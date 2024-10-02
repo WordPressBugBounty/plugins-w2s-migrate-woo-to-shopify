@@ -1,0 +1,65 @@
+/**1.2.0 - 2024.05.24**/
+- Updated: Updated clear data
+- Updated: Updated compatible with WC8.9.0
+- Updated: Updated support file
+- Updated: version api sdk 2024-04
+- Fixed: Fixed security
+
+/**1.1.1 - 2024.04.13**/
+- Updated: Updated compatible with WC8.7.0 and WP 6.5.2
+- Updated: Updated support file
+
+/**1.1.0 - 2024.02.19**/
+- Updated: Updated compatible with WC8.6.0
+- Updated: Updated support file
+- Updated: Updated version Shopify Api
+
+/**1.0.11 - 2023.07.15**/
+- Updated: Updated compatible with WC8.5.0 and WP 6.4.0
+- Updated: Update support file
+
+/**1.0.11 - 2023.07.15**/
+- Updated: Updated compatible with HPOS-WC7.8.0 and WP 6.2.0
+- Updated: Update support file
+
+/**1.0.10 - 2023.02.23**/
+- Updated: Updated compatible with WC7.4.0
+
+/**1.0.9 - 2023.01.07**/
+- Updated: Updated compatible with WC7.2.0 and WP 6.1.0
+- Updated: Update support file
+– Updated: Language file
+
+/**1.0.8 - 2022.10.08**/
+- Fixed: Fixed import sku not working
+- Updated: Updated support
+- Updated: Updated compatible with WC6.9.0
+
+/**1.0.7 - 2022.7.15**/
+- Fixed: Fixed compatible with pro version
+- Updated: Updated compatible with WC6.7.0
+
+/**1.0.6 - 2022.06.29**/
+- Updated: Updated guide create custom app Shopify
+- Updated: Updated compatible with WC6.6.0
+
+/**1.0.5 - 2022.05.21**/
+- Updated: Updated support
+- Updated: Updated compatible with WC6.5.0 and WP 6.0.0
+- Fixed: Fixed security
+
+/**1.0.4 - 2022.03.29**/
+- Updated: Updated support
+
+/**1.0.3 - 2022.03.21**/
+- Updated: Updated support
+- Updated: Updated compatible with WC6.3.0
+
+/**1.0.2 - 2022.02.28**/
+ Updated: Support Shopify custom apps as Private apps are deprecated and can't be created as of January 2022
+
+/**1.0.1 - 2021.12.22**/
+-Fixed: Fixed different currency message
+
+/**1.0.0 - 2021.12.16**/
+- The first released

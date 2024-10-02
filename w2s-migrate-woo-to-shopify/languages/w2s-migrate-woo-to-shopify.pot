@@ -1,0 +1,516 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: W2S - Migrate Woo to Shopify\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-10-17 04:26+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.5.5; wp-5.8.2\n"
+"X-Domain: w2s-migrate-woo-to-shopify"
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:298
+msgid "1000"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:291
+msgid "300"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:305
+msgid "64M"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:69
+msgid "Action"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:582
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:595
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:608
+msgid "Active"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:254
+msgid "Add store"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:64
+msgid "API access token or API secret"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:59
+msgid "API key"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:136
+msgid "API key can not be empty! "
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:897
+msgid "API permission must have product write permission"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:892
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:244
+msgid "API permission must have product write permission!"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:541
+msgid "API permission not correct !!!"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:137
+msgid "API secret can not be empty! "
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:583
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:596
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:609
+msgid "Archived"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:650
+#, php-format
+msgid "Base currency in WooCommerce %s differs from the one in Shopify %s"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:208
+msgid "Change your API at least once a month"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:433
+msgid "Choose product you don't want to import"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:411
+msgid "Choose product you want to import"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:775
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:876
+#, php-format
+msgid "Completed % s /%s "
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:732
+msgid "Data"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:584
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:590
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:597
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:610
+msgid "Draft"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:416
+msgid "Exclude product"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:368
+msgid "Filter by product type"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:456
+msgid "Filter include product by product categories."
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:468
+msgid "From"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:571
+msgid "From Woocommerce"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:42
+msgid "General settings"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://villatheme.com/"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://villatheme.com/extensions/w2s-migrate-woocommerce-to-shopify/"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:209
+msgid ""
+"If you only use API to import data, remove API permissions or delete the API "
+"after import completed"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:777
+msgid "Import"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:783
+msgid "Import error"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:883
+msgid "Import error, please try again! "
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:912
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:917
+msgid "Import nonce error"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:520
+msgid "Import Product Categories"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:530
+msgid "Import product categories"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:560
+msgid "Import product SKU"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:545
+msgid "Import product tags"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:462
+msgid "Import products created date"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:362
+msgid "Import Products options"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:488
+msgid "Import Products sequence"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:550
+msgid "Import Products SKU"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:535
+msgid "Import Products Tags"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:638
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:698
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:821
+msgid "Import successfully"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-logs.php:2
+msgid "Import WooCommerce to Shopify log files"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:636
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:822
+#, php-format
+msgid "Importing... %s /%s completed"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:696
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:843
+#, php-format
+msgid "Importing... %s /%s error"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:847
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:852
+#, php-format
+msgid "Importing... %s /%s skipped"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:664
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:673
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:688
+#, php-format
+msgid "Importing... %s /%s was skipped"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:438
+msgid "Include by Product categories"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:393
+msgid "Include product"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:505
+msgid "Keep Product Slug"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:515
+msgid "keep the slug of the product when importing"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:952
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-logs.php:10
+msgid "Log file not found."
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:189
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:190
+msgid "Logs"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:783
+msgid "Logs:"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:301
+msgid "Memory Limit"
+msgstr ""
+
+#. Description of the plugin
+msgid "Migrate all products and categories from WooCommerce to Shopify"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:34
+msgid "Migrate WooCommerce to Shopify"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:224
+msgid "Minimum recommended value"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:139
+msgid "Need to select at least one data to import! "
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:138
+msgid "Need to select at least one store to import! "
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:948
+msgid "No log file selected."
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:530
+msgid "Not find products to import"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:585
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:598
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:611
+msgid "Not import"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:380
+msgid "Only Simple"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:387
+msgid "Only variable"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:222
+msgid "Option name"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:496
+msgid "Order by Created Date Ascending"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:497
+msgid "Order by Created Date Descending"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:494
+msgid "Order by Title Ascending"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:495
+msgid "Order by Title Descending"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:498
+msgid "Order by Updated Date Ascending"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:499
+msgid "Order by Updated Date Descending"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:603
+msgid "Pending Review"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:294
+msgid "PHP Max Input Vars"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:287
+msgid "PHP Time Limit"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/includes/class-vi-w2s-activator.php:39
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/includes/class-vi-w2s.php:97
+msgid ""
+"Please install and activate WooCommerce to use W2S - Migrate Woo To Shopify "
+"plugin."
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:565
+msgid "Product Status Mapping"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:741
+msgid "Products"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:754
+msgid "Products Categories"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:670
+msgid "products with attribute count more than 3"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:662
+msgid "Products with variants have not been entered correctly"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:733
+msgid "Progress"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:577
+msgid "Publish"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:243
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:261
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:279
+msgid "Required"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:358
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:626
+msgid "Save"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:140
+msgid "Select products"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:155
+msgid "Settings"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:203
+msgid "Shopify Admin API security recommendation"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:373
+msgid "Simple & Variable"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:54
+msgid "Store address"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:135
+msgid "Store address can not be empty! "
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:902
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:907
+msgid "Store setting error"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:180
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:218
+msgid "System Status"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:179
+msgid "System status"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:687
+msgid "The product has been imported to shopify"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:66
+msgid ""
+"This is API access token( with custom app) or API secret ( with private app)"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:61
+msgid "This is api key"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:56
+msgid "This is store address Eg: myshop.myshopify.com"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:853
+msgid "This product category has been import error "
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:848
+msgid "This product category has been imported to shopify"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:476
+msgid "To"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:572
+msgid "To Shopify"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:207
+msgid ""
+"Treat the API key and password like you would any other password, since "
+"whoever has access to these credentials has API access to the store."
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:324
+msgid "Upgrade this feature"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:934
+msgid "View"
+msgstr ""
+
+#. Author of the plugin
+msgid "Villatheme"
+msgstr ""
+
+#. Name of the plugin
+msgid "W2S - Migrate WooCommerce to Shopify"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:168
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:169
+msgid "Woo to Shopify"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:945
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:232
+msgid ""
+"You need to enter correct all domain, API key and API secret to be able to "
+"import"
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:206
+msgid "You should enable only what is necessary for your app to work."
+msgstr ""
+
+#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:223
+msgid "Your option value"
+msgstr ""
