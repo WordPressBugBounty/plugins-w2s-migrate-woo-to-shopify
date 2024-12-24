@@ -197,7 +197,7 @@ abstract class ShopifyResource
             $childKey = array_search($name, $this->childResource);
 
             if ($childKey === false) {
-                throw new SdkException("Child Resource $name is not available for " . $this->getResourceName());
+                throw new SdkException("Child Resource $name is not available for " . $this->getResourceName());// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
             }
 
             //If any associative key is given to the childname, then it will be considered as the class name,
@@ -228,7 +228,7 @@ abstract class ShopifyResource
             }
 
             if ($actionKey === false) {
-                throw new SdkException("No action named $name is defined for " . $this->getResourceName());
+                throw new SdkException("No action named $name is defined for " . $this->getResourceName());// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
             }
 
             //If any associative key is given to the action, then it will be considered as the method name,
@@ -362,7 +362,7 @@ abstract class ShopifyResource
     public function count($urlParams = array())
     {
         if (!$this->countEnabled) {
-            throw new SdkException("Count is not available for " . $this->getResourceName());
+            throw new SdkException("Count is not available for " . $this->getResourceName());// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
         }
 
         $url = $this->generateUrl($urlParams, 'count');
@@ -384,7 +384,7 @@ abstract class ShopifyResource
     public function search($query)
     {
         if (!$this->searchEnabled) {
-            throw new SdkException("Search is not available for " . $this->getResourceName());
+            throw new SdkException("Search is not available for " . $this->getResourceName());// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
         }
 
         if (!is_array($query)) $query = array('query' => $query);
@@ -537,7 +537,7 @@ abstract class ShopifyResource
                 return array('account_activation_url'=>false);
             }
             
-            throw new ApiException($message, CurlRequest::$lastHttpCode);
+            throw new ApiException($message, CurlRequest::$lastHttpCode);// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
         }
 
         if ($dataKey && isset($responseArray[$dataKey])) {
@@ -589,7 +589,7 @@ abstract class ShopifyResource
 
     public function getUrlParams($url) {
         if ($url) {
-            $parts = parse_url($url);
+            $parts = wp_parse_url($url);
             return $parts['query'];
         }
         return '';

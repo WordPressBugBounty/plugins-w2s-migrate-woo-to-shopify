@@ -145,7 +145,7 @@ class Vi_W2s {
 
 		$plugin_i18n = new Vi_W2s_i18n();
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+		$this->loader->add_action( 'init', $plugin_i18n, 'load_plugin_textdomain' );
 
 	}
 
@@ -157,7 +157,6 @@ class Vi_W2s {
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
-
 		$plugin_admin = new Vi_W2s_Admin( $this->get_vi_w2s(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );

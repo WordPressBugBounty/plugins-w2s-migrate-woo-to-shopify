@@ -1,3 +1,8 @@
+/**1.2.1 - 2024.12.24**/
+- Fixed: Fixed security
+- Fixed: Translation loading triggered too early
+- Updated: Updated support file
+
 /**1.2.0 - 2024.05.24**/
 - Updated: Updated clear data
 - Updated: Updated compatible with WC8.9.0

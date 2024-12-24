@@ -47,7 +47,7 @@ class HttpRequestGraphQL extends HttpRequestJson
         self::$httpHeaders = $httpHeaders;
 
         if (is_array($variables)) {
-            self::$postDataGraphQL = json_encode(['query' => $data, 'variables' => $variables]);
+            self::$postDataGraphQL = wp_json_encode(['query' => $data, 'variables' => $variables]);
             self::$httpHeaders['Content-type'] = 'application/json';
         } else {
             self::$httpHeaders['Content-type'] = 'application/graphql';

@@ -114,7 +114,7 @@ if ( ! class_exists( 'VIW2S_ADMIN_Clear_Data' ) ) {
 
 		public function admin_enqueue_script( $page ) {
 			if ( $page === 'woo-to-shopify_page_w2s-import-woocommerce-to-shopify-clear-data' ) {
-				wp_enqueue_script( 'viw2s-clear-data-script', VIW2S_ADMIN_JS . 'clear-data.js', array( 'jquery' ), VIW2S_VERSION );
+				wp_enqueue_script( 'viw2s-clear-data-script', VIW2S_ADMIN_JS . 'clear-data.js', array( 'jquery' ), VIW2S_VERSION,true );
 				wp_localize_script( 'viw2s-clear-data-script', 'viw2s_clear_param', array(
 					'url'         => admin_url( 'admin-ajax.php' ),
 					'viw2s_nonce' => wp_create_nonce( 'viw2s_clear_data_nonce' ),
@@ -210,19 +210,19 @@ if ( ! class_exists( 'VIW2S_ADMIN_Clear_Data' ) ) {
 				}
 			}
 			if ( is_file( $path . 'products.txt' ) ) {
-				unlink( $path . 'products.txt' );
+				wp_delete_file( $path . 'products.txt' );// phpcs:ignore WordPress.Security.NonceVerification.Missing
 			}
 			if ( is_file( $path . 'ids_product_imported.txt' ) ) {
-				unlink( $path . 'ids_product_imported.txt' );
+				wp_delete_file( $path . 'ids_product_imported.txt' );
 			}
 			if ( is_file( $path . 'ids_product_new_imported.txt' ) ) {
-				unlink( $path . 'ids_product_new_imported.txt' );
+				wp_delete_file( $path . 'ids_product_new_imported.txt' );
 			}
 			if ( is_file( $path . 'list_products_imported.txt' ) ) {
-				unlink( $path . 'list_products_imported.txt' );
+				wp_delete_file( $path . 'list_products_imported.txt' );
 			}
 			if ( is_file( $path . 'shopify_products_imported.txt' ) ) {
-				unlink( $path . 'shopify_products_imported.txt' );
+				wp_delete_file( $path . 'shopify_products_imported.txt' );
 			}
 		}
 
@@ -252,13 +252,13 @@ if ( ! class_exists( 'VIW2S_ADMIN_Clear_Data' ) ) {
 				}
 			}
 			if ( is_file( $path . 'product_categories.txt' ) ) {
-				unlink( $path . 'product_categories.txt' );
+				wp_delete_file( $path . 'product_categories.txt' );
 			}
 			if ( is_file( $path . 'list_product_categories_imported.txt' ) ) {
-				unlink( $path . 'list_product_categories_imported.txt' );
+				wp_delete_file( $path . 'list_product_categories_imported.txt' );
 			}
 			if ( is_file( $path . 'shopify_products_imported.txt' ) ) {
-				unlink( $path . 'shopify_products_imported.txt' );
+				wp_delete_file( $path . 'shopify_products_imported.txt' );
 			}
 
 		}

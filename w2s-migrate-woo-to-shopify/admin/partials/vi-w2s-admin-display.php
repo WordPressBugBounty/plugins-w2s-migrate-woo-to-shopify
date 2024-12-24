@@ -130,7 +130,7 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
 									if ( ! empty( $text_error_domain ) ) {
 										?>
                                         <div>
-                                            <i class="attention icon"></i><?php esc_html_e( $text_error_domain, 'w2s-migrate-woo-to-shopify' ); ?>
+                                            <i class="attention icon"></i><?php echo esc_html( $text_error_domain ); ?>
                                         </div>
 										<?php
 									}
@@ -149,7 +149,7 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
 									if ( ! empty( $text_error_api_key ) ) {
 										?>
                                         <div>
-                                            <i class="attention icon"></i><?php esc_html_e( $text_error_api_key, 'w2s-migrate-woo-to-shopify' ); ?>
+                                            <i class="attention icon"></i><?php echo esc_html( $text_error_api_key ); ?>
                                         </div>
 										<?php
 									}
@@ -167,7 +167,7 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
 									if ( ! empty( $text_error_api_secret ) ) {
 										?>
                                         <div>
-                                            <i class="attention icon"></i><?php esc_html_e( $text_error_api_secret, 'w2s-migrate-woo-to-shopify' ); ?>
+                                            <i class="attention icon"></i><?php echo esc_html( $text_error_api_secret); ?>
                                         </div>
 										<?php
 									}
@@ -275,25 +275,25 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
                                 </li>
                                 <li>
                                     <strong><?php esc_html_e( 'Step 2: Enable cutom app', 'w2s-migrate-woocommerce-to-shopify' ); ?></strong>
-                                    <p><?php echo sprintf( esc_html__( 'On the Shopify dashboard, go to the App settings as in the picture below >> Click "Develop apps". Then, follow the steps in %s to enable custom app development from the Shopify admin.', 'w2s-migrate-woocommerce-to-shopify' ), '<a target="_blank" href="https://help.shopify.com/en/manual/apps/custom-apps#:~:text=From%20your%20Shopify%20admin%2C%20go%20to%20Apps,then%20click%20Allow%20custom%20app%20development."  rel="noopener">this instruction </a>' ); ?>
+                                    <p><?php echo sprintf( esc_html( 'On the Shopify dashboard, go to the App settings as in the picture below >> Click "Develop apps". Then, follow the steps in %1$s to enable custom app development from the Shopify admin.' ), '<a target="_blank" href="https://help.shopify.com/en/manual/apps/custom-apps#:~:text=From%20your%20Shopify%20admin%2C%20go%20to%20Apps,then%20click%20Allow%20custom%20app%20development."  rel="noopener">this instruction </a>' ); ?>
                                         <a href="https://docs.villatheme.com/wp-content/uploads/2022/06/Screenshot-11.png"
                                            target="_blank"><?php esc_html_e( 'See image guide', 'w2s-migrate-woocommerce-to-shopify' ); ?></a>
                                     </p>
                                 </li>
                                 <li>
                                     <strong><?php esc_html_e( 'Step 3: Create an app', 'w2s-migrate-woocommerce-to-shopify' ); ?></strong>
-                                    <p><?php echo sprintf( esc_html__( 'Click "Create an app" to create a custom app. And follow the next steps in %s to create a custom app.', 'w2s-migrate-woocommerce-to-shopify' ), '<a href="https://help.shopify.com/en/manual/apps/custom-apps#:~:text=Create%20the%20app,Create%20app." target="_blank">this instruction</a>' ); ?>
+                                    <p><?php echo sprintf( esc_html( 'Click "Create an app" to create a custom app. And follow the next steps in %1$s to create a custom app.' ), '<a href="https://help.shopify.com/en/manual/apps/custom-apps#:~:text=Create%20the%20app,Create%20app." target="_blank">this instruction</a>' ); ?>
                                         <a href="https://docs.villatheme.com/wp-content/uploads/2022/06/Screenshot-10.png"
                                            target="_blank"><?php esc_html_e( 'See image guide', 'w2s-migrate-woocommerce-to-shopify' ); ?></a>
                                     </p>
-                                    <p><?php echo sprintf( esc_html__( 'Note: In the past, Shopify used to allow users to create private apps, but this feature was removed, as mentioned in %s. If any users who have been using our plugin since then, the private app credentials in your plugin settings will still be kept and work properly.', 'w2s-migrate-woocommerce-to-shopify' ), '<a href="https://help.shopify.com/en/manual/apps/private-apps#:~:text=Private%20apps%20are%20deprecated%20and%20can%27t%20be%20created%20as%20of%20January%202022.%20Ask%20your%20app%20developer%20to%20create%20a%20custom%20app.%20Like%20private%20apps%2C%20custom%20apps%20are%20built%20exclusively%20for%20your%20shop%2C%20but%20they%20don%27t%20require%20open%20API%20access%20to%20your%20store%20or%20access%20to%20your%20Shopify%20admin." target="_blank" rel="noopener">this statement</a>' ); ?>
+                                    <p><?php echo sprintf( esc_html( 'Note: In the past, Shopify used to allow users to create private apps, but this feature was removed, as mentioned in %1$s. If any users who have been using our plugin since then, the private app credentials in your plugin settings will still be kept and work properly.', 'w2s-migrate-woocommerce-to-shopify' ), '<a href="https://help.shopify.com/en/manual/apps/private-apps#:~:text=Private%20apps%20are%20deprecated%20and%20can%27t%20be%20created%20as%20of%20January%202022.%20Ask%20your%20app%20developer%20to%20create%20a%20custom%20app.%20Like%20private%20apps%2C%20custom%20apps%20are%20built%20exclusively%20for%20your%20shop%2C%20but%20they%20don%27t%20require%20open%20API%20access%20to%20your%20store%20or%20access%20to%20your%20Shopify%20admin." target="_blank" rel="noopener">this statement</a>' ); ?>
                                         <a href="https://docs.villatheme.com/wp-content/uploads/2022/06/Screenshot-14.png"
                                            target="_blank"><?php esc_html_e( 'See image detail scopes', 'w2s-migrate-woocommerce-to-shopify' ); ?></a>
                                     </p>
                                 </li>
                                 <li>
                                     <strong><?php esc_html_e( 'Step 4: Assign API scopes', 'w2s-migrate-woocommerce-to-shopify' ); ?></strong>
-                                    <p><?php echo sprintf( esc_html__( 'After successfully creating a custom app, the next step is to assign API scopes to it. Please visit %s for specific steps.', 'w2s-migrate-woocommerce-to-shopify' ), '<a href="https://help.shopify.com/en/manual/apps/custom-apps#:~:text=Select%20API%20scopes,least%20one%20scope." target="_blank" >this instruction</a>' ); ?></p>
+                                    <p><?php echo sprintf( esc_html( 'After successfully creating a custom app, the next step is to assign API scopes to it. Please visit %1$s for specific steps.' ), '<a href="https://help.shopify.com/en/manual/apps/custom-apps#:~:text=Select%20API%20scopes,least%20one%20scope." target="_blank" >this instruction</a>' ); ?></p>
                                 </li>
                                 <li>
                                     <strong><?php esc_html_e( 'Step 5: Install the app', 'w2s-migrate-woocommerce-to-shopify' ); ?></strong>
@@ -447,7 +447,7 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
 											<?php
 											if ( ! empty( $product_cat_include_id ) ) {
 												foreach ( $product_cat_include_id as $item_product_cat ) {
-													echo '<option value="' . esc_attr( $item_product_cat ) . '"  selected>' . esc_html__( get_term_by( 'slug', $item_product_cat, 'product_cat' )->name, 'w2s-migrate-woo-to-shopify' ) . '</option>';
+													echo '<option value="' . esc_attr( $item_product_cat ) . '"  selected>' . esc_html( get_term_by( 'slug', $item_product_cat, 'product_cat' )->name ) . '</option>';
 												}
 											}
 											?>
@@ -647,7 +647,7 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
 		?>
         <div class="viw2s-permission-warning">
             <div class="vi-ui red message">
-				<?php printf( esc_html__( 'Base currency in WooCommerce %s differs from the one in Shopify %s', 'w2s-migrate-woo-to-shopify' ), $WooCurrency, $ShopifyStore['data']['currency'] ); ?>
+				<?php printf( esc_html( 'Base currency in WooCommerce %s differs from the one in Shopify %1$s' ), esc_html($WooCurrency), esc_html($ShopifyStore['data']['currency']) ); ?>
             </div>
         </div>
 		<?php

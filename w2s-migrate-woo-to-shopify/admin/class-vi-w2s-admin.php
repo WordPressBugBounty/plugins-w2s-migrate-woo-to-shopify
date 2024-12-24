@@ -125,17 +125,14 @@ class Vi_W2s_Admin {
 			$current_screen === 'woo-to-shopify_page_w2s-import-woocommerce-to-shopify-clear-data'
 		) {
 
-			wp_enqueue_script( $this->vi_w2s . '-js-accordion', VIW2S_DIR_URL . 'assets/js/accordion.min.js', array( 'jquery' ) );
-			wp_enqueue_script( $this->vi_w2s . '-js-checkbox', VIW2S_DIR_URL . 'assets/js/checkbox.min.js', array( 'jquery' ) );
-			wp_enqueue_script( $this->vi_w2s . '-js-dropdown', VIW2S_DIR_URL . 'assets/js/dropdown.min.js', array( 'jquery' ) );
-			wp_enqueue_script( $this->vi_w2s . '-js-progress', VIW2S_DIR_URL . 'assets/js/progress.min.js', array( 'jquery' ) );
-			wp_enqueue_script( $this->vi_w2s . '-js-select2', VIW2S_DIR_URL . 'assets/js/select2.js', array( 'jquery' ) );
-			wp_enqueue_script( $this->vi_w2s . '-js-transition', VIW2S_DIR_URL . 'assets/js/transition.min.js', array( 'jquery' ) );
+			wp_enqueue_script( $this->vi_w2s . '-js-accordion', VIW2S_DIR_URL . 'assets/js/accordion.min.js', array( 'jquery' ), $this->version, true  );
+			wp_enqueue_script( $this->vi_w2s . '-js-checkbox', VIW2S_DIR_URL . 'assets/js/checkbox.min.js', array( 'jquery' ) , $this->version, true );
+			wp_enqueue_script( $this->vi_w2s . '-js-dropdown', VIW2S_DIR_URL . 'assets/js/dropdown.min.js', array( 'jquery' ), $this->version, true  );
+			wp_enqueue_script( $this->vi_w2s . '-js-progress', VIW2S_DIR_URL . 'assets/js/progress.min.js', array( 'jquery' ), $this->version, true  );
+			wp_enqueue_script( $this->vi_w2s . '-js-select2', VIW2S_DIR_URL . 'assets/js/select2.js', array( 'jquery' ), $this->version, true  );
+			wp_enqueue_script( $this->vi_w2s . '-js-transition', VIW2S_DIR_URL . 'assets/js/transition.min.js', array( 'jquery' ) , $this->version, true );
 
-			wp_enqueue_script( $this->vi_w2s . '-js', VIW2S_DIR_URL . 'admin/js/vi-w2s-admin.js', array(
-				'jquery',
-				'jquery-tiptip'
-			), $this->version );
+			wp_enqueue_script( $this->vi_w2s . '-js', VIW2S_DIR_URL . 'admin/js/vi-w2s-admin.js', array( 'jquery', 'jquery-tiptip' ), $this->version, true );
 			$viw2s_i18n_params = array(
 				'ajaxurl'                              => admin_url( "admin-ajax.php" ),
 				'i18n_empty_store_address_error'       => esc_html__( 'Store address can not be empty! ', 'w2s-migrate-woo-to-shopify' ),
@@ -294,21 +291,21 @@ class Vi_W2s_Admin {
                 <td data-export-label="<?php esc_attr_e( 'PHP Time Limit', 'w2s-migrate-woo-to-shopify' ) ?>"><?php esc_html_e( 'PHP Time Limit', 'w2s-migrate-woo-to-shopify' ) ?></td>
                 <td style="<?php if ( $max_execution_time > 0 && $max_execution_time < 300 ) {
 					echo esc_attr( 'color:red' );
-				} ?>"><?php esc_html_e( $max_execution_time ); ?></td>
+				} ?>"><?php echo esc_html( $max_execution_time ); ?></td>
                 <td><?php esc_html_e( '3000', 'w2s-migrate-woo-to-shopify' ) ?></td>
             </tr>
             <tr>
                 <td data-export-label="<?php esc_attr_e( 'PHP Max Input Vars', 'w2s-migrate-woo-to-shopify' ) ?>"><?php esc_html_e( 'PHP Max Input Vars', 'w2s-migrate-woo-to-shopify' ) ?></td>
                 <td style="<?php if ( $max_input_vars < 1000 ) {
 					echo esc_attr( 'color:red' );
-				} ?>"><?php esc_html_e( $max_input_vars ); ?></td>
+				} ?>"><?php echo esc_html( $max_input_vars ); ?></td>
                 <td><?php esc_html_e( '10000', 'w2s-migrate-woo-to-shopify' ) ?></td>
             </tr>
             <tr>
                 <td data-export-label="<?php esc_attr_e( 'Memory Limit', 'w2s-migrate-woo-to-shopify' ) ?>"><?php esc_html_e( 'Memory Limit', 'w2s-migrate-woo-to-shopify' ) ?></td>
                 <td style="<?php if ( intval( $memory_limit ) < 64 ) {
 					echo esc_attr( 'color:red' );
-				} ?>"><?php esc_html_e( $memory_limit ); ?></td>
+				} ?>"><?php echo esc_html( $memory_limit ); ?></td>
                 <td><?php esc_html_e( '512M', 'w2s-migrate-woo-to-shopify' ) ?></td>
             </tr>
             </tbody>
@@ -367,15 +364,15 @@ class Vi_W2s_Admin {
 	}
 
 	public function viw2s_ajax_search_product() {
-		$keysearch           = isset( $_POST['keysearch'] ) ? wc_clean( wp_unslash( $_POST['keysearch'] ) ) : '';
-		$exclude_product_ids = isset( $_POST['exclude_product_ids'] ) ? wc_clean( wp_unslash( $_POST['exclude_product_ids'] ) ) : array();
+		$keysearch           = isset( $_POST['keysearch'] ) ? wc_clean( wp_unslash( $_POST['keysearch'] ) ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$exclude_product_ids = isset( $_POST['exclude_product_ids'] ) ? wc_clean( wp_unslash( $_POST['exclude_product_ids'] ) ) : array();// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		$product_args        = array(
 			'status'         => 'publish',
 			'post_type'      => 'product',
 			'posts_per_page' => - 1,
-			'post__not_in'   => $exclude_product_ids,
+			'post__not_in'   => $exclude_product_ids,//phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
 			's'              => $keysearch,
-			'tax_query'      => array(
+			'tax_query'      => array(//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 				array(
 					'taxonomy' => 'product_type',
 					'field'    => 'slug',
@@ -400,7 +397,7 @@ class Vi_W2s_Admin {
 	}
 
 	public function viw2s_ajax_search_product_cat() {
-		$keysearch = isset( $_POST['keysearch'] ) ? wc_clean( wp_unslash( $_POST['keysearch'] ) ) : '';
+		$keysearch = isset( $_POST['keysearch'] ) ? wc_clean( wp_unslash( $_POST['keysearch'] ) ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Missing
 
 		$arr_tax = get_terms( array(
 			'taxonomy'   => 'product_cat',
@@ -454,7 +451,7 @@ class Vi_W2s_Admin {
 			if ( sizeof( $viw2s_store_setting ) > 0 ) {
 				foreach ( $viw2s_store_setting as $store_item ) {
 					$new_store_item           = $store_item;
-					$parse_domain             = isset( $store_item['domain'] ) ? wc_clean( parse_url( $store_item['domain'] ) ) : array();
+					$parse_domain             = isset( $store_item['domain'] ) ? wc_clean( wp_parse_url( $store_item['domain'] ) ) : array();
 					$domain                   = isset( $parse_domain['host'] ) ? $parse_domain['host'] : $parse_domain['path'];
 					$new_store_item['domain'] = $domain;
 					$api_key                  = isset( $store_item['api_key'] ) ? wc_clean( $store_item['api_key'] ) : '';
@@ -619,10 +616,10 @@ class Vi_W2s_Admin {
 							$list_products_imported        = [];
 							$ids_products_imported         = [];
 							if ( is_file( $list_products_imported_path ) ) {
-								$list_products_imported = json_decode( file_get_contents( $list_products_imported_path ), true );
+								$list_products_imported = json_decode( file_get_contents( $list_products_imported_path ), true );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 							}
 							if ( is_file( $ids_products_imported_path ) ) {
-								$ids_products_imported = json_decode( file_get_contents( $ids_products_imported_path ), true );
+								$ids_products_imported = json_decode( file_get_contents( $ids_products_imported_path ), true );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 							}
 							if (
 								! empty( $get_all_importing_arr_product ) &&
@@ -643,14 +640,14 @@ class Vi_W2s_Admin {
 									$log                 = array(
 										'shopify_id' => '',
 										'woo_id'     => $viw2s_item_product["id"],
-										'title'      => esc_html__( get_the_title( $viw2s_item_product["id"] ), 'w2s-migrate-woo-to-shopify' ),
+										'title'      => esc_html( get_the_title( $viw2s_item_product["id"] ) ),
 										'message'    => '',
 									);
 									try {
 										switch ( $viw2s_item_product_data['status'] ) {
 											case 'success':
 												$viw2s_import_status                 = $VIW2SShopifySDK->Product->post( $viw2s_item_product_data['data'] );
-												$viw2s_import_product_progress_label = sprintf( esc_html__( 'Importing... %s /%s completed', 'w2s-migrate-woo-to-shopify' ), $product_index, $viw2s_total_product );
+												$viw2s_import_product_progress_label = sprintf( esc_html( 'Importing... %s /%s completed' ), $product_index, $viw2s_total_product );
 												$log['shopify_id']                   = $viw2s_import_status['id'];
 												$log['message']                      = esc_html__( 'Import successfully', 'w2s-migrate-woo-to-shopify' );
 												/*Update data to product metadata*/
@@ -712,12 +709,12 @@ class Vi_W2s_Admin {
 												}
 
 												/*log to file list_product_imported*/
-												file_put_contents( $list_products_imported_path, wp_json_encode( $list_products_imported ) );
+												file_put_contents( $list_products_imported_path, wp_json_encode( $list_products_imported ) );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 
 												/*log to file ids_product_imported*/
 												$ids_products_imported[] = $viw2s_item_product['id'];
 												$ids_products_imported   = array_unique( $ids_products_imported );
-												file_put_contents( $ids_products_imported_path, wp_json_encode( $ids_products_imported ) );
+												file_put_contents( $ids_products_imported_path, wp_json_encode( $ids_products_imported ) );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 												break;
 											case 'attribute_has_any_product':
 											case 'dont_has_any_product':
@@ -726,7 +723,7 @@ class Vi_W2s_Admin {
 
 												$log['message'] = esc_html__( 'Products with variants have not been entered correctly', 'w2s-migrate-woo-to-shopify' );
 
-												$viw2s_import_product_progress_label = sprintf( esc_html__( 'Importing... %s /%s was skipped', 'w2s-migrate-woo-to-shopify' ), $product_index, $viw2s_total_product );
+												$viw2s_import_product_progress_label = sprintf( esc_html( 'Importing... %1$s /%2$s was skipped' ), $product_index, $viw2s_total_product );
 												break;
 											case 'too_much_attributes':
 												$viw2s_import_status = 'error';
@@ -735,7 +732,7 @@ class Vi_W2s_Admin {
 												$log['message'] = esc_html__( 'products with attribute count more than 3', 'w2s-migrate-woo-to-shopify' );
 
 
-												$viw2s_import_product_progress_label = sprintf( esc_html__( 'Importing... %s /%s was skipped', 'w2s-migrate-woo-to-shopify' ), $product_index, $viw2s_total_product );
+												$viw2s_import_product_progress_label = sprintf( esc_html( 'Importing... %1$s /%2$s was skipped' ), $product_index, $viw2s_total_product );
 												break;
 											case 'exist':
 												$_w2s_shopify_data = get_post_meta( $viw2s_item_product["id"], '_w2s_shopify_data', true );
@@ -750,7 +747,7 @@ class Vi_W2s_Admin {
 												$viw2s_import_status = 'exist';
 
 												$log['message']                      = esc_html__( 'The product has been imported to shopify', 'w2s-migrate-woo-to-shopify' );
-												$viw2s_import_product_progress_label = sprintf( esc_html__( 'Importing... %s /%s was skipped', 'w2s-migrate-woo-to-shopify' ), $product_index, $viw2s_total_product );
+												$viw2s_import_product_progress_label = sprintf( esc_html( 'Importing... %1$s /%2$s was skipped' ), $product_index, $viw2s_total_product );
 												break;
 										}
 										$status = 'successful';
@@ -758,7 +755,7 @@ class Vi_W2s_Admin {
 									} catch ( Exception $exception ) {
 										$viw2s_import_status                 = $exception->getMessage();
 										$error_product_code                  = $exception->getCode();
-										$viw2s_import_product_progress_label = sprintf( esc_html__( 'Importing... %s /%s error', 'w2s-migrate-woo-to-shopify' ), $product_index, $viw2s_total_product );
+										$viw2s_import_product_progress_label = sprintf( esc_html( 'Importing... %1$s /%2$s error' ), $product_index, $viw2s_total_product );
 
 										$log['message'] = esc_html__( 'Import successfully', 'w2s-migrate-woo-to-shopify' );
 										$status         = 'error_access_scope';
@@ -834,7 +831,7 @@ class Vi_W2s_Admin {
 										'logs'              => $logs,
 										'imported_products' => $product_index,
 										'code'              => 'no_data',
-										'message'           => sprintf( esc_html__( 'Completed % s /%s ', 'w2s-migrate-woo-to-shopify' ), $viw2s_total_product, $viw2s_total_product ),
+										'message'           => sprintf( esc_html( 'Completed %1$s /%2$s ' ), $viw2s_total_product, $viw2s_total_product ),
 									);
 								}
 
@@ -860,11 +857,11 @@ class Vi_W2s_Admin {
 								'title'              => '',
 								'message'            => '',
 							);
-							$product_category_log                              = $path . 'product_categories.txt';
-							$list_product_categories_imported_path             = $path . '/list_product_categories_imported.txt';
-							$list_product_categories_imported                  = [];
+							$product_category_log                     = $path . 'product_categories.txt';
+							$list_product_categories_imported_path    = $path . '/list_product_categories_imported.txt';
+							$list_product_categories_imported         = [];
 							if ( is_file( $list_product_categories_imported_path ) ) {
-								$list_product_categories_imported = json_decode( file_get_contents( $list_product_categories_imported_path ), true );
+								$list_product_categories_imported = json_decode( file_get_contents( $list_product_categories_imported_path ), true );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 							}
 							if (
 								! empty( $get_all_importing_arr_product_categories ) &&
@@ -880,14 +877,14 @@ class Vi_W2s_Admin {
 									$code                            = '';
 									$status                          = '';
 									$log['woo_product_cat_id']       = $viw2s_item_product_cat['term_id'];
-									$log['title']                    = esc_html__( $viw2s_item_product_cat['title'], 'w2s-migrate-woo-to-shopify' );
+									$log['title']                    = esc_html( $viw2s_item_product_cat['title'] );
 									if ( $viw2s_item_product_cat['status'] === 'success' ) {
 										try {
 											$viw2s_import_product_cat_status = $VIW2SShopifySDK->CustomCollection()->post( $viw2s_item_product_cat_data );
 
 											$status                                  = 'success';
 											$log['message']                          = esc_html__( 'Import successfully', 'w2s-migrate-woo-to-shopify' );
-											$viw2s_import_product_cat_progress_label = sprintf( esc_html__( 'Importing... %s /%s completed', 'w2s-migrate-woo-to-shopify' ), $categories_index, $viw2s_total_product_categories );
+											$viw2s_import_product_cat_progress_label = sprintf( esc_html( 'Importing... %1$s /%2$s completed' ), $categories_index, $viw2s_total_product_categories );
 											$_w2s_shopify_cats_data                  = get_term_meta( $viw2s_item_product_cat['term_id'], '_w2s_shopify_data', true );
 											if ( ! empty( $_w2s_shopify_cats_data ) && is_array( $_w2s_shopify_cats_data ) ) {
 												$_w2s_shopify_cats_data[ $domain ] = array(
@@ -913,22 +910,22 @@ class Vi_W2s_Admin {
 											}
 											$list_product_categories_imported[ $viw2s_import_product_cat_status['id'] ] = $viw2s_item_product_cat['term_id'];
 											/*log to file list_product_categories_imported*/
-											file_put_contents( $list_product_categories_imported_path, wp_json_encode( $list_product_categories_imported ) );
+											file_put_contents( $list_product_categories_imported_path, wp_json_encode( $list_product_categories_imported ) );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 										} catch ( Exception $exception ) {
 											$code                                    = $exception->getCode();
 											$viw2s_import_product_cat_status         = $exception->getMessage();
 											$status                                  = 'error';
-											$log['message']                          = esc_html__( $exception->getMessage(), 'w2s-migrate-woo-to-shopify' );
-											$viw2s_import_product_cat_progress_label = sprintf( esc_html__( 'Importing... %s /%s error', 'w2s-migrate-woo-to-shopify' ), $categories_index, $viw2s_total_product_categories );
+											$log['message']                          = esc_html( $exception->getMessage() );
+											$viw2s_import_product_cat_progress_label = sprintf( esc_html( 'Importing... %1$s /%2$s error' ), $categories_index, $viw2s_total_product_categories );
 
 										}
 									} else if ( $viw2s_item_product_cat['status'] == 'exist' ) {
-										$viw2s_import_product_cat_progress_label = sprintf( esc_html__( 'Importing... %s /%s skipped', 'w2s-migrate-woo-to-shopify' ), $categories_index, $viw2s_total_product_categories );
+										$viw2s_import_product_cat_progress_label = sprintf( esc_html( 'Importing... %1$s /%2$s skipped' ), $categories_index, $viw2s_total_product_categories );
 										$log['message']                          = esc_html__( 'This product category has been imported to shopify', 'w2s-migrate-woo-to-shopify' );
 										$viw2s_import_product_cat_status         = get_term_meta( $viw2s_item_product_cat['term_id'], '_w2s_shopify_data', true );
 										$status                                  = 'exist';
 									} else {
-										$viw2s_import_product_cat_progress_label = sprintf( esc_html__( 'Importing... %s /%s skipped', 'w2s-migrate-woo-to-shopify' ), $categories_index, $viw2s_total_product_categories );
+										$viw2s_import_product_cat_progress_label = sprintf( esc_html( 'Importing... %1$s /%2$s skipped'), $categories_index, $viw2s_total_product_categories );
 										$log['message']                          = esc_html__( 'This product category has been import error ', 'w2s-migrate-woo-to-shopify' );
 										$viw2s_import_product_cat_status         = get_term_meta( $viw2s_item_product_cat['term_id'], '_w2s_shopify_data', true );
 										$status                                  = 'error';
@@ -952,7 +949,7 @@ class Vi_W2s_Admin {
 										'categories_index' => $categories_index - 1,
 										'total_categories' => $viw2s_total_product_categories,
 										'code'             => 'no_data',
-										'message'          => sprintf( esc_html__( 'Completed % s /%s ', 'w2s-migrate-woo-to-shopify' ), $categories_index - 1, $viw2s_total_product_categories ),
+										'message'          => sprintf( esc_html( 'Completed %1$s /%2$s ' ), $categories_index - 1, $viw2s_total_product_categories ),
 									);
 								}
 							} else {
@@ -978,7 +975,7 @@ class Vi_W2s_Admin {
 				}
 
 			} else {
-				$logs     = '<strong class="important_alert"> ' . esc_html__( $viw2s_get_api_scope['data'] ?? 'Store setting error', 'w2s-migrate-woo-to-shopify' ) . '</strong>';
+				$logs     = '<strong class="important_alert"> ' . esc_html( $viw2s_get_api_scope['data'] ?? 'Store setting error' ) . '</strong>';
 				$response = array(
 					'status'  => 'error_store_setting',
 					'logs'    => $logs,
@@ -1020,9 +1017,9 @@ class Vi_W2s_Admin {
 
 	public function generate_log_ajax() {
 		/*Check the nonce*/
-		if ( empty( $_GET['action'] ) || ! check_admin_referer( $_GET['action'] ) ) {
-			wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'w2s-migrate-woo-to-shopify' ) );
-		}
+        if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_GET['_wpnonce'] ), 'viw2s_view_log' ) || ! current_user_can('manage_woocommerce') ) {
+	        wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'w2s-migrate-woo-to-shopify' ) );
+        }
 		if ( empty( $_GET['viw2s_file'] ) ) {
 			wp_die( esc_html__( 'No log file selected.', 'w2s-migrate-woo-to-shopify' ) );
 		}
@@ -1030,7 +1027,7 @@ class Vi_W2s_Admin {
 		if ( ! is_file( $file ) ) {
 			wp_die( esc_html__( 'Log file not found.', 'w2s-migrate-woo-to-shopify' ) );
 		}
-		echo( wp_kses_post( nl2br( file_get_contents( $file ) ) ) );
+		echo( wp_kses_post( nl2br( file_get_contents( $file ) ) ) );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 		exit();
 	}
 }

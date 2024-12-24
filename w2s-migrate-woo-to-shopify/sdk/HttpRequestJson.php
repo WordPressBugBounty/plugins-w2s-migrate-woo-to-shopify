@@ -45,7 +45,7 @@ class HttpRequestJson
     protected static function prepareRequest($httpHeaders = array(), $dataArray = array())
     {
 
-        self::$postDataJSON = json_encode($dataArray);
+        self::$postDataJSON = wp_json_encode($dataArray);
 
         self::$httpHeaders = $httpHeaders;
 
@@ -206,7 +206,7 @@ class HttpRequestJson
             }
 
             if ($httpCode != null && $httpCode != $httpOK && $httpCode != $httpCreated && $httpCode != $httpDeleted) {
-                throw new Exception\CurlException("Request failed with HTTP Code $httpCode.", $httpCode);
+                throw new Exception\CurlException("Request failed with HTTP Code $httpCode.", $httpCode);// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
             }
         }
 

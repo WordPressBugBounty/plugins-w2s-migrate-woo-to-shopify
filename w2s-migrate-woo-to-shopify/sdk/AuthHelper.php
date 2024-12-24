@@ -61,7 +61,7 @@ class AuthHelper
      */
     public static function verifyShopifyRequest()
     {
-        $data = $_GET;
+        $data = $_GET;// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
         if(!isset(ShopifySDK::$config['SharedSecret'])) {
             throw new SdkException("Please provide SharedSecret while configuring the SDK client.");
@@ -121,7 +121,7 @@ class AuthHelper
             }
 
             //If redirect url is the same as this url, then need to check for access token when redirected back from shopify
-            if(isset($_GET['code'])) {
+            if(isset($_GET['code'])) {// phpcs:ignore WordPress.Security.NonceVerification.Recommended
                 return self::getAccessToken($config);
             } else {
                 $redirectUrl = self::getCurrentUrl();
@@ -168,7 +168,7 @@ class AuthHelper
             $data = array(
                 'client_id' => $config['ApiKey'],
                 'client_secret' => $config['SharedSecret'],
-                'code' => $_GET['code'],
+                'code' => $_GET['code'],// phpcs:ignore WordPress.Security.NonceVerification.Recommended
             );
 
             $response = HttpRequestJson::post($config['AdminUrl'] . 'oauth/access_token', $data);

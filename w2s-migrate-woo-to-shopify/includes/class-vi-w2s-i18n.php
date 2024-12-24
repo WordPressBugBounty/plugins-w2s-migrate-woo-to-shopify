@@ -48,11 +48,12 @@ class Vi_W2s_i18n {
 				'plugin_name'     => 'W2S - Migrate WooCommerce to Shopify',
 				'php_version'     => '7.0',
 				'wp_version'      => '5.0',
-				'wc_version'      => '7.0',
 				'require_plugins' => [
 					[
-						'slug' => 'woocommerce',
-						'name' => 'WooCommerce',
+						'slug'    => 'woocommerce',
+						'name'    => 'WooCommerce',
+						'file'    => 'woocommerce/woocommerce.php',
+						'version' => '7.0',
 					],
 				]
 			]

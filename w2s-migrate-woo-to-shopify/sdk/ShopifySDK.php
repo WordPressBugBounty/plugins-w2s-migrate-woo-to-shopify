@@ -325,7 +325,7 @@ class ShopifySDK
             } else {
                 $message = "Invalid resource name $resourceName. Pls check the API Reference to get the appropriate resource name.";
             }
-            throw new SdkException($message);
+            throw new SdkException($message);// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
         }
 
         $resourceClassName = __NAMESPACE__ . "\\$resourceName";

@@ -79,10 +79,10 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 			return implode( ' ', array_map( array( 'VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA', 'set' ), $name ) );
 		} else {
 			if ( $set_name ) {
-				return esc_attr__( str_replace( '-', '_', self::$prefix . $name ) );
+				return esc_attr( str_replace( '-', '_', self::$prefix . $name ) );
 
 			} else {
-				return esc_attr__( self::$prefix . $name );
+				return esc_attr( self::$prefix . $name );
 
 			}
 		}
@@ -109,22 +109,22 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 		$list_products_imported = [];
 		$ids_products_imported  = [];
 		if ( is_file( $list_products_imported_path ) ) {
-			$list_products_imported = json_decode( file_get_contents( $list_products_imported_path ), true );
+			$list_products_imported = json_decode( file_get_contents( $list_products_imported_path ), true );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 		}
 		/*Save to 2 file, old file to count and exclude when new import,
 		it just merge new file when each new import active.
 		New file will clean data after new import*/
 		if ( is_file( $ids_product_imported_path ) ) {
-			$ids_products_imported = json_decode( file_get_contents( $ids_product_imported_path ), true );
+			$ids_products_imported = json_decode( file_get_contents( $ids_product_imported_path ), true );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 		} else {
-			@file_put_contents( $ids_product_imported_path, json_encode( [] ) );
+			@file_put_contents( $ids_product_imported_path, wp_json_encode( [] ) );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 		}
 		$products_option     = self::get_params( 'viw2s_import_products_option' );
 		$product_create_date = self::viw2s_format_create_date();
 		$args                = array(
 			'status'  => 'publish',
 			'limit'   => - 1,
-			'exclude' => array_unique( $ids_products_imported )
+			'exclude' => array_unique( $ids_products_imported ),//phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 		);
 
 		if ( empty( $products_option['product_by_type'] ) || ( in_array( 'all', $products_option['product_by_type'] ) ) ) {
@@ -143,7 +143,7 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 
 		}
 		if ( ! empty( $products_option['product_exclude_id'] ) ) {
-			$args['exclude'] = array_unique( wp_parse_args( $ids_products_imported, $products_option['product_exclude_id'] ) );
+			$args['exclude'] = array_unique( wp_parse_args( $ids_products_imported, $products_option['product_exclude_id'] ) );//phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 
 		}
 		if ( ! empty( $products_option['product_categories_include_id'] ) ) {
@@ -204,7 +204,7 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 			}
 			if ( ! is_file( $list_products_imported_path ) || empty( $list_products_imported ) ) {
 				if ( ! empty( $arr_ids_imported ) ) {
-					file_put_contents( $list_products_imported_path, json_encode( $arr_ids_imported ) );
+					file_put_contents( $list_products_imported_path, wp_json_encode( $arr_ids_imported ) );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 				}
 			}
 			if ( ! empty( $arr_ids_check ) ) {
@@ -401,7 +401,7 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 							if ( ! empty( array_keys( $product_attributes ) ) ) {
 								$count_attribute_has_value = 0;
 								foreach ( array_keys( $product_attributes ) as $i => $attribute_key ) {
-									$attribute_key = str_replace( ' ', '-', strtolower( $attribute_key ) );
+									$attribute_key = wc_sanitize_taxonomy_name( $attribute_key );
 									if ( ! empty( $variation_item['attributes'][ 'attribute_' . $attribute_key ] ) ) {
 										$term_attribute                                         = get_term_by( 'slug', $variation_item['attributes'][ 'attribute_' . $attribute_key ], $attribute_key );
 										$product_variant_item[ 'option' . (string) ( $i + 1 ) ] = $term_attribute->name ?? $variation_item['attributes'][ 'attribute_' . $attribute_key ];
@@ -644,7 +644,7 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 				array_push( $viw2s_arr_product_cats, $arr_term );
 			}
 			if ( ! is_file( $list_product_categories_imported_path ) && ! empty( $arr_ids_imported ) ) {
-				file_put_contents( $list_product_categories_imported_path, json_encode( $arr_ids_imported ) );
+				file_put_contents( $list_product_categories_imported_path, wp_json_encode( $arr_ids_imported ) );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 			}
 		}
 
@@ -699,7 +699,7 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 			'posts_per_page' => - 1,
 			'fields'         => 'ids', // Only get ids product
 			'post_status'    => 'publish',
-			'tax_query'      => array(
+			'tax_query'      => array(//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 				array(
 					'taxonomy' => 'product_cat',
 					'field'    => 'term_id',
@@ -788,11 +788,11 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 	}
 
 	public static function viw2s_log( $log_file, $logs_content ) {
-		$logs_content = PHP_EOL . "[" . date( "Y-m-d H:i:s" ) . "] " . $logs_content;
+		$logs_content = PHP_EOL . "[" . date( "Y-m-d H:i:s" ) . "] " . $logs_content;// phpcs:ignore WordPress.DateTime.RestrictedFunctions.date_date
 		if ( is_file( $log_file ) ) {
-			file_put_contents( $log_file, $logs_content, FILE_APPEND );
+			file_put_contents( $log_file, $logs_content, FILE_APPEND );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 		} else {
-			file_put_contents( $log_file, $logs_content );
+			file_put_contents( $log_file, $logs_content );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 		}
 	}
 
@@ -916,12 +916,12 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 			if ( count( $files ) ) {
 				foreach ( $files as $file ) { // iterate files
 					if ( is_file( $file ) ) {
-						unlink( $file );
+						wp_delete_file( $file );
 					} // delete file
 				}
 			}
 		} elseif ( is_file( $files ) ) {
-			unlink( $files );
+			wp_delete_file( $files );
 		}
 	}
 
@@ -935,17 +935,17 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 				if ( is_dir( $file ) ) {
 					self::deleteDir( $file );
 				} else {
-					unlink( $file );
+					wp_delete_file( $file );
 				}
 			}
-			rmdir( $dirPath );
+			rmdir( $dirPath );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_rmdir
 		}
 	}
 
 	protected static function create_plugin_cache_folder() {
 		if ( ! is_dir( VIW2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_CACHE ) ) {
 			wp_mkdir_p( VIW2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_CACHE );
-			file_put_contents( VIW2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_CACHE . '.htaccess',
+			file_put_contents( VIW2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_CACHE . '.htaccess',// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 				'
 				<IfModule !mod_authz_core.c>Order deny,allow
 					Deny from all

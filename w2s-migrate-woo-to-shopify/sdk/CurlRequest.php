@@ -60,19 +60,19 @@ class CurlRequest
     protected static function init($url, $httpHeaders = array())
     {
         // Create Curl resource
-        $ch = curl_init();
+        $ch = curl_init();// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_init
 
         // Set URL
-        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_URL, $url);// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
 
         //Return the transfer as a string
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
 
-        curl_setopt($ch, CURLOPT_HEADER, true);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'PHPClassic/PHPShopify');
+        curl_setopt($ch, CURLOPT_HEADER, true);// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
+        curl_setopt($ch, CURLOPT_USERAGENT, 'PHPClassic/PHPShopify');// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
 
         foreach (self::$config as $option => $value) {
-            curl_setopt($ch, $option, $value);
+            curl_setopt($ch, $option, $value);// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
         }
 
         $headers = array();
@@ -80,20 +80,22 @@ class CurlRequest
             $headers[] = "$key: $value";
         }
         //Set HTTP Headers
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
 
         return $ch;
 
     }
 
-    /**
-     * Implement a GET request and return output
-     *
-     * @param string $url
-     * @param array $httpHeaders
-     *
-     * @return string
-     */
+	/**
+	 * Implement a GET request and return output
+	 *
+	 * @param string $url
+	 * @param array $httpHeaders
+	 *
+	 * @return string
+	 * @throws CurlException
+	 * @throws ResourceRateLimitException
+	 */
     public static function get($url, $httpHeaders = array())
     {
         //Initialize the Curl resource
@@ -102,57 +104,63 @@ class CurlRequest
         return self::processRequest($ch);
     }
 
-    /**
-     * Implement a POST request and return output
-     *
-     * @param string $url
-     * @param array $data
-     * @param array $httpHeaders
-     *
-     * @return string
-     */
+	/**
+	 * Implement a POST request and return output
+	 *
+	 * @param string $url
+	 * @param array $data
+	 * @param array $httpHeaders
+	 *
+	 * @return string
+	 * @throws CurlException
+	 * @throws ResourceRateLimitException
+	 */
     public static function post($url, $data, $httpHeaders = array())
     {
         $ch = self::init($url, $httpHeaders);
         //Set the request type
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
 
         return self::processRequest($ch);
     }
 
-    /**
-     * Implement a PUT request and return output
-     *
-     * @param string $url
-     * @param array $data
-     * @param array $httpHeaders
-     *
-     * @return string
-     */
+	/**
+	 * Implement a PUT request and return output
+	 *
+	 * @param string $url
+	 * @param array $data
+	 * @param array $httpHeaders
+	 *
+	 * @return string
+	 * @throws CurlException
+	 * @throws ResourceRateLimitException
+	 */
     public static function put($url, $data, $httpHeaders = array())
     {
         $ch = self::init($url, $httpHeaders);
         //set the request type
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
 
         return self::processRequest($ch);
     }
 
-    /**
-     * Implement a DELETE request and return output
-     *
-     * @param string $url
-     * @param array $httpHeaders
-     *
-     * @return string
-     */
+	/**
+	 * Implement a DELETE request and return output
+	 *
+	 * @param string $url
+	 * @param array $httpHeaders
+	 *
+	 * @return string
+	 * @throws CurlException
+	 * @throws ResourceRateLimitException
+	 */
     public static function delete($url, $httpHeaders = array())
     {
         $ch = self::init($url, $httpHeaders);
         //set the request type
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
 
         return self::processRequest($ch);
     }
@@ -167,23 +175,24 @@ class CurlRequest
         self::$config = $config;
     }
 
-    /**
-     * Execute a request, release the resource and return output
-     *
-     * @param resource $ch
-     *
-     * @throws CurlException if curl request is failed with error
-     *
-     * @return string
-     */
+	/**
+	 * Execute a request, release the resource and return output
+	 *
+	 * @param resource $ch
+	 *
+	 * @return string
+	 * @throws ResourceRateLimitException
+	 *
+	 * @throws CurlException if curl request is failed with error
+	 */
     protected static function processRequest($ch)
     {
         # Check for 429 leaky bucket error
         while (1) {
-            $output   = curl_exec($ch);
+            $output   = curl_exec($ch);// phpcs:ignore 	WordPress.WP.AlternativeFunctions.curl_curl_exec
             $response = new CurlResponse($output);
 
-            self::$lastHttpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            self::$lastHttpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_getinfo
             if (self::$lastHttpCode != 429) {
                 break;
             }
@@ -193,7 +202,7 @@ class CurlRequest
             if (!empty($apiCallLimit)) {
                 $limitHeader = explode('/', $apiCallLimit, 2);
                 if (isset($limitHeader[1]) && $limitHeader[0] < $limitHeader[1]) {
-                    throw new ResourceRateLimitException($response->getBody());
+                    throw new ResourceRateLimitException($response->getBody());// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
                 }
             }
             
@@ -207,12 +216,12 @@ class CurlRequest
             sleep((float)$retryAfter);
         }
 
-        if (curl_errno($ch)) {
-            throw new Exception\CurlException(curl_errno($ch) . ' : ' . curl_error($ch));
+        if (curl_errno($ch)) {// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_errno
+            throw new Exception\CurlException(curl_errno($ch) . ' : ' . curl_error($ch));// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped, WordPress.WP.AlternativeFunctions.curl_curl_error,WordPress.WP.AlternativeFunctions.curl_curl_errno
         }
 
         // close curl resource to free up system resources
-        curl_close($ch);
+        curl_close($ch);// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_close
 
         self::$lastHttpResponseHeaders = $response->getHeaders();
 
