@@ -197,7 +197,7 @@ We commit that you will import product data successfully. Please follow our guid
 ### Plugin Links
 
 - [Project Page](https://villatheme.com/extensions/w2s-migrate-woocommerce-to-shopify/)
-- [Report Bugs/Issues](http://villatheme.com/supports)
+- [Report Bugs/Issues](https://villatheme.com/knowledge-base/security-is-our-priority/)
 
 == Installation ==
 1. Upload `w2s-migrate-woo-to-shopify.zip` to the `/wp-content/plugins/` directory
