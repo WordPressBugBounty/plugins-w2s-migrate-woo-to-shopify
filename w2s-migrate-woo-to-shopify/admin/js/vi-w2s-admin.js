@@ -340,27 +340,37 @@ jQuery(document).ready(function ($) {
             // __viw2s_next_back_btn($this, next_atr);
 
             form_import.addClass('loading');
+
+            let type_import = selected_elements[0];
             $.ajax({
                 url: viw2s_i18n_params.ajaxurl,
                 type: 'post',
-                data: 'action=viw2s_ajax_active_import&' + form_import.serialize(),
+                data: 'action=viw2s_ajax_active_import&' + form_import.serialize() + '&type_import=' + type_import,
                 success: function (response) {
 
                     form_import.removeClass('loading');
                     $('.viw2s_wrap_logs').show();
                     if (response.status === 'success') {
-                        if (response.total_products > 0) {
+                        if (response.total_products > 0 || response.total_categories > 0) {
                             $('.viw2s-import-progress').css({'visibility': 'hidden'});
+                            $('.viw2s-import-element-enable').closest('.vi-ui.toggle.checkbox').hide();
                             for (let ele in progress_bars) {
+                                progress_bars[ele].show();
                                 progress_bars[ele].css({'visibility': 'visible'});
                                 progress_bars[ele].progress('set label', 'Waiting...').progress('set percent', 0);
                             }
-                            total_products = parseInt(response.total_products);
-                            total_categories = parseInt(response.total_categories);
-                            current_import_product_id = response.current_import_product_id;
-                            current_import_product_type = response.current_import_product_type;
-                            product_index = 0;
-                            categories_index = 0;
+
+                            if (response.total_products) {
+                                total_products = parseInt(response.total_products);
+                                product_index = 0;
+                                current_import_product_id = response.current_import_product_id;
+                                current_import_product_type = response.current_import_product_type;
+                            }
+
+                            if (response.total_categories) {
+                                total_categories = parseInt(response.total_categories);
+                                categories_index = 0;
+                            }
                             vis2w_import_element();
                         } else {
                             if (response.logs) {
@@ -414,7 +424,9 @@ jQuery(document).ready(function ($) {
                     total_products = parseInt(response.total_products);
                     let try_current_import_product_id = response.current_import_product_id,
                         try_current_import_product_type = parseInt(response.current_import_product_type);
-                    viw2s_import_products();
+                    setTimeout( function() {
+                        viw2s_import_products();
+                    }, 5000);
                 } else if (response.status === 'error_store_setting') {
                     if (response.logs) {
                         $('.viw2s-logs').append(response.logs).scrollTop($('.viw2s-logs')[0].scrollHeight);
@@ -452,7 +464,7 @@ jQuery(document).ready(function ($) {
                             if (response.logs) {
                                 $('.viw2s-logs').append(response.logs).scrollTop($('.viw2s-logs')[0].scrollHeight);
                             }
-                            if (response.status === 'successful') {
+                            if (response.status === 'successful' || response.status === 'skipped') {
                                 if (response.imported_products <= total_products) {
 
                                     viw2s_import_products();

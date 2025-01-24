@@ -5,9 +5,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
-	private $params;
-	private $default;
-	private static $prefix;
+	public $params;
+	public $default;
+	public static $prefix;
 	protected $my_options;
 	protected static $instance = null;
 
@@ -20,6 +20,9 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 		global $viw2s_settings;
 		if ( ! $viw2s_settings ) {
 			$viw2s_settings = get_option( 'viw2s_params', array() );
+		}
+		if ( empty( $viw2s_settings['viw2s_import_products_option'] ) ) {
+			unset( $viw2s_settings['viw2s_import_products_option'] );
 		}
 		$this->default = array(
 			'viw2s_store_setting'          => array(),
@@ -662,21 +665,29 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 			return;
 		}
 		$all_id_product_by_cats = self::viw2s_get_all_id_product_by_cats( $product_cat['term_id'] );
-
+		$product_cat            = array(
+			'handle' => wc_sanitize_taxonomy_name( $product_cat['handle'] ),
+			'title'  => $product_cat['title'],
+		);
 		if ( is_array( $all_id_product_by_cats ) && ! empty( $all_id_product_by_cats ) ) {
-			$arr_term = array();
+			$arr_term        = array();
+			$arr_shopify_ids = array();
 			foreach ( $all_id_product_by_cats as $product_id ) {
-				if ( ! empty( self::viw2s_shopify_product_id_by_woo_product_id( $product_id ) ) ) {
-
-					$arr_term[] = [
-						"product_id" => self::viw2s_shopify_product_id_by_woo_product_id( $product_id )
-						// shopify id product
-					];
+				$shopify_id = self::viw2s_shopify_product_id_by_woo_product_id( $product_id );
+				if ( ! empty( $shopify_id ) ) {
+					if ( ! in_array( $shopify_id, $arr_shopify_ids, true ) ) {
+						$arr_shopify_ids[] = $shopify_id;
+//						$arr_term[]        = [
+//							"product_id" => $shopify_id,// shopify id product
+//						];
+						$arr_term[] = "gid://shopify/Product/{$shopify_id}";
+					}
 				}
 
 			}
 			if ( ! empty( $arr_term ) ) {
-				$product_cat['collects'] = $arr_term;
+//				$product_cat['collects'] = $arr_term;
+				$product_cat['products'] = $arr_term;
 			}
 		}
 
@@ -805,18 +816,23 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 	 * @return array
 	 */
 	static public function get_access_scopes( $domain, $api_key, $api_secret ) {
-		$url     = "https://{$api_key}:{$api_secret}@{$domain}/admin/oauth/access_scopes.json";
+		$access_token = '';
+		if ( strpos( $api_secret, 'shpat_' ) ) {
+			$access_token = $api_secret;
+		}
+		if ( $access_token ) {
+			$url     = "https://{$domain}/admin/oauth/access_scopes.json";
+			$headers = array( 'X-Shopify-Access-Token' => $access_token );
+		} else {
+			$url     = "https://{$api_key}:{$api_secret}@{$domain}/admin/oauth/access_scopes.json";
+			$headers = array( 'Authorization' => 'Basic ' . base64_encode( $api_key . ':' . $api_secret ) );
+		}
 		$request = wp_remote_get(
 			$url, array(
 				'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36',
-				'timeout'    => 30,
-				'headers'    => array( 'Authorization' => 'Basic ' . base64_encode( $api_key . ':' . $api_secret ) ),
+				'timeout'    => 10,
+				'headers'    => $headers,
 			)
-		);
-		$return  = array(
-			'status' => 'error',
-			'data'   => '',
-			'code'   => '',
 		);
 		if ( ! is_wp_error( $request ) ) {
 			if ( isset( $request['response']['code'] ) ) {
@@ -872,17 +888,13 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 	 * @return array
 	 */
 	static public function get_shopify_store_info( $domain, $api_key, $api_secret ) {
-
 		$return          = array();
-		$config          = array(
-			'ShopUrl'  => $domain,
-			'ApiKey'   => $api_key,
-			'Password' => $api_secret
-		);
-		$VIW2SShopifySDK = PHPShopify\ShopifySDK::config( $config );
+		$bulk_import = Viw2s_Bulk_Import::instance( $domain );
 		try {
 			$return = array(
-				'data' => $VIW2SShopifySDK->Shop->get(),
+				'data' => [
+					'currency' => $bulk_import->currency_code
+				],
 				'code' => 200
 			);
 
@@ -979,6 +991,23 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 		}
 
 		return $args;
+	}
+
+	public function get_setting_by_store_name( $store_name = '' ) {
+		$res = [];
+		if ( $store_name !== '' ) {
+			$all_store_setting = self::get_params( 'viw2s_store_setting' );
+			foreach ( $all_store_setting as $store_item ) {
+				if ( $store_item['domain'] === $store_name ) {
+					$res['domain']                   = $store_item['domain'];
+					$res['api_key']                  = $store_item['api_key'];
+					$res['api_secret']               = $store_item['api_secret'];
+					$res['get_access_scopes_handle'] = self::get_access_scopes_handle( $store_item['domain'], $store_item['api_key'], $store_item['api_secret'] );
+				}
+			}
+		}
+
+		return $res;
 	}
 
 

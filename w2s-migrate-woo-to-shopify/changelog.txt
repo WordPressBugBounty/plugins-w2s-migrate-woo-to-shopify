@@ -1,3 +1,17 @@
+/**1.3.0 - 2025.01.23**/
+- Fixed: View file limitations
+- Added: Toggle import product or product categories
+- Updated: Enhance import logs box
+- Updated: Updated support file
+- Updated: Enhance import processes
+- Updated: Change to GraphQL API
+- Removed: Shopify SDK API
+
+/**1.2.1 - 2024.12.24**/
+- Fixed: Fixed security
+- Fixed: Translation loading triggered too early
+- Updated: Updated support file
+
 /**1.2.1 - 2024.12.24**/
 - Fixed: Fixed security
 - Fixed: Translation loading triggered too early

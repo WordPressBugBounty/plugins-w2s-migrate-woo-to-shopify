@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: W2S - Migrate Woo to Shopify\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-24 03:10+0000\n"
+"POT-Creation-Date: 2025-01-21 09:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,111 +16,113 @@ msgstr ""
 "X-Loco-Version: 2.5.5; wp-5.8.2\n"
 "X-Domain: w2s-migrate-woo-to-shopify"
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:302
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:302
 msgid "10000"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:295
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:295
 msgid "3000"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:309
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:309
 msgid "512M"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:69
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:69
 msgid "Action"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:582
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:595
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:608
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:582
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:595
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:608
 msgid "Active"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:254
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:254
 msgid "Add store"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:64
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:64
 msgid "API access token or API secret"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:59
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:59
 msgid "API key"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:139
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:139
 msgid "API key can not be empty! "
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:973
-msgid "API permission must have product write permission"
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1019
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1024
+#, php-format
+msgid "API permission must have %s permission"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:968
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:244
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:244
 msgid "API permission must have product write permission!"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:545
-msgid "API permission not correct !!!"
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:558
+#, php-format
+msgid "API permission not correct, missing %s scopes !!!"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:140
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:140
 msgid "API secret can not be empty! "
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:583
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:596
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:609
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:583
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:596
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:609
 msgid "Archived"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:212
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:212
 msgid "Change your API at least once a month"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:433
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:433
 msgid "Choose product you don't want to import"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:411
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:411
 msgid "Choose product you want to import"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:732
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:732
 msgid "Data"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:584
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:590
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:597
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:610
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:584
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:590
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:597
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:610
 msgid "Draft"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:416
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:416
 msgid "Exclude product"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:368
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:368
 msgid "Filter by product type"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:456
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:456
 msgid "Filter include product by product categories."
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:468
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:468
 msgid "From"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:571
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:571
 msgid "From Woocommerce"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:42
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:42
 msgid "General settings"
 msgstr ""
 
@@ -132,106 +134,109 @@ msgstr ""
 msgid "https://villatheme.com/extensions/w2s-migrate-woocommerce-to-shopify/"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:213
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:213
 msgid ""
 "If you only use API to import data, remove API permissions or delete the API "
 "after import completed"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:777
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:789
 msgid "Import"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:842
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:853
 msgid "Import error"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:959
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1010
 msgid "Import error, please try again! "
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:988
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:993
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:664
+msgid "Import failed"
+msgstr ""
+
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1039
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1044
 msgid "Import nonce error"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:520
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:520
 msgid "Import Product Categories"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:530
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:530
 msgid "Import product categories"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:560
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:560
 msgid "Import product SKU"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:545
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:545
 msgid "Import product tags"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:462
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:462
 msgid "Import products created date"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:362
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:362
 msgid "Import Products options"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:488
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:488
 msgid "Import Products sequence"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:550
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:550
 msgid "Import Products SKU"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:535
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:535
 msgid "Import Products Tags"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:652
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:760
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:886
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:685
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:935
 msgid "Import successfully"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-logs.php:2
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-logs.php:2
 msgid "Import WooCommerce to Shopify log files"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:438
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:438
 msgid "Include by Product categories"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:393
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:393
 msgid "Include product"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:505
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:505
 msgid "Keep Product Slug"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:515
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:515
 msgid "keep the slug of the product when importing"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1028
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-logs.php:10
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1084
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-logs.php:10
 msgid "Log file not found."
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:193
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:194
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:193
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:194
 msgid "Logs"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:783
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:795
 msgid "Logs:"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:305
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:305
 msgid "Memory Limit"
 msgstr ""
 
@@ -239,204 +244,216 @@ msgstr ""
 msgid "Migrate all products and categories from WooCommerce to Shopify"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:34
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:34
 msgid "Migrate WooCommerce to Shopify"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:228
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:228
 msgid "Minimum recommended value"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:142
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:142
 msgid "Need to select at least one data to import! "
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:141
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:141
 msgid "Need to select at least one store to import! "
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1024
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1076
 msgid "No log file selected."
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:534
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:549
+msgid "Not find categories to import"
+msgstr ""
+
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:532
 msgid "Not find products to import"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:585
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:598
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:611
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:585
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:598
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:611
 msgid "Not import"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:380
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:380
 msgid "Only Simple"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:387
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:387
 msgid "Only variable"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:226
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:226
 msgid "Option name"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:496
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:496
 msgid "Order by Created Date Ascending"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:497
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:497
 msgid "Order by Created Date Descending"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:494
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:494
 msgid "Order by Title Ascending"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:495
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:495
 msgid "Order by Title Descending"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:498
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:498
 msgid "Order by Updated Date Ascending"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:499
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:499
 msgid "Order by Updated Date Descending"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:603
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:603
 msgid "Pending Review"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:298
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:298
 msgid "PHP Max Input Vars"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:291
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:291
 msgid "PHP Time Limit"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:565
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:673
+msgid "Product don't have any variation"
+msgstr ""
+
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:565
 msgid "Product Status Mapping"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:741
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:675
+msgid "Product's slug has been used"
+msgstr ""
+
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:741
 msgid "Products"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:754
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:760
 msgid "Products Categories"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:732
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:773
 msgid "products with attribute count more than 3"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:724
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:765
 msgid "Products with variants have not been entered correctly"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:733
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:733
 msgid "Progress"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:577
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:577
 msgid "Publish"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:247
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:265
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:283
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:247
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:265
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:283
 msgid "Required"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:358
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:626
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:358
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:626
 msgid "Save"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:143
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:143
 msgid "Select products"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:158
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:158
 msgid "Settings"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:207
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:207
 msgid "Shopify Admin API security recommendation"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:373
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:373
 msgid "Simple & Variable"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:54
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:54
 msgid "Store address"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:138
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:138
 msgid "Store address can not be empty! "
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:983
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1034
 msgid "Store setting error"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:184
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:222
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:184
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:222
 msgid "System Status"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:183
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:183
 msgid "System status"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:749
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:790
 msgid "The product has been imported to shopify"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:66
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:66
 msgid ""
 "This is API access token( with custom app) or API secret ( with private app)"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:61
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:61
 msgid "This is api key"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:56
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:56
 msgid "This is store address Eg: myshop.myshopify.com"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:929
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:980
 msgid "This product category has been import error "
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:924
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:975
 msgid "This product category has been imported to shopify"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:476
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:476
 msgid "To"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:572
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:572
 msgid "To Shopify"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:211
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:211
 msgid ""
 "Treat the API key and password like you would any other password, since "
 "whoever has access to these credentials has API access to the store."
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:328
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:328
 msgid "Upgrade this feature"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1010
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1061
 msgid "View"
 msgstr ""
 
@@ -448,25 +465,25 @@ msgstr ""
 msgid "W2S - Migrate WooCommerce to Shopify"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:171
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:172
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:171
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:172
 msgid "Woo to Shopify"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1021
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1072
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:232
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:232
 msgid ""
 "You need to enter correct all domain, API key and API secret to be able to "
 "import"
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:210
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:210
 msgid "You should enable only what is necessary for your app to work."
 msgstr ""
 
-#: D:/git-2024/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:227
+#: C:/villatheme-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:227
 msgid "Your option value"
 msgstr ""

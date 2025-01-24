@@ -125,12 +125,12 @@ class Vi_W2s_Admin {
 			$current_screen === 'woo-to-shopify_page_w2s-import-woocommerce-to-shopify-clear-data'
 		) {
 
-			wp_enqueue_script( $this->vi_w2s . '-js-accordion', VIW2S_DIR_URL . 'assets/js/accordion.min.js', array( 'jquery' ), $this->version, true  );
-			wp_enqueue_script( $this->vi_w2s . '-js-checkbox', VIW2S_DIR_URL . 'assets/js/checkbox.min.js', array( 'jquery' ) , $this->version, true );
-			wp_enqueue_script( $this->vi_w2s . '-js-dropdown', VIW2S_DIR_URL . 'assets/js/dropdown.min.js', array( 'jquery' ), $this->version, true  );
-			wp_enqueue_script( $this->vi_w2s . '-js-progress', VIW2S_DIR_URL . 'assets/js/progress.min.js', array( 'jquery' ), $this->version, true  );
-			wp_enqueue_script( $this->vi_w2s . '-js-select2', VIW2S_DIR_URL . 'assets/js/select2.js', array( 'jquery' ), $this->version, true  );
-			wp_enqueue_script( $this->vi_w2s . '-js-transition', VIW2S_DIR_URL . 'assets/js/transition.min.js', array( 'jquery' ) , $this->version, true );
+			wp_enqueue_script( $this->vi_w2s . '-js-accordion', VIW2S_DIR_URL . 'assets/js/accordion.min.js', array( 'jquery' ), $this->version, true );
+			wp_enqueue_script( $this->vi_w2s . '-js-checkbox', VIW2S_DIR_URL . 'assets/js/checkbox.min.js', array( 'jquery' ), $this->version, true );
+			wp_enqueue_script( $this->vi_w2s . '-js-dropdown', VIW2S_DIR_URL . 'assets/js/dropdown.min.js', array( 'jquery' ), $this->version, true );
+			wp_enqueue_script( $this->vi_w2s . '-js-progress', VIW2S_DIR_URL . 'assets/js/progress.min.js', array( 'jquery' ), $this->version, true );
+			wp_enqueue_script( $this->vi_w2s . '-js-select2', VIW2S_DIR_URL . 'assets/js/select2.js', array( 'jquery' ), $this->version, true );
+			wp_enqueue_script( $this->vi_w2s . '-js-transition', VIW2S_DIR_URL . 'assets/js/transition.min.js', array( 'jquery' ), $this->version, true );
 
 			wp_enqueue_script( $this->vi_w2s . '-js', VIW2S_DIR_URL . 'admin/js/vi-w2s-admin.js', array( 'jquery', 'jquery-tiptip' ), $this->version, true );
 			$viw2s_i18n_params = array(
@@ -499,50 +499,63 @@ class Vi_W2s_Admin {
 		}
 		if ( wp_verify_nonce( $_POST['_viw2s_action_import_nonce'], 'viw2s_action_import_nonce' ) ) {
 			$viw2s_setting_store = $this->setting->get_params( 'viw2s_store_setting' );
+			$type_import         = isset( $_POST['type_import'] ) ? wc_clean( wp_unslash( $_POST['type_import'] ) ) : '';
 			if ( is_array( $viw2s_setting_store ) && ! empty( $viw2s_setting_store ) && isset( $viw2s_setting_store[0]['validate'] ) && $viw2s_setting_store[0]['validate'] ) {
 				$viw2s_get_api_scope = $this->setting->get_access_scopes( $viw2s_setting_store[0]['domain'], $viw2s_setting_store[0]['api_key'], $viw2s_setting_store[0]['api_secret'] );
 				if ( $viw2s_get_api_scope['status'] == 'success' ) {
 					$viw2s_get_api_access_scope_handle = $this->setting->get_access_scopes_handle( $viw2s_setting_store[0]['domain'], $viw2s_setting_store[0]['api_key'], $viw2s_setting_store[0]['api_secret'] );
-					if (
-						! empty( $viw2s_get_api_access_scope_handle ) &&
-						in_array( 'read_products', $viw2s_get_api_access_scope_handle ) &&
-						in_array( 'write_products', $viw2s_get_api_access_scope_handle )
-					) {
-						$viw2s_get_all_product_data      = $this->setting->viw2s_get_all_product_data();
-						$viw2s_get_all_product_cats_data = $this->setting->viw2s_get_all_product_cats();
-						update_option( 'viw2s_importing_arr_product', $viw2s_get_all_product_data );
-						update_option( 'viw2s_importing_arr_product_categories', $viw2s_get_all_product_cats_data );
+					$missing_scopes                    = array_diff( [
+						'read_products',
+						'write_products',
+						'read_locations',
+						'write_inventory'
+					], $viw2s_get_api_access_scope_handle );
+					if ( empty( $missing_scopes ) ) {
 						$status = 'success';
-						if ( ! empty( $viw2s_get_all_product_data ) ) {
-							$viw2s_item_product = $viw2s_get_all_product_data[0];
+						if ( $type_import === 'products' ) {
+							$viw2s_get_all_product_data = $this->setting->viw2s_get_all_product_data();
+							if ( ! empty( $viw2s_get_all_product_data ) ) {
+								update_option( 'viw2s_importing_arr_product', $viw2s_get_all_product_data );
+								$viw2s_item_product = $viw2s_get_all_product_data[0];
+								$response           = array(
+									'status'                      => $status,
+									'total_products'              => count( $viw2s_get_all_product_data ),
+									'current_import_product_type' => $viw2s_item_product["type"] ?? '',
+									'current_import_product_id'   => $viw2s_item_product["id"] ?? '',
+									'product_index'               => 0,
+									'all_product_data'            => $viw2s_get_all_product_data,
+								);
 
-							$response = array(
-								'status'                      => $status,
-								'total_products'              => count( $viw2s_get_all_product_data ),
-								'total_categories'            => count( $viw2s_get_all_product_cats_data ),
-								'current_import_product_type' => $viw2s_item_product["type"] ?? '',
-								'current_import_product_id'   => $viw2s_item_product["id"] ?? '',
-								'product_index'               => 0,
-								'categories_index'            => 0,
-								'all_product_data'            => $viw2s_get_all_product_data,
-								'all_product_cats_data'       => $viw2s_get_all_product_cats_data
-							);
-						} else {
-
-							$response = array(
-								'status'           => $status,
-								'logs'             => '<div><strong class="important_alert">' . esc_html__( 'Not find products to import', 'w2s-migrate-woo-to-shopify' ) . '</strong></div>',
-								'total_products'   => 0,
-								'total_categories' => count( $viw2s_get_all_product_cats_data ),
-							);
+							} else {
+								$response = array(
+									'status'         => $status,
+									'logs'           => '<div><strong class="important_alert">' . esc_html__( 'Not find products to import', 'w2s-migrate-woo-to-shopify' ) . '</strong></div>',
+									'total_products' => 0,
+								);
+							}
+						} elseif ( $type_import === 'product_categories' ) {
+							$viw2s_get_all_product_cats_data = $this->setting->viw2s_get_all_product_cats();
+							if ( ! empty( $viw2s_get_all_product_cats_data ) ) {
+								update_option( 'viw2s_importing_arr_product_categories', $viw2s_get_all_product_cats_data );
+								$response = array(
+									'status'                => $status,
+									'total_categories'      => count( $viw2s_get_all_product_cats_data ),
+									'categories_index'      => 0,
+									'all_product_cats_data' => $viw2s_get_all_product_cats_data
+								);
+							} else {
+								$response = array(
+									'status'         => $status,
+									'logs'           => '<div><strong class="important_alert">' . esc_html__( 'Not find categories to import', 'w2s-migrate-woo-to-shopify' ) . '</strong></div>',
+									'total_products' => 0,
+								);
+							}
 						}
-
-
 					} else {
 						$status   = 'permission_not_correct';
 						$response = array(
 							'status' => $status,
-							'logs'   => '<div><strong class="important_alert">' . esc_html__( 'API permission not correct !!!', 'w2s-migrate-woo-to-shopify' ) . '</strong></div>'
+							'logs'   => '<div><strong class="important_alert">' . sprintf( esc_html__( 'API permission not correct, missing %s scopes !!!', 'w2s-migrate-woo-to-shopify' ), implode( ', ', $missing_scopes ) ) . '</strong></div>'
 						);
 					}
 
@@ -585,19 +598,16 @@ class Vi_W2s_Admin {
 				isset( $viw2s_get_api_scope['status'] ) &&
 				$viw2s_get_api_scope['status'] === 'success'
 			) {
-
 				$viw2s_get_api_access_scope_handle = $this->setting->get_access_scopes_handle( $domain, $api_key, $api_secret );
-				if (
-					! empty( $viw2s_get_api_access_scope_handle ) &&
-					in_array( 'read_products', $viw2s_get_api_access_scope_handle ) &&
-					in_array( 'write_products', $viw2s_get_api_access_scope_handle )
-				) {
-					$config          = array(
-						'ShopUrl'  => $domain,
-						'ApiKey'   => $api_key,
-						'Password' => $api_secret
-					);
-					$VIW2SShopifySDK = PHPShopify\ShopifySDK::config( $config );
+				$missing_scopes                    = array_diff( [
+					'read_products',
+					'write_products',
+					'read_locations',
+					'write_inventory'
+				], $viw2s_get_api_access_scope_handle );
+				if ( empty( $missing_scopes ) ) {
+
+					$bulk_import = Viw2s_Bulk_Import::instance( $domain );
 
 					$path = VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA::get_cache_path( $domain, $api_key, $api_secret ) . '/';
 					VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA::create_cache_folder( $path );
@@ -621,217 +631,222 @@ class Vi_W2s_Admin {
 							if ( is_file( $ids_products_imported_path ) ) {
 								$ids_products_imported = json_decode( file_get_contents( $ids_products_imported_path ), true );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 							}
-							if (
-								! empty( $get_all_importing_arr_product ) &&
-								( $product_index !== '' )
-							) {
-								$viw2s_total_product = count( $get_all_importing_arr_product );
-								$product_index ++;
-								if ( $product_index <= $viw2s_total_product ) {
-									$viw2s_item_product                  = $get_all_importing_arr_product[ $product_index - 1 ];
-									$viw2s_item_product_data             = $this->setting->viw2s_product_data_format( $viw2s_item_product["id"], $viw2s_item_product["type"] );
-									$viw2s_import_product_images         = array();
-									$viw2s_new_import_product_images     = array();
-									$viw2s_import_product_progress_label = 'Importing...';
+							if ( ! empty( $get_all_importing_arr_product ) && ( $product_index !== '' ) ) {
+								$viw2s_total_product     = count( $get_all_importing_arr_product );
+								$arr_item_product_data   = array();
+								$arr_item_product_result = array();
+								/* Bulk import product depends on rate*/
+//                                $bulk_import->set_time_limit();
+								for ( $i = 0; $i < $bulk_import->product_rate(); $i ++ ) {
 
-									$error_product_code  = '';
-									$error_image_code    = '';
-									$viw2s_import_status = '';
-									$log                 = array(
-										'shopify_id' => '',
-										'woo_id'     => $viw2s_item_product["id"],
-										'title'      => esc_html( get_the_title( $viw2s_item_product["id"] ) ),
-										'message'    => '',
-									);
-									try {
-										switch ( $viw2s_item_product_data['status'] ) {
-											case 'success':
-												$viw2s_import_status                 = $VIW2SShopifySDK->Product->post( $viw2s_item_product_data['data'] );
-												$viw2s_import_product_progress_label = sprintf( esc_html( 'Importing... %s /%s completed' ), $product_index, $viw2s_total_product );
-												$log['shopify_id']                   = $viw2s_import_status['id'];
-												$log['message']                      = esc_html__( 'Import successfully', 'w2s-migrate-woo-to-shopify' );
-												/*Update data to product metadata*/
-												$_w2s_shopify_data = get_post_meta( $viw2s_item_product["id"], '_w2s_shopify_data', true );
-												if ( ! empty( $_w2s_shopify_data ) && is_array( $_w2s_shopify_data ) ) {
-													$_w2s_shopify_data[ $domain ] = array(
-														'_w2s_shopify_product_id' => $viw2s_import_status['id'],
-														'_w2s_shopify_variant_id' => $viw2s_import_status['variants'][0]['id'],
-														'status'                  => 'imported'
-													);
-													update_post_meta( $viw2s_item_product["id"], '_w2s_shopify_data', $_w2s_shopify_data );
-												} else {
-													update_post_meta( $viw2s_item_product["id"], '_w2s_shopify_data', array(
-														$domain => array(
-															'_w2s_shopify_product_id' => $viw2s_import_status['id'],
+									$product_index ++;
+									if ( $product_index <= $viw2s_total_product ) {
+										$viw2s_item_product                  = $get_all_importing_arr_product[ $product_index - 1 ];
+										$viw2s_item_product_data             = $bulk_import->get_product_data_format( $viw2s_item_product["id"] );
+										$arr_item_product_data[]             = $viw2s_item_product_data['data'];
+										$viw2s_new_import_product_images     = array();
+										$viw2s_import_product_progress_label = 'Importing...';
+
+										$error_product_code  = '';
+										$error_image_code    = '';
+										$viw2s_import_status = '';
+										$title               = esc_html( get_the_title( $viw2s_item_product["id"] ) );
+										$status              = 'successful';
+										$log                 = array(
+											'shopify_id' => '',
+											'woo_id'     => $viw2s_item_product["id"],
+											'title'      => esc_html( get_the_title( $viw2s_item_product["id"] ) ),
+											'message'    => '',
+										);
+										try {
+											switch ( $viw2s_item_product_data['status'] ) {
+												case 'success':
+													$result                    = $bulk_import->import_product( $viw2s_item_product_data['data'] );
+													$arr_item_product_result[] = $result;
+													if ( ! empty( $result['data']['productSet']['userErrors'] ) ) {
+														$log['title']       = esc_html__( 'Import failed', 'w2s-migrate-woo-to-shopify' );
+														$log['product_url'] = get_edit_post_link( $viw2s_item_product["id"] );
+														$message            = $result['data']['productSet']['userErrors'][0]['message'];
+														$field_error        = $result['data']['productSet']['userErrors'][0]['field'];
+														$code               = 422;
+
+														if ( $message === 'Too many attempts. Please try again later.' ) {
+															$code = 429;
+														} elseif ( $message === 'Product options input is required when updating variants' ) {
+															$message = esc_html__( 'Product don\'t have any variation', 'w2s-migrate-woo-to-shopify' );
+														} elseif ( str_contains( $message, 'Please provide a new handle' ) ) {
+															$message = esc_html__( 'Product\'s slug has been used', 'w2s-migrate-woo-to-shopify' );
+														}
+														throw new Exception( "{$title} - {$message}", $code );
+													}
+													$viw2s_import_status                 = $result['data']['productSet']['product'];
+													$shopify_variants                    = $viw2s_import_status['variants']['nodes'];
+													$inventory_item_update               = $viw2s_item_product_data['inventory_item_update'];
+													$shopify_product_id                  = basename( $viw2s_import_status['id'] );
+													$viw2s_import_product_progress_label = sprintf( esc_html( 'Importing... %s /%s completed' ), $product_index, $viw2s_total_product );
+													$log['shopify_id']                   = $shopify_product_id;
+													$log['message']                      = esc_html__( 'Import successfully', 'w2s-migrate-woo-to-shopify' );
+
+													/* Because productSet doesn't support inventory, need to do it separately */
+													foreach ( $inventory_item_update as $j => $inventory_item ) {
+														$bulk_import->update_inventory_item( array(
+															'id'    => $shopify_variants[ $j ]['inventoryItem']['id'],
+															'input' => $inventory_item
+														) );
+													}
+
+													/*Update data to product metadata*/
+													$_w2s_shopify_data = get_post_meta( $viw2s_item_product["id"], '_w2s_shopify_data', true );
+													if ( ! empty( $_w2s_shopify_data ) && is_array( $_w2s_shopify_data ) ) {
+														$_w2s_shopify_data[ $domain ] = array(
+															'_w2s_shopify_product_id' => $shopify_product_id,
 															'_w2s_shopify_variant_id' => $viw2s_import_status['variants'][0]['id'],
 															'status'                  => 'imported'
-														)
-													) );
-												}
-												/*Update data to product metadata for children product*/
-												if ( $viw2s_item_product['type'] == 'variable' && ! empty( $viw2s_item_product["children_ids"] ) ) {
-													$shopify_variants = $viw2s_import_status['variants'];
-
-													foreach ( $viw2s_item_product["children_ids"] as $children_key => $children_id ) {
-														$_w2s_shopify_data_children = get_post_meta( $children_id, '_w2s_shopify_data', true );
-
-														if ( ! empty( $_w2s_shopify_data_children ) && is_array( $_w2s_shopify_data_children ) ) {
-															$_w2s_shopify_data_children[ $domain ] = array(
-																'_w2s_shopify_product_id' => $viw2s_import_status['id'],
-																'_w2s_shopify_variant_id' => $shopify_variants[ $children_key ]['id'],
-																'status'                  => 'imported'
-															);
-															update_post_meta( $children_id, '_w2s_shopify_data', $_w2s_shopify_data_children );
-														} else {
-															update_post_meta( $children_id, '_w2s_shopify_data', array(
-																$domain => array(
-																	'_w2s_shopify_product_id' => $viw2s_import_status['id'],
-																	'_w2s_shopify_variant_id' => $shopify_variants[ $children_key ]['id'],
-																	'status'                  => 'imported'
-																)
-															) );
-														}
-													}
-
-												}
-												/*Clean $list_products_imported */
-												if ( ! empty( $list_products_imported ) && is_array( $list_products_imported ) ) {
-
-													$list_products_imported = array_unique( $list_products_imported, SORT_NUMERIC );
-													$key_old_not_exist      = array_search( $viw2s_item_product["id"], $list_products_imported );
-													if ( $key_old_not_exist ) {
-														unset( $list_products_imported[ $key_old_not_exist ] );
-													}
-												}
-
-												if ( is_array( $viw2s_import_status ) && key_exists( 'id', $viw2s_import_status ) ) {
-													$list_products_imported[ $viw2s_import_status['id'] ] = $viw2s_item_product["id"]; //Set to file array('shopify_id'=>'woo_id')
-												}
-
-												/*log to file list_product_imported*/
-												file_put_contents( $list_products_imported_path, wp_json_encode( $list_products_imported ) );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
-
-												/*log to file ids_product_imported*/
-												$ids_products_imported[] = $viw2s_item_product['id'];
-												$ids_products_imported   = array_unique( $ids_products_imported );
-												file_put_contents( $ids_products_imported_path, wp_json_encode( $ids_products_imported ) );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
-												break;
-											case 'attribute_has_any_product':
-											case 'dont_has_any_product':
-												$viw2s_import_status = 'error';
-												$log['product_url']  = get_edit_post_link( $viw2s_item_product["id"] );
-
-												$log['message'] = esc_html__( 'Products with variants have not been entered correctly', 'w2s-migrate-woo-to-shopify' );
-
-												$viw2s_import_product_progress_label = sprintf( esc_html( 'Importing... %1$s /%2$s was skipped' ), $product_index, $viw2s_total_product );
-												break;
-											case 'too_much_attributes':
-												$viw2s_import_status = 'error';
-												$log['product_url']  = get_edit_post_link( $viw2s_item_product["id"] );
-
-												$log['message'] = esc_html__( 'products with attribute count more than 3', 'w2s-migrate-woo-to-shopify' );
-
-
-												$viw2s_import_product_progress_label = sprintf( esc_html( 'Importing... %1$s /%2$s was skipped' ), $product_index, $viw2s_total_product );
-												break;
-											case 'exist':
-												$_w2s_shopify_data = get_post_meta( $viw2s_item_product["id"], '_w2s_shopify_data', true );
-												if (
-													! empty( $_w2s_shopify_data ) &&
-													is_array( $_w2s_shopify_data ) &&
-													isset( $_w2s_shopify_data[ $domain ] ) &&
-													isset( $_w2s_shopify_data[ $domain ]['_w2s_shopify_product_id'] )
-												) {
-													$log['product_url'] = esc_url( $domain . '/admin/products/' . $_w2s_shopify_data[ $domain ]['_w2s_shopify_product_id'] );
-												}
-												$viw2s_import_status = 'exist';
-
-												$log['message']                      = esc_html__( 'The product has been imported to shopify', 'w2s-migrate-woo-to-shopify' );
-												$viw2s_import_product_progress_label = sprintf( esc_html( 'Importing... %1$s /%2$s was skipped' ), $product_index, $viw2s_total_product );
-												break;
-										}
-										$status = 'successful';
-
-									} catch ( Exception $exception ) {
-										$viw2s_import_status                 = $exception->getMessage();
-										$error_product_code                  = $exception->getCode();
-										$viw2s_import_product_progress_label = sprintf( esc_html( 'Importing... %1$s /%2$s error' ), $product_index, $viw2s_total_product );
-
-										$log['message'] = esc_html__( 'Import successfully', 'w2s-migrate-woo-to-shopify' );
-										$status         = 'error_access_scope';
-									}
-									try {
-										if ( $viw2s_item_product_data['status'] == 'success' ) {
-
-											$viw2s_shopify_product_id    = $viw2s_import_status['id'] ?? '';
-											$viw2s_import_product_images = $viw2s_item_product_data['data_images'];
-											if ( ! empty( $viw2s_import_status ) && is_array( $viw2s_import_status ) && isset( $viw2s_import_status['variants'] ) ) {
-												$shopify_arr_variant = $viw2s_import_status['variants'];
-
-												foreach ( $shopify_arr_variant as $index_variant => $shopify_variant_item ) {
-													$shopify_variant_id                                           = $shopify_variant_item['id'];
-													$viw2s_import_product_images[ $index_variant ]['variant_ids'] = array( $shopify_variant_id );
-												}
-											}
-
-											if ( ! empty( $viw2s_import_product_images ) ) {
-												foreach ( $viw2s_import_product_images as $v1 ) {
-													if ( isset( $viw2s_new_import_product_images[ $v1['src'] ] ) ) {
-														if ( isset( $v1['variant_ids'] ) && is_array( $viw2s_new_import_product_images[ $v1['src'] ]['variant_ids'] ) && ! empty( $v1['variant_ids'] ) ) {
-															array_push( $viw2s_new_import_product_images[ $v1['src'] ]['variant_ids'], $v1['variant_ids'][0] );
-														}
+														);
+														update_post_meta( $viw2s_item_product["id"], '_w2s_shopify_data', $_w2s_shopify_data );
 													} else {
-														$viw2s_new_import_product_images[ $v1['src'] ]['src'] = $v1['src'] ?? [];
-														if ( isset( $v1['variant_ids'] ) && is_array( $v1['variant_ids'] ) && ! empty( $v1['variant_ids'] ) ) {
-															$viw2s_new_import_product_images[ $v1['src'] ]['variant_ids'] = $v1['variant_ids'];
+														update_post_meta( $viw2s_item_product["id"], '_w2s_shopify_data', array(
+															$domain => array(
+																'_w2s_shopify_product_id' => $shopify_product_id,
+																'_w2s_shopify_variant_id' => $viw2s_import_status['variants'][0]['id'],
+																'status'                  => 'imported'
+															)
+														) );
+													}
+													/*Update data to product metadata for children product*/
+													if ( $viw2s_item_product['type'] == 'variable' && ! empty( $viw2s_item_product["children_ids"] ) ) {
+
+														foreach ( $viw2s_item_product["children_ids"] as $children_key => $children_id ) {
+															$_w2s_shopify_data_children = get_post_meta( $children_id, '_w2s_shopify_data', true );
+
+															if ( ! empty( $_w2s_shopify_data_children ) && is_array( $_w2s_shopify_data_children ) ) {
+																$_w2s_shopify_data_children[ $domain ] = array(
+																	'_w2s_shopify_product_id' => $shopify_product_id,
+																	'_w2s_shopify_variant_id' => basename( $shopify_variants[ $children_key ]['id'] ),
+																	'status'                  => 'imported'
+																);
+																update_post_meta( $children_id, '_w2s_shopify_data', $_w2s_shopify_data_children );
+															} else {
+																update_post_meta( $children_id, '_w2s_shopify_data', array(
+																	$domain => array(
+																		'_w2s_shopify_product_id' => $shopify_product_id,
+																		'_w2s_shopify_variant_id' => basename( $shopify_variants[ $children_key ]['id'] ),
+																		'status'                  => 'imported'
+																	)
+																) );
+															}
+														}
+
+													}
+													/*Clean $list_products_imported */
+													if ( ! empty( $list_products_imported ) && is_array( $list_products_imported ) ) {
+
+														$list_products_imported = array_unique( $list_products_imported, SORT_NUMERIC );
+														$key_old_not_exist      = array_search( $viw2s_item_product["id"], $list_products_imported );
+														if ( $key_old_not_exist ) {
+															unset( $list_products_imported[ $key_old_not_exist ] );
 														}
 													}
-												}
-												$viw2s_import_image_status = $VIW2SShopifySDK->Product( $viw2s_shopify_product_id )->put( [ 'images' => array_values( $viw2s_new_import_product_images ) ] );
-											} else {
-												$viw2s_import_image_status = 'empty';
+
+													if ( is_array( $viw2s_import_status ) && key_exists( 'id', $viw2s_import_status ) ) {
+														$list_products_imported[ $shopify_product_id ] = $viw2s_item_product["id"]; //Set to file array('shopify_id'=>'woo_id')
+													}
+
+													/*log to file list_product_imported*/
+													file_put_contents( $list_products_imported_path, wp_json_encode( $list_products_imported ) );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+
+													/*log to file ids_product_imported*/
+													$ids_products_imported[] = $viw2s_item_product['id'];
+													$ids_products_imported   = array_unique( $ids_products_imported );
+													file_put_contents( $ids_products_imported_path, wp_json_encode( $ids_products_imported ) );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+													break;
+												case 'attribute_has_any_product':
+												case 'dont_has_any_product':
+													$viw2s_import_status = 'error';
+													$log['product_url']  = get_edit_post_link( $viw2s_item_product["id"] );
+
+													$log['message'] = esc_html__( 'Products with variants have not been entered correctly', 'w2s-migrate-woo-to-shopify' );
+
+													$viw2s_import_product_progress_label = sprintf( esc_html( 'Importing... %1$s /%2$s was skipped' ), $product_index, $viw2s_total_product );
+													break;
+												case 'too_much_attributes':
+													$viw2s_import_status = 'error';
+													$log['product_url']  = get_edit_post_link( $viw2s_item_product["id"] );
+
+													$log['message'] = esc_html__( 'products with attribute count more than 3', 'w2s-migrate-woo-to-shopify' );
+
+
+													$viw2s_import_product_progress_label = sprintf( esc_html( 'Importing... %1$s /%2$s was skipped' ), $product_index, $viw2s_total_product );
+													break;
+												case 'exist':
+													$_w2s_shopify_data = get_post_meta( $viw2s_item_product["id"], '_w2s_shopify_data', true );
+													if (
+														! empty( $_w2s_shopify_data ) &&
+														is_array( $_w2s_shopify_data ) &&
+														isset( $_w2s_shopify_data[ $domain ] ) &&
+														isset( $_w2s_shopify_data[ $domain ]['_w2s_shopify_product_id'] )
+													) {
+														$log['product_url'] = esc_url( $domain . '/admin/products/' . $_w2s_shopify_data[ $domain ]['_w2s_shopify_product_id'] );
+													}
+													$viw2s_import_status = 'exist';
+
+													$log['message']                      = esc_html__( 'The product has been imported to shopify', 'w2s-migrate-woo-to-shopify' );
+													$viw2s_import_product_progress_label = sprintf( esc_html( 'Importing... %1$s /%2$s was skipped' ), $product_index, $viw2s_total_product );
+													break;
 											}
 
-										} else {
-
-											$viw2s_import_image_status = 'error';
+										} catch ( Exception $exception ) {
+											$viw2s_import_status                 = $exception->getMessage();
+											$error_product_code                  = $exception->getCode();
+											$viw2s_import_product_progress_label = sprintf( esc_html( 'Importing... %1$s /%2$s error' ), $product_index, $viw2s_total_product );
+											$status                              = 'error_access_scope';
+											$log['message']                      = $viw2s_import_status;
+											if ( $error_product_code === 422 ) {
+												$status = 'skipped';
+											} else if ( $error_product_code === 429 ) {
+												$status        = 'retry';
+												$product_index = $product_index - 1;
+												break;
+											}
 										}
-									} catch ( Exception $exception ) {
-										$error_image_code          = $exception->getCode();
-										$viw2s_import_image_status = $exception->getMessage();
-									}
-									$logs_content = $log['title'] . ": " . $log['message'] . ", Shopify product ID: " . $log['shopify_id'] . ", WC product ID: " . $log['woo_id'];
-									VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA::viw2s_log( $log_file, $logs_content );
-									if ( $status === 'error_access_scope' ) {
-										$logs = '<strong class="important_alert"> ' . $viw2s_import_status . '</strong>';
+										$logs_content = $log['title'] . ": " . $log['message'] . ", Shopify product ID: " . $log['shopify_id'] . ", WC product ID: " . $log['woo_id'];
+										VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA::viw2s_log( $log_file, $logs_content );
 
+										if ( $status === 'error_access_scope' ) {
+											$logs = '<strong class="important_alert"> ' . $viw2s_import_status . '</strong>';
+										} else {
+											$logs .= ' <div>' . $log['title'] . ': <strong > ' . $log['message'] . ' .</strong > ' . ( isset( $log['product_url'] ) ? ' <a href = "' . esc_url( $log['product_url'] ) . '" target = "_blank" rel = "nofollow" > View & edit </a> ' : '' ) . ' </div> ';
+										}
 									} else {
-										$logs .= ' <div>' . $log['title'] . ': <strong > ' . $log['message'] . ' .</strong > ' . ( isset( $log['product_url'] ) ? ' <a href = "' . esc_url( $log['product_url'] ) . '" target = "_blank" rel = "nofollow" > View & edit </a> ' : '' ) . ' </div> ';
+										$logs     = '/*============================================================================*/';
+										$response = array(
+											'status'            => 'finish',
+											'logs'              => $logs,
+											'imported_products' => $product_index,
+											'code'              => 'no_data',
+											'message'           => sprintf( esc_html( 'Completed %1$s /%2$s ' ), $viw2s_total_product, $viw2s_total_product ),
+										);
+										break;
 									}
-//						$new_item_product = $get_all_importing_arr_product[ $product_index ];
+
+								}
+
+								if ( $status !== 'successful' ) {
+									$viw2s_import_product_progress_label = sprintf( esc_html( 'Importing... %1$s / %2$s error' ), $product_index, $viw2s_total_product );
+								} else if ( $status === 'successful' ) {
+									$viw2s_import_product_progress_label = sprintf( esc_html( 'Importing... %1$s /%2$s completed' ), $product_index, $viw2s_total_product );
+								}
+
+								if ( empty( $response ) ) {
 									$response = array(
-										'logs'                            => $logs,
-										'viw2s_import_status'             => $viw2s_import_status,
-										'error_product_code'              => $error_product_code,
-										'error_image_code'                => $error_image_code,
-										'viw2s_import_image_status'       => $viw2s_import_image_status,
-										'status'                          => $status,
-										'imported_products'               => $product_index,
-										'current_import_product_type'     => $viw2s_item_product["type"],
-										'current_import_product_id'       => $viw2s_item_product["id"],
-										'viw2s_get_all_product_data'      => $viw2s_item_product_data,
-										'viw2s_new_import_product_images' => array_values( $viw2s_new_import_product_images ),
-										'viw2s_import_product_images'     => $viw2s_import_product_images,
-										'message'                         => $viw2s_import_product_progress_label,
-									);
-								} else {
-									$logs     = '/*============================================================================*/';
-									$response = array(
-										'status'            => 'finish',
-										'logs'              => $logs,
-										'imported_products' => $product_index,
-										'code'              => 'no_data',
-										'message'           => sprintf( esc_html( 'Completed %1$s /%2$s ' ), $viw2s_total_product, $viw2s_total_product ),
+										'logs'                       => $logs,
+										'status'                     => $status,
+										'imported_products'          => $product_index,
+										'total_products'             => $viw2s_total_product,
+//										'current_import_product_id'       => $viw2s_item_product["id"],
+										'viw2s_get_all_product_data' => $arr_item_product_data,
+										'viw2s_import_product_result' => $arr_item_product_result,
+										'message'                    => $viw2s_import_product_progress_label,
 									);
 								}
 
@@ -873,29 +888,69 @@ class Vi_W2s_Admin {
 								if ( $categories_index <= $viw2s_total_product_categories ) {
 									$viw2s_item_product_cat          = $get_all_importing_arr_product_categories[ $categories_index - 1 ];
 									$viw2s_item_product_cat_data     = $this->setting->viw2s_format_product_cats( $viw2s_item_product_cat );
+									$title                           = esc_html( $viw2s_item_product_cat['title'] );
 									$viw2s_import_product_cat_status = '';
 									$code                            = '';
 									$status                          = '';
 									$log['woo_product_cat_id']       = $viw2s_item_product_cat['term_id'];
-									$log['title']                    = esc_html( $viw2s_item_product_cat['title'] );
+									$log['title']                    = $title;
 									if ( $viw2s_item_product_cat['status'] === 'success' ) {
 										try {
-											$viw2s_import_product_cat_status = $VIW2SShopifySDK->CustomCollection()->post( $viw2s_item_product_cat_data );
+											$graphQL = "
+                                                mutation collectionUpdate(\$input: CollectionInput!) {
+                                                  collectionCreate(input: \$input) {
+                                                    collection {
+                                                      id
+                                                      products(first: 100 ) {
+                                                        nodes {
+                                                          id
+                                                        }
+                                                      }
+                                                    }
+                                                    userErrors {
+                                                      field
+                                                      message
+                                                    }
+                                                  }
+                                                }
+                                            ";
+											/* Only exist products on shopify can add collections*/
+											if ( ! empty( $viw2s_item_product_cat_data['products'] ) ) {
+												foreach ( $viw2s_item_product_cat_data['products'] as $product_id ) {
+													$viw2s_item_product_cat_data['products'] = [ $product_id ];
+													$bulk_import->query( $graphQL, array(
+														'input' => array(
+															'handle'   => $viw2s_item_product_cat_data['handle'],
+															'title'    => $viw2s_item_product_cat_data['title'],
+															'products' => [ $product_id ]
+														)
+													) );
+												}
+											} else {
+												$viw2s_import_product_cat_status = $bulk_import->query( $graphQL, array( 'input' => $viw2s_item_product_cat_data ) );
+											}
 
+											if ( ! empty( $viw2s_import_product_cat_status['data']['collectionCreate']['userErrors'] ) ) {
+												$message     = $viw2s_import_product_cat_status['data']['collectionCreate']['userErrors'][0]['message'];
+												$field_error = $viw2s_import_product_cat_status['data']['collectionCreate']['userErrors'][0]['field'];
+												throw new Exception( "{$title} - {$message}", 422 );
+											}
 											$status                                  = 'success';
 											$log['message']                          = esc_html__( 'Import successfully', 'w2s-migrate-woo-to-shopify' );
+											$shopify_collection_id                   = esc_html( $viw2s_import_product_cat_status['data']['collectionCreate']['collection']['id'] ?? '' );
+											$log['shopify_id']                       = basename( $shopify_collection_id );
 											$viw2s_import_product_cat_progress_label = sprintf( esc_html( 'Importing... %1$s /%2$s completed' ), $categories_index, $viw2s_total_product_categories );
 											$_w2s_shopify_cats_data                  = get_term_meta( $viw2s_item_product_cat['term_id'], '_w2s_shopify_data', true );
 											if ( ! empty( $_w2s_shopify_cats_data ) && is_array( $_w2s_shopify_cats_data ) ) {
 												$_w2s_shopify_cats_data[ $domain ] = array(
-													'_w2s_shopify_product_cat_id' => $viw2s_import_product_cat_status['id'],
+													'_w2s_shopify_product_cat_id' => $shopify_collection_id,
 													'status'                      => 'imported'
 												);
 												update_term_meta( $viw2s_item_product_cat['term_id'], '_w2s_shopify_data', $_w2s_shopify_cats_data );
 											} else {
 												update_term_meta( $viw2s_item_product_cat['term_id'], '_w2s_shopify_data', array(
 													$domain => array(
-														'_w2s_shopify_product_cat_id' => $viw2s_import_product_cat_status['id'],
+														'_w2s_shopify_product_cat_id' => $shopify_collection_id,
 														'status'                      => 'imported'
 													)
 												) );
@@ -908,7 +963,7 @@ class Vi_W2s_Admin {
 													unset( $list_product_categories_imported[ $key_old_not_exist ] );
 												}
 											}
-											$list_product_categories_imported[ $viw2s_import_product_cat_status['id'] ] = $viw2s_item_product_cat['term_id'];
+											$list_product_categories_imported[ $shopify_collection_id ] = $viw2s_item_product_cat['term_id'];
 											/*log to file list_product_categories_imported*/
 											file_put_contents( $list_product_categories_imported_path, wp_json_encode( $list_product_categories_imported ) );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 										} catch ( Exception $exception ) {
@@ -925,7 +980,7 @@ class Vi_W2s_Admin {
 										$viw2s_import_product_cat_status         = get_term_meta( $viw2s_item_product_cat['term_id'], '_w2s_shopify_data', true );
 										$status                                  = 'exist';
 									} else {
-										$viw2s_import_product_cat_progress_label = sprintf( esc_html( 'Importing... %1$s /%2$s skipped'), $categories_index, $viw2s_total_product_categories );
+										$viw2s_import_product_cat_progress_label = sprintf( esc_html( 'Importing... %1$s /%2$s skipped' ), $categories_index, $viw2s_total_product_categories );
 										$log['message']                          = esc_html__( 'This product category has been import error ', 'w2s-migrate-woo-to-shopify' );
 										$viw2s_import_product_cat_status         = get_term_meta( $viw2s_item_product_cat['term_id'], '_w2s_shopify_data', true );
 										$status                                  = 'error';
@@ -965,12 +1020,12 @@ class Vi_W2s_Admin {
 							throw new \Exception( 'Unexpected value' );
 					}
 				} else {
-					$logs     = '<strong class="important_alert"> ' . esc_html__( 'API permission must have product write permission!', 'w2s-migrate-woo-to-shopify' ) . '</strong>';
+					$logs     = '<strong class="important_alert"> ' . sprintf( esc_html__( 'API permission must have %s permission', 'w2s-migrate-woo-to-shopify' ), implode( ', ', $missing_scopes ) ) . '</strong>';
 					$response = array(
 						'status'  => 'error_access_scope',
 						'logs'    => $logs,
 						'code'    => 'no_data',
-						'message' => esc_html__( 'API permission must have product write permission', 'w2s-migrate-woo-to-shopify' ),
+						'message' => sprintf( esc_html__( 'API permission must have %s permission', 'w2s-migrate-woo-to-shopify' ), implode( ', ', $missing_scopes ) ),
 					);
 				}
 
@@ -1017,17 +1072,23 @@ class Vi_W2s_Admin {
 
 	public function generate_log_ajax() {
 		/*Check the nonce*/
-        if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_GET['_wpnonce'] ), 'viw2s_view_log' ) || ! current_user_can('manage_woocommerce') ) {
-	        wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'w2s-migrate-woo-to-shopify' ) );
-        }
+		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_GET['_wpnonce'] ), 'viw2s_view_log' ) || ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'w2s-migrate-woo-to-shopify' ) );
+		}
+
 		if ( empty( $_GET['viw2s_file'] ) ) {
 			wp_die( esc_html__( 'No log file selected.', 'w2s-migrate-woo-to-shopify' ) );
 		}
-		$file = urldecode( wc_clean( $_GET['viw2s_file'] ) );
-		if ( ! is_file( $file ) ) {
+
+		$allow_file_names = [ 'logs', 'products', 'product_categories', 'ids_product_imported', 'list_products_imported', 'list_product_categories_imported' ];
+		$file             = urldecode( wc_clean( $_GET['viw2s_file'] ) );
+		$path_info        = pathinfo( $file );
+
+		if ( ! is_file( $file ) || ! in_array( $path_info['filename'], $allow_file_names ) ) {
 			wp_die( esc_html__( 'Log file not found.', 'w2s-migrate-woo-to-shopify' ) );
 		}
 		echo( wp_kses_post( nl2br( file_get_contents( $file ) ) ) );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+
 		exit();
 	}
 }

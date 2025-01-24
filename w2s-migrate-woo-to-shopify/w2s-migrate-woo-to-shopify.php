@@ -3,18 +3,18 @@
  * Plugin Name:       W2S - Migrate WooCommerce to Shopify
  * Plugin URI:        https://villatheme.com/extensions/w2s-migrate-woocommerce-to-shopify/
  * Description:       Migrate all products and categories from WooCommerce to Shopify
- * Version:           1.2.1
+ * Version:           1.3.0
  * Author:            Villatheme
  * Author URI:        https://villatheme.com/
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       w2s-migrate-woo-to-shopify
- * Copyright 2021 - 2024 VillaTheme.com. All rights reserved.
+ * Copyright 2021 - 2025 VillaTheme.com. All rights reserved.
  * Domain Path:       /languages
  * Requires at least: 5.0
  * Tested up to:      6.7
  * WC requires at least: 7.0.0
- * WC tested up to: 9.4
+ * WC tested up to: 9.6
  * Requires PHP: 7.0
  * Requires Plugins: woocommerce
  */
@@ -37,7 +37,7 @@ if ( is_plugin_active( 'w2s-migrate-woocommerce-to-shopify/w2s-migrate-woocommer
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'VIW2S_VERSION', '1.2.1' );
+define( 'VIW2S_VERSION', '1.3.0' );
 define( 'VIW2S_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'VIW2S_DIR_URL', plugin_dir_url( __FILE__ ) );
 define( 'VIW2S_CSS', VIW2S_DIR_URL . 'assets/css/' );
@@ -50,14 +50,6 @@ require_once VIW2S_DIR_PATH . 'includes/support.php';
 if ( ! defined( 'VIW2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_CACHE' ) ) {
 	define( 'VIW2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_CACHE', WP_CONTENT_DIR . "/cache/import-woocommerce-to-shopify/" );//use the same cache folder with free version
 }
-if ( is_file( plugin_dir_path( __FILE__ ) . 'autoload.php' ) ) {
-	require_once plugin_dir_path( __FILE__ ) . 'autoload.php';
-}
-
-if ( is_file( plugin_dir_path( __FILE__ ) . 'vendor/autoload.php' ) ) {
-	require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
-}
-
 
 /**
  * The code that runs during plugin activation.
@@ -100,6 +92,7 @@ function run_viw2s_import() {
 	if ( is_plugin_active( 'w2s-migrate-woocommerce-to-shopify\w2s-migrate-woocommerce-to-shopify.php' ) ) {
 		return;
 	}
+	include plugin_dir_path( __FILE__ ) . '/autoload.php';
 	$plugin = new Vi_W2s();
 	$plugin->run();
 

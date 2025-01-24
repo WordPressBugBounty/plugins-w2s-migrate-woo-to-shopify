@@ -128,6 +128,8 @@ class Vi_W2s {
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/vi-w2s-admin-clear-data.php';
 
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/vi-w2s-bulk-import.php';
+
 		$this->loader = new Vi_W2s_Loader();
 
 	}

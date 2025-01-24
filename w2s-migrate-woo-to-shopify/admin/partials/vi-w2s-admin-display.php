@@ -19,6 +19,7 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
 		'Password' => $api_secret
 	);
 	$viw2s_get_api_access_scope_handle = $VIW2S_Data_default->get_access_scopes_handle( $domain, $api_key, $api_secret );
+
 	if (
 		isset( $store_setting[0]['validate'] ) &&
 		$store_setting[0]['validate']
@@ -51,7 +52,7 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
                     <thead>
                     <tr>
                         <th>
-							<?php esc_html_e( 'Store address', 'w2s-migrate-woo-to-shopify' ); ?>
+		                    <?php esc_html_e( 'Store address', 'w2s-migrate-woo-to-shopify' ); ?>
                             <span class="viw2s-help-tip"
                                   data-tip="<?php esc_attr_e( 'This is store address Eg: myshop.myshopify.com', 'w2s-migrate-woo-to-shopify' ) ?>"></span>
                         </th>
@@ -698,17 +699,17 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
 							}
 						}
 						?>
-                        <input type="checkbox"
-                               id="viw2s-import-products-enable"
-                               class="viw2s-import-element-enable " data-element_name="products"
-                               name="import_products" checked
-                        >
-                        <input type="checkbox"
-                               id="viw2s-import-products-categories-enable"
-                               class="viw2s-import-element-enable" data-element_name="product_categories"
-                               name="import_products_categories"
-							<?php checked( $import_product_categories, 'on' ) ?>
-                        >
+<!--                        <input type="checkbox"-->
+<!--                               id="viw2s-import-products-enable"-->
+<!--                               class="viw2s-import-element-enable " data-element_name="products"-->
+<!--                               name="import_products" checked-->
+<!--                        >-->
+<!--                        <input type="checkbox"-->
+<!--                               id="viw2s-import-products-categories-enable"-->
+<!--                               class="viw2s-import-element-enable" data-element_name="product_categories"-->
+<!--                               name="import_products_categories"-->
+<!--							--><?php //checked( $import_product_categories, 'on' ) ?>
+<!--                        >-->
                     </div>
 
 					<?php
@@ -740,8 +741,14 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
                                     <tr>
                                         <td><?php esc_html_e( 'Products', 'w2s-migrate-woo-to-shopify' ); ?></td>
                                         <td>
+                                            <div class="vi-ui toggle checkbox ">
+                                                <input type="checkbox"
+                                                       class="viw2s-import-element-enable viw2s-import-products-enable"
+                                                       data-element_name="products"
+                                                       name="" checked >
+                                                <label></label>
+                                            </div>
                                             <div class="vi-ui indicating progress standard viw2s-import-progress"
-                                                 style="visibility: hidden"
                                                  id="<?php echo esc_attr( 'viw2s-products-progress' ) ?>">
                                                 <div class="label"></div>
                                                 <div class="bar">
@@ -753,8 +760,14 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
                                     <tr>
                                         <td><?php esc_html_e( 'Products Categories', 'w2s-migrate-woo-to-shopify' ); ?></td>
                                         <td>
+                                            <div class="vi-ui toggle checkbox ">
+                                                <input type="checkbox"
+                                                       class="viw2s-import-element-enable viw2s-import-product-categories-enable"
+                                                       data-element_name="product_categories"
+                                                       name="" checked>
+                                                <label></label>
+                                            </div>
                                             <div class="vi-ui indicating progress standard viw2s-import-progress"
-                                                 style="visibility: hidden"
                                                  id="<?php echo esc_attr( 'viw2s-product-categories-progress' ) ?>">
                                                 <div class="label"></div>
                                                 <div class="bar">
