@@ -226,16 +226,14 @@ QUERY;
 
 
 	public function get_product_data_format( $product_id ) {
-		$product_data_format             = array();
-		$prefix                          = 'viw2s_import_products--';
-		$domain_store                    = self::$store_name;
-		$keep_slug_product               = $this->settings->get_params( $domain_store, $prefix . 'import_product_keep_slug' );
-		$import_attribute_simple_product = $this->settings->get_params( $domain_store, $prefix . 'import_attribute_simple_product' );
-		$import_tags                     = $this->settings->get_params( $domain_store, $prefix . 'import_product_tags' );
-		$import_sku                      = $this->settings->get_params( $domain_store, $prefix . 'import_product_sku' );
-		$import_product_metafields       = $this->settings->get_params( $domain_store, $prefix . 'import_product_metafields' );
-		$import_product_images_size      = $this->settings->get_params( $domain_store, 'viw2s_import_products--product_import_images_size' ) ?? 'full';
-		$arr_data_temp                   = array();
+		$product_data_format        = array();
+		$domain_store               = self::$store_name;
+		$import_option              = $this->settings->get_params( 'viw2s_import_products_option' );
+		$keep_slug_product          = $import_option['import_product_keep_slug'] ?? null;
+		$import_tags                = $import_option['import_product_tags'] ?? null;
+		$import_sku                 = $import_option['import_product_sku'] ?? null;
+		$import_product_images_size = 'full';
+		$arr_data_temp              = array();
 
 		$viw2s_shopify_product_data = get_post_meta( $product_id, '_w2s_shopify_data', true );
 		$data_product_item          = wc_get_product( $product_id );
@@ -309,29 +307,6 @@ QUERY;
 
 					$status = 'success';
 
-					if ( $import_attribute_simple_product ) {
-						$simple_attributes = $data_product_item->get_attributes();
-						$namespace         = ! empty( $this->settings->get_params( $domain_store, $prefix . 'import_attribute_simple_product_namespace' ) ) ? $this->settings->get_params( $domain_store, $prefix . 'import_attribute_simple_product_namespace' ) : 'global';
-						if ( ! empty( $simple_attributes ) ) {
-							$simple_attributes_meta = [];
-							foreach ( $simple_attributes as $attribute_name => $attribute ) {
-								$attribute_data = $attribute->get_data() ?? [];
-								$options        = $attribute_data['options'] ?? [];
-								if ( ! empty( $options ) ) {
-									$simple_attributes_meta[] = array(
-										"key"       => $attribute_name,
-										"value"     => implode( ',', $options ),
-										"type"      => 'single_line_text_field',
-										"namespace" => $namespace
-									);
-								}
-							}
-							if ( ! empty( $simple_attributes_meta ) ) {
-								$arr_data_temp['metafields'] = wp_parse_args( $arr_data_temp['metafields'], $simple_attributes_meta );
-							}
-						}
-					}
-
 					if ( $data_product_item->is_on_sale() ) {
 						$price            = $data_product_item->get_sale_price();
 						$compare_at_price = $data_product_item->get_regular_price();
@@ -369,21 +344,6 @@ QUERY;
 						}
 					} else {
 						$inventory_item_update['tracked'] = false;
-					}
-					/*Import barcode to variant if feature enable*/
-					if ( ! empty( $import_product_metafields ) && is_array( $import_product_metafields ) ) {
-
-						foreach ( $import_product_metafields as $import_product_meta_item ) {
-							$woo_product_metakey = $import_product_meta_item['metakey'] ?? '';
-							$import_product_type = $import_product_meta_item['type'] ?? '';
-							if ( get_post_meta( $data_product_item->get_id(), $woo_product_metakey, true ) ) {
-								$woo_product_metavalue = get_post_meta( $data_product_item->get_id(), $woo_product_metakey, true );
-								if ( $import_product_type === 'product_barcode' ) {
-									$product_variant_item['barcode'] = $woo_product_metavalue;
-								}
-							}
-
-						}
 					}
 
 					$product_variant[]           = $product_variant_item;
@@ -529,7 +489,7 @@ QUERY;
 				$product_arr_data_images = array_values(
 					array_intersect_key(
 						$product_arr_data_images,
-						array_unique(array_column($product_arr_data_images, 'originalSource'))
+						array_unique( array_column( $product_arr_data_images, 'originalSource' ) )
 					)
 				);
 

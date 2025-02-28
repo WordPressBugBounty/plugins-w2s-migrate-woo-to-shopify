@@ -206,6 +206,11 @@ We commit that you will import product data successfully. Please follow our guid
 == Screenshots ==
 
 == Changelog ==
+/**1.3.1 - 2025.02.28 **/
+- Fixed: Import products sku
+- Fixed: Import low resolution image
+- Updated: Update support file
+
 /**1.3.0 - 2025.01.23**/
 - Fixed: View file limitations
 - Added: Toggle import product or product categories

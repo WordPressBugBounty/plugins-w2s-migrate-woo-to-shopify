@@ -839,14 +839,14 @@ class Vi_W2s_Admin {
 
 								if ( empty( $response ) ) {
 									$response = array(
-										'logs'                       => $logs,
-										'status'                     => $status,
-										'imported_products'          => $product_index,
-										'total_products'             => $viw2s_total_product,
+										'logs'                        => $logs,
+										'status'                      => $status,
+										'imported_products'           => $product_index,
+										'total_products'              => $viw2s_total_product,
 //										'current_import_product_id'       => $viw2s_item_product["id"],
-										'viw2s_get_all_product_data' => $arr_item_product_data,
+										'viw2s_get_all_product_data'  => $arr_item_product_data,
 										'viw2s_import_product_result' => $arr_item_product_result,
-										'message'                    => $viw2s_import_product_progress_label,
+										'message'                     => $viw2s_import_product_progress_label,
 									);
 								}
 

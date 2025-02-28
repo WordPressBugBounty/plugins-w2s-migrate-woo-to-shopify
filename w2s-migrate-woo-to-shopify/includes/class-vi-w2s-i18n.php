@@ -50,10 +50,10 @@ class Vi_W2s_i18n {
 				'wp_version'      => '5.0',
 				'require_plugins' => [
 					[
-						'slug'    => 'woocommerce',
-						'name'    => 'WooCommerce',
-						'file'    => 'woocommerce/woocommerce.php',
-						'version' => '7.0',
+						'slug'            => 'woocommerce',
+						'name'            => 'WooCommerce',
+						'defined_version' => 'WC_VERSION',
+						'version'         => '7.0',
 					],
 				]
 			]
