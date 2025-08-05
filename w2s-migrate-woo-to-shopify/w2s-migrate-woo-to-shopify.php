@@ -3,7 +3,7 @@
  * Plugin Name:       W2S - Migrate WooCommerce to Shopify
  * Plugin URI:        https://villatheme.com/extensions/w2s-migrate-woocommerce-to-shopify/
  * Description:       Migrate all products and categories from WooCommerce to Shopify
- * Version:           1.3.1
+ * Version:           1.3.2
  * Author:            Villatheme
  * Author URI:        https://villatheme.com/
  * License:           GPL v2 or later
@@ -14,7 +14,7 @@
  * Requires at least: 5.0
  * Tested up to: 6.8
  * WC requires at least: 7.0.0
- * WC tested up to: 9.8
+ * WC tested up to: 10.0
  * Requires PHP: 7.0
  * Requires Plugins: woocommerce
  */
@@ -37,7 +37,7 @@ if ( is_plugin_active( 'w2s-migrate-woocommerce-to-shopify/w2s-migrate-woocommer
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'VIW2S_VERSION', '1.3.1' );
+define( 'VIW2S_VERSION', '1.3.2' );
 define( 'VIW2S_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'VIW2S_DIR_URL', plugin_dir_url( __FILE__ ) );
 define( 'VIW2S_CSS', VIW2S_DIR_URL . 'assets/css/' );
@@ -64,13 +64,13 @@ function activate_viw2s() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-viw2s-deactivator.php
  */
-function deactivate_viw2s() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-vi-w2s-deactivator.php';
-	VI_IMPORT_WOOCOMMERCE_TO_SHOPIFY_Deactivator::deactivate();
-}
+//function deactivate_viw2s() {
+//	require_once plugin_dir_path( __FILE__ ) . 'includes/class-vi-w2s-deactivator.php';
+//	VI_IMPORT_WOOCOMMERCE_TO_SHOPIFY_Deactivator::deactivate();
+//}
 
 register_activation_hook( __FILE__, 'activate_viw2s' );
-register_deactivation_hook( __FILE__, 'deactivate_viw2s' );
+//register_deactivation_hook( __FILE__, 'deactivate_viw2s' );
 
 
 /**

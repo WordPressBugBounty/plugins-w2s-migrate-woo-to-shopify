@@ -679,6 +679,15 @@ class Vi_W2s_Admin {
 														}
 														throw new Exception( "{$title} - {$message}", $code );
 													}
+													if ( ! empty( $result['errors'][0]['message'] ) ) {
+														$message = $result['errors'][0]['message'];
+														$code    = 422;
+														if ( strpos( $message, 'This mutation is unavailable at the moment. Try again' ) !== false ||
+														     strpos( $message, 'Throttled' ) !== false ) {
+															$code = 429;
+														}
+														throw new Exception( "{$title} - {$message}", $code );
+													}
 													$viw2s_import_status                 = $result['data']['productSet']['product'];
 													$shopify_variants                    = $viw2s_import_status['variants']['nodes'];
 													$inventory_item_update               = $viw2s_item_product_data['inventory_item_update'];
