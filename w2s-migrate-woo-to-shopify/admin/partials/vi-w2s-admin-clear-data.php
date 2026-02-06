@@ -239,11 +239,11 @@ if ( ! class_exists( 'VIW2S_ADMIN_Clear_Data' ) ) {
 				'taxonomy'   => 'product_cat',
 				'orderby'    => 'name',
 				'order'      => 'ASC',
-				'hide_empty' => true,
+				'hide_empty' => false,
 				'fields'     => 'ids',
 			) );
 			foreach ( $arr_tax as $tax_item ) {
-				$w2s_shopify_data = (array) get_post_meta( $tax_item, '_w2s_shopify_data', true );
+				$w2s_shopify_data = (array) get_term_meta( $tax_item, '_w2s_shopify_data', true );
 				unset( $w2s_shopify_data[ $domain ] );
 				if ( empty( $w2s_shopify_data ) ) {
 					delete_term_meta( $tax_item, '_w2s_shopify_data' );

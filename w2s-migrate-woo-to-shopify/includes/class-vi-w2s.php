@@ -103,6 +103,14 @@ class Vi_W2s {
 	 */
 	private function load_dependencies() {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/data.php';
+		
+		/**
+		 * API Settings and OAuth handlers
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-viw2s-oauth-handler.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-viw2s-api-settings.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-viw2s-api-ajax-handler.php';
+		
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
@@ -171,6 +179,8 @@ class Vi_W2s {
 		$this->loader->add_action( 'wp_ajax_viw2s_view_log', $plugin_admin, 'generate_log_ajax' );
 		$this->loader->add_action( 'wp_ajax_viw2s_ajax_active_import', $plugin_admin, 'viw2s_ajax_active_import' );
 		$this->loader->add_action( 'wp_ajax_viw2s_ajax_import_action', $plugin_admin, 'viw2s_ajax_import_action' );
+		$this->loader->add_action( 'wp_ajax_viw2s_save_oauth_credentials', $plugin_admin, 'viw2s_save_oauth_credentials' );
+		$this->loader->add_action( 'wp_ajax_viw2s_delete_api_credentials', $plugin_admin, 'viw2s_delete_api_credentials' );
 
 	}
 

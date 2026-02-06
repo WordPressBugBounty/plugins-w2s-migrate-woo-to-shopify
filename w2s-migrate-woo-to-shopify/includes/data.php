@@ -598,35 +598,42 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 	 *
 	 * @return array|void
 	 */
-	public function viw2s_get_all_product_cats() {
-		$domain                    = '';
-		$api_key                   = '';
-		$api_secret                = '';
-		$w2s_shopify_store_setting = self::get_params( 'viw2s_store_setting' );
-		if ( ! empty( $w2s_shopify_store_setting ) && isset( $w2s_shopify_store_setting[0]['domain'] ) ) {
-			$domain     = $w2s_shopify_store_setting[0]['domain'];
-			$api_key    = $w2s_shopify_store_setting['api_key'] ?? '';
-			$api_secret = $w2s_shopify_store_setting['api_secret'] ?? '';
+	public function viw2s_get_all_product_cats( $domain = '' ) {
+		// FREE version: Auto-get domain from first store if not provided
+		if ( empty( $domain ) ) {
+			$w2s_shopify_store_setting = self::get_params( 'viw2s_store_setting' );
+			error_log( 'DEBUG viw2s_get_all_product_cats - Store settings: ' . print_r( $w2s_shopify_store_setting, true ) );
+			if ( ! empty( $w2s_shopify_store_setting ) && isset( $w2s_shopify_store_setting[0]['domain'] ) ) {
+				$domain = $w2s_shopify_store_setting[0]['domain'];
+				error_log( 'DEBUG viw2s_get_all_product_cats - Auto-loaded domain: ' . $domain );
+			}
 		}
-		$path                        = self::get_cache_path( $domain, $api_key, $api_secret ) . '/';
+
+		// If still no domain, return empty
+		if ( empty( $domain ) ) {
+			error_log( 'DEBUG viw2s_get_all_product_cats - EMPTY DOMAIN - returning empty array' );
+			return array();
+		}
+
+		$viw2s_current_store = self::get_setting_by_store_name( $domain );
+		$api_key             = $viw2s_current_store['api_key'] ?? '';
+		$api_secret          = $viw2s_current_store['api_secret'] ?? '';
+		$path                = self::get_cache_path( $domain, $api_key, $api_secret ) . '/';
 		$viw2s_product_cats = get_terms( array(
 			'taxonomy'   => 'product_cat',
 			'orderby'    => 'name',
 			'order'      => 'ASC',
-			'hide_empty' => true,
+			'hide_empty' => false,
 			'fields'     => 'all',
-		) );;
+		) );
 		$list_product_categories_imported_path = $path . '/list_product_categories_imported.txt';
+	error_log( 'DEBUG viw2s_get_all_product_cats - Total WooCommerce categories: ' . ( is_array( $viw2s_product_cats ) ? count( $viw2s_product_cats ) : 0 ) );
 
 		$viw2s_arr_product_cats = array();
 		if ( ! empty( $viw2s_product_cats ) && ! is_wp_error( $viw2s_product_cats ) ) {
-			$status                    = 'success';
-			$domain                    = '';
-			$w2s_shopify_store_setting = self::get_params( 'viw2s_store_setting' );
-			if ( ! empty( $w2s_shopify_store_setting ) && isset( $w2s_shopify_store_setting[0]['domain'] ) ) {
-				$domain = $w2s_shopify_store_setting[0]['domain'];
-			}
+			$arr_ids_imported = array();
 			foreach ( $viw2s_product_cats as $term_item ) {
+				$status = 'success';
 
 				$_w2s_shopify_data = get_term_meta( $term_item->term_id, '_w2s_shopify_data', true );
 				if ( is_array( $_w2s_shopify_data ) && array_key_exists( $domain, $_w2s_shopify_data ) ) {
@@ -635,17 +642,21 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 					if ( ! empty( $_w2s_shopify_id ) ) {
 						$arr_ids_imported[ $_w2s_shopify_id ] = $term_item->term_id;
 					}
+			error_log( 'DEBUG viw2s_get_all_product_cats - SKIPPED category: ' . $term_item->name . ' (ID: ' . $term_item->term_id . ') - already imported' );
 					continue;
 				}
 
 				$arr_term = array(
 					'title'   => $term_item->name,
+					'handle'  => $term_item->slug,
 					'term_id' => $term_item->term_id,
 					'status'  => $status
 				);
 
 				array_push( $viw2s_arr_product_cats, $arr_term );
+	error_log( 'DEBUG viw2s_get_all_product_cats - ADDING category: ' . $term_item->name . ' (ID: ' . $term_item->term_id . ')' );
 			}
+error_log( 'DEBUG viw2s_get_all_product_cats - Total to import: ' . count( $viw2s_arr_product_cats ) );
 			if ( ! is_file( $list_product_categories_imported_path ) && ! empty( $arr_ids_imported ) ) {
 				file_put_contents( $list_product_categories_imported_path, wp_json_encode( $arr_ids_imported ) );// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 			}
@@ -657,14 +668,30 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 	/** Get all product tags name
 	 *
 	 * @param $product_cat array
+	 * @param $domain string
 	 *
 	 * @return array|void
 	 */
-	public function viw2s_format_product_cats( $product_cat ) {
+	public function viw2s_format_product_cats( $product_cat, $domain = '' ) {
 		if ( empty( $product_cat ) ) {
-			return;
+			return array();
 		}
+
+		// FREE version: Auto-get domain from first store if not provided
+		if ( empty( $domain ) ) {
+			$w2s_shopify_store_setting = self::get_params( 'viw2s_store_setting' );
+			if ( ! empty( $w2s_shopify_store_setting ) && isset( $w2s_shopify_store_setting[0]['domain'] ) ) {
+				$domain = $w2s_shopify_store_setting[0]['domain'];
+			}
+		}
+
+		// If still no domain, return empty (shouldn't happen in normal flow)
+		if ( empty( $domain ) ) {
+			return array();
+		}
+
 		$all_id_product_by_cats = self::viw2s_get_all_id_product_by_cats( $product_cat['term_id'] );
+
 		$product_cat            = array(
 			'handle' => wc_sanitize_taxonomy_name( $product_cat['handle'] ),
 			'title'  => $product_cat['title'],
@@ -673,7 +700,7 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 			$arr_term        = array();
 			$arr_shopify_ids = array();
 			foreach ( $all_id_product_by_cats as $product_id ) {
-				$shopify_id = self::viw2s_shopify_product_id_by_woo_product_id( $product_id );
+				$shopify_id = self::viw2s_shopify_product_id_by_woo_product_id( $product_id, $domain );
 				if ( ! empty( $shopify_id ) ) {
 					if ( ! in_array( $shopify_id, $arr_shopify_ids, true ) ) {
 						$arr_shopify_ids[] = $shopify_id;
@@ -727,18 +754,29 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 	 *
 	 * @return int|void
 	 */
-	public function viw2s_shopify_product_id_by_woo_product_id( $product_id = '' ) {
+	public function viw2s_shopify_product_id_by_woo_product_id( $product_id = '', $domain = '' ) {
 		if ( empty( $product_id ) ) {
 			return;
 		}
 		$w2s_shopify_product_id    = '';
 		$w2s_shopify_store_setting = self::get_params( 'viw2s_store_setting' );
-		if ( ! empty( $w2s_shopify_store_setting ) && isset( $w2s_shopify_store_setting[0]['domain'] ) ) {
-			$domain               = $w2s_shopify_store_setting[0]['domain'];
-			$shopify_product_data = get_post_meta( $product_id, '_w2s_shopify_data', true );
+		if ( ! empty( $w2s_shopify_store_setting ) ) {
+			// FREE version: Auto-get domain from first store if not provided
+			if ( empty( $domain ) && isset( $w2s_shopify_store_setting[0]['domain'] ) ) {
+				$domain = $w2s_shopify_store_setting[0]['domain'];
+			}
 
-			if ( $shopify_product_data && isset( $shopify_product_data[ $domain ] ) ) {
-				$w2s_shopify_product_id = $shopify_product_data[ $domain ]['_w2s_shopify_product_id'];
+			if ( ! empty( $domain ) ) {
+				$shopify_product_data = get_post_meta( $product_id, '_w2s_shopify_data', true );
+
+				if ( $shopify_product_data && isset( $shopify_product_data[ $domain ] ) ) {
+					$w2s_shopify_product_id = $shopify_product_data[ $domain ]['_w2s_shopify_product_id'];
+				} else {
+					$shopify_product_id = get_post_meta( $product_id, '_shopify_product_id', true );
+					if ( $shopify_product_id ) {
+						$w2s_shopify_product_id = $shopify_product_id;
+					}
+				}
 			}
 		}
 
@@ -817,9 +855,20 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 	 */
 	static public function get_access_scopes( $domain, $api_key, $api_secret ) {
 		$access_token = '';
-		if ( strpos( $api_secret, 'shpat_' ) ) {
+
+		// Check for OAuth token (shpua_) or Legacy Admin API token (shpat_)
+		if ( strpos( $api_secret, 'shpua_' ) !== false || strpos( $api_secret, 'shpat_' ) !== false ) {
 			$access_token = $api_secret;
 		}
+
+		// Fallback: If credentials are empty, try to get from OAuth settings
+		if ( empty( $access_token ) && empty( $api_key ) && empty( $api_secret ) ) {
+			$oauth_settings = Viw2s_API_Settings::get_settings( $domain );
+			if ( ! empty( $oauth_settings['access_token'] ) ) {
+				$access_token = $oauth_settings['access_token'];
+			}
+		}
+
 		if ( $access_token ) {
 			$url     = "https://{$domain}/admin/oauth/access_scopes.json";
 			$headers = array( 'X-Shopify-Access-Token' => $access_token );
@@ -834,16 +883,24 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 				'headers'    => $headers,
 			)
 		);
+		$return = array(
+			'status' => 'error',
+			'data'   => '',
+			'code'   => '',
+		);
 		if ( ! is_wp_error( $request ) ) {
 			if ( isset( $request['response']['code'] ) ) {
 				$return['code'] = $request['response']['code'];
 			}
 			$body = json_decode( $request['body'], true );
-			if ( isset( $body['errors'] ) ) {
+			if ( ! empty( $body ) && isset( $body['errors'] ) ) {
 				$return['data'] = $body['errors'];
-			} else {
+			} elseif ( ! empty( $body ) && isset( $body['access_scopes'] ) ) {
 				$return['status'] = 'success';
 				$return['data']   = $body['access_scopes'];
+			} else {
+				$return['status'] = 'success';
+				$return['data']   = [];
 			}
 		} else {
 			$return['data'] = $request->get_error_message();
@@ -865,8 +922,8 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 		$return = array();
 		try {
 			$access_scopes        = self::get_access_scopes( $domain, $api_key, $api_secret );
-			$access_scopes_data   = $access_scopes['data'];
-			$access_scopes_status = $access_scopes['status'];
+			$access_scopes_data   = $access_scopes['data'] ?? array();
+			$access_scopes_status = $access_scopes['status'] ?? '';
 			if ( $access_scopes_status === 'success' && is_array( $access_scopes_data ) && ! empty( $access_scopes_data ) ) {
 				foreach ( $access_scopes_data as $access_scopes_handle_item ) {
 					$return[] = $access_scopes_handle_item['handle'];
@@ -979,8 +1036,10 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 		}
 	}
 
-	public static function get_cache_path( $domain, $api_key, $api_secret ) {
-		return VIW2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_CACHE . md5( $api_key ) . '_' . md5( $api_secret ) . '_' . $domain;
+	public static function get_cache_path( $domain, $api_key = '', $api_secret = '' ) {
+		// Use only domain for cache path to support both Legacy API and OAuth
+		// This ensures cache reuse when switching between authentication methods
+		return VIW2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_CACHE . $domain;
 	}
 
 	public static function implode_args( $args ) {
@@ -989,20 +1048,47 @@ class VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA {
 				$args[ $key ] = implode( ',', $value );
 			}
 		}
-
 		return $args;
 	}
 
 	public function get_setting_by_store_name( $store_name = '' ) {
 		$res = [];
+		$all_store_setting = self::get_params( 'viw2s_store_setting' );
+
+		// If store_name is provided, try to find exact match
 		if ( $store_name !== '' ) {
-			$all_store_setting = self::get_params( 'viw2s_store_setting' );
 			foreach ( $all_store_setting as $store_item ) {
-				if ( $store_item['domain'] === $store_name ) {
-					$res['domain']                   = $store_item['domain'];
-					$res['api_key']                  = $store_item['api_key'];
-					$res['api_secret']               = $store_item['api_secret'];
-					$res['get_access_scopes_handle'] = self::get_access_scopes_handle( $store_item['domain'], $store_item['api_key'], $store_item['api_secret'] );
+				// Skip stores with empty domain
+				if ( empty( $store_item['domain'] ) && empty( $store_item['shop_domain'] ) ) {
+					continue;
+				}
+
+				// Match by domain OR shop_domain
+				if ( $store_item['domain'] === $store_name || ( $store_item['shop_domain'] ?? '' ) === $store_name ) {
+					$res['domain']       = $store_item['domain'];
+					$res['api_key']      = $store_item['api_key'] ?? '';
+					$res['api_secret']   = $store_item['api_secret'] ?? '';
+					$res['oauth_enabled'] = $store_item['oauth_enabled'] ?? false;
+
+					$oauth_settings = Viw2s_API_Settings::get_settings( $store_name );
+
+					// Handle OAuth settings if available
+					if ( ! empty( $oauth_settings ) ) {
+						$res['api_type']     = 'oauth';
+						$res['access_token'] = $oauth_settings['access_token'] ?? '';
+						$res['shop_domain']  = $oauth_settings['shop_domain'] ?? '';
+					}
+
+					// Handle scopes with priority: store_item > oauth token_scope > legacy API call
+					if ( ! empty( $store_item['get_access_scopes_handle'] ) ) {
+						$res['get_access_scopes_handle'] = $store_item['get_access_scopes_handle'];
+					} elseif ( ! empty( $oauth_settings['token_scope'] ) ) {
+						$res['get_access_scopes_handle'] = array_filter( array_map( 'trim', explode( ',', $oauth_settings['token_scope'] ) ) );
+					} else {
+						$res['get_access_scopes_handle'] = self::get_access_scopes_handle( $store_item['domain'], $store_item['api_key'] ?? '', $store_item['api_secret'] ?? '' );
+					}
+
+					break; // Found match, stop searching
 				}
 			}
 		}

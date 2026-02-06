@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: W2S - Migrate WooCommerce to Shopify Premium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-26 08:43+0000\n"
-"PO-Revision-Date: 2022-10-17 04:27+0000\n"
+"PO-Revision-Date: 2026-01-30 02:01+0000\n"
 "Last-Translator: \n"
 "Language-Team: Vietnamese\n"
 "Language: vi\n"
@@ -15,127 +15,145 @@ msgstr ""
 "X-Loco-Version: 2.6.2; wp-6.0.2\n"
 "X-Domain: w2s-migrate-woocommerce-to-shopify"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:298
-msgid "1000"
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:292
+msgid " or the tutorial below to create a custom app and get API credentials"
+msgstr " hoặc xem hướng dẫn bên dưới để tạo ứng dụng tùy chỉnh và lấy thông tin xác thực API."
+
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:306
+#, fuzzy
+#| msgid "1000"
+msgid "10000"
 msgstr "1000"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:291
-msgid "300"
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:299
+#, fuzzy
+#| msgid "300"
+msgid "3000"
 msgstr "300"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:305
-msgid "64M"
-msgstr "64M"
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:313
+msgid "512M"
+msgstr ""
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:69
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:107
 msgid "Action"
 msgstr "Thao tác"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:582
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:595
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:608
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:578
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:591
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:604
 msgid "Active"
 msgstr "Hoạt động"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:254
-msgid "Add store"
-msgstr "Thêm cửa hàng"
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:269
+msgid "Add Connection"
+msgstr ""
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:64
-msgid "API access token or API secret"
-msgstr "Api Access Token hoặc API Secret"
-
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:59
-msgid "API key"
-msgstr "API key"
-
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:136
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:142
 msgid "API key can not be empty! "
 msgstr "API key không được để trống!"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:897
-msgid "API permission must have product write permission"
-msgstr "API phải được cấp quyền quản lý sản phẩm (write_product)"
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1135
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1140
+#, php-format
+msgid "API permission must have %s permission"
+msgstr ""
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:892
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:244
-msgid "API permission must have product write permission!"
-msgstr "API phải được cấp quyền quản lý sản phẩm (write_product)!"
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:648
+#, php-format
+msgid "API permission not correct, missing %s scopes !!!"
+msgstr ""
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:541
-msgid "API permission not correct !!!"
-msgstr "Quyền hạn API không đúng !!!"
-
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:137
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:143
 msgid "API secret can not be empty! "
 msgstr "API secret không được để trống!"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:583
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:596
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:609
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:92
+msgid "API Type"
+msgstr ""
+
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:579
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:592
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:605
 msgid "Archived"
 msgstr "Đã lưu trữ"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:650
-#, php-format
-#| msgid ""
-#| "Base currency in WooCommerce %1$s differs from the one in Shopify %2$s"
-msgid "Base currency in WooCommerce %s differs from the one in Shopify %s"
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:147
+msgid "Back"
 msgstr ""
-"Đồng tiền mặc định trên WooCommerce %s khác với đồng tiền mặc định trên "
-"Shopify %s"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:208
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1019
+msgid "Category format error"
+msgstr ""
+
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:216
 msgid "Change your API at least once a month"
 msgstr "Thay đổi API ít nhất mỗi tháng một lần"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:433
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:429
 msgid "Choose product you don't want to import"
 msgstr "Chọn kiểu sản phẩm để loại trừ khi nhập dữ liệu"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:411
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:407
 msgid "Choose product you want to import"
 msgstr "Chọn sản phẩm để nhập dữ liệu"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:775
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:876
-#, php-format
-#| msgid "Completed %s /%s "
-msgid "Completed % s /%s "
-msgstr "Đã hoàn thành %s /%s "
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:99
+msgid "Client ID (OAuth) or API Key (Legacy)"
+msgstr ""
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:732
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:104
+msgid "Client Secret (OAuth) or API Access Token (Legacy)"
+msgstr ""
+
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:78
+msgid "Connect to Shopify store"
+msgstr ""
+
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:97
+msgid "Credential 1"
+msgstr ""
+
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:102
+msgid "Credential 2"
+msgstr ""
+
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:732
 msgid "Data"
 msgstr "Dữ liệu"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:584
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:590
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:597
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:610
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:580
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:586
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:593
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:606
 msgid "Draft"
 msgstr "Nháp"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:416
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/includes/class-viw2s-oauth-token-refresh-cron.php:38
+msgid "Every 18 Hours (OAuth Token Refresh)"
+msgstr ""
+
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:412
 msgid "Exclude product"
 msgstr "Loại trừ sản phẩm"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:368
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:364
 msgid "Filter by product type"
 msgstr "Lọc bằng kiểu sản phẩm"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:456
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:452
 msgid "Filter include product by product categories."
 msgstr "Lấy sản phẩm bằng danh mục sản phẩm"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:468
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:464
 msgid "From"
 msgstr "Từ"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:571
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:567
 msgid "From Woocommerce"
 msgstr "Từ Woocommerce"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:42
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:69
 msgid "General settings"
 msgstr "Cài đặt tổng quan"
 
@@ -147,7 +165,7 @@ msgstr "https://villatheme.com/"
 msgid "https://villatheme.com/extensions/w2s-migrate-woocommerce-to-shopify/"
 msgstr "https://villatheme.com/extensions/w2s-migrate-woocommerce-to-shopify/"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:209
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:217
 msgid ""
 "If you only use API to import data, remove API permissions or delete the API "
 "after import completed"
@@ -155,127 +173,108 @@ msgstr ""
 "Nếu dùng API để nhập dữ liệu, hãy xóa quyền hạn API hoặc xóa API sau khi "
 "nhập xong"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:777
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:780
 msgid "Import"
 msgstr "Nhập dữ liệu"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:783
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:968
 msgid "Import error"
 msgstr "Lỗi nhập dữ liệu"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:883
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1126
 msgid "Import error, please try again! "
 msgstr "Lỗi nhập, xin vui lòng thử lại!"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:912
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:917
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:766
+msgid "Import failed"
+msgstr ""
+
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1155
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1160
 msgid "Import nonce error"
 msgstr "Lỗi nhập dữ liệu duy nhất"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:520
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:516
 msgid "Import Product Categories"
 msgstr "Nhập dữ liệu Danh mục Sản phẩm"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:530
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:526
 msgid "Import product categories"
 msgstr "Nhập dữ liệu danh mục sản phẩm"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:560
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:556
 msgid "Import product SKU"
 msgstr "Nhập dữ liệu SKU của sản phẩm"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:545
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:541
 msgid "Import product tags"
 msgstr "Nhập dữ liệu thẻ sản phẩm"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:462
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:458
 msgid "Import products created date"
 msgstr "Nhập dữ liệu ngày tạo sản phẩm"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:362
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:358
 msgid "Import Products options"
 msgstr "Cấu hình nhập sản phẩm"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:488
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:484
 msgid "Import Products sequence"
 msgstr "Trình tự nhập dữ liệu sản phẩm"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:550
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:546
 msgid "Import Products SKU"
 msgstr "Nhập dữ liệu SKU của sản phẩm"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:535
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:531
 msgid "Import Products Tags"
 msgstr "Nhập dữ liệu thẻ sản phẩm"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:638
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:698
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:821
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:796
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1051
 msgid "Import successfully"
 msgstr "Nhập dữ liệu thành công"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-logs.php:2
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-logs.php:2
 msgid "Import WooCommerce to Shopify log files"
 msgstr "Tệp ghi chép nhập dữ liệu từ WooCommerce đến Shopify"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:636
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:822
-#, php-format
-msgid "Importing... %s /%s completed"
-msgstr "Đang nhập... %s /%s hoàn thành"
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:311
+msgid "IMPORTANT NOTE:"
+msgstr ""
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:696
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:843
-#, php-format
-msgid "Importing... %s /%s error"
-msgstr "Đang nhập... %s /%s lỗi"
-
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:847
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:852
-#, php-format
-msgid "Importing... %s /%s skipped"
-msgstr "Đang nhập... %s /%s đã bỏ qua"
-
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:664
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:673
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:688
-#, php-format
-#| msgid "Importing... %1$s / %2$s was skipped"
-msgid "Importing... %s /%s was skipped"
-msgstr "Đang nhập... %s / %s bị bỏ qua"
-
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:438
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:434
 msgid "Include by Product categories"
 msgstr "Bao gồm theo Danh mục sản phẩm"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:393
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:389
 msgid "Include product"
 msgstr "Bao gồm sản phẩm"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:505
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:501
 msgid "Keep Product Slug"
 msgstr "Giữ slug của sản phẩm"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:515
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:511
 #| msgid "Keep the slug of the product when importing"
 msgid "keep the slug of the product when importing"
 msgstr "Giữ slug của sản phẩm khi nhập dữ liệu"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:952
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-logs.php:10
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1200
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-logs.php:14
 msgid "Log file not found."
 msgstr "Không tìm thấy tệp ghi chép. "
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:189
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:190
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:197
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:198
 msgid "Logs"
 msgstr "Ghi chép"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:783
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:786
 msgid "Logs:"
 msgstr "Ghi chép:"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:301
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:309
 msgid "Memory Limit"
 msgstr "Giới hạn Bộ nhớ"
 
@@ -285,209 +284,220 @@ msgstr ""
 "Chuyển đổi tất cả các sản phẩm và danh mục sản phẩm từ WooCommerce đến "
 "Shopify"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:34
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:61
 msgid "Migrate WooCommerce to Shopify"
 msgstr "Migrate WooCommerce to Shopify"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:224
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:232
 msgid "Minimum recommended value"
 msgstr "Giá trị nhỏ nhất được đề xuất"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:139
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:145
 msgid "Need to select at least one data to import! "
 msgstr "Cần chọn ít nhất một dữ liệu để nhập dữ liệu!"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:138
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:144
 msgid "Need to select at least one store to import! "
 msgstr "Cần chọn ít nhất một cửa hàng để nhập dữ liệu!"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:948
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:252
+msgid ""
+"No API connections configured yet. Click \"Add Connection\" to get started."
+msgstr ""
+
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1192
 msgid "No log file selected."
 msgstr "Không có tệp ghi chép nào được chọn"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:530
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:639
+msgid "Not find categories to import"
+msgstr ""
+
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:622
 msgid "Not find products to import"
 msgstr "Không tìm thấy sản phẩm để nhập"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:585
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:598
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:611
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:581
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:594
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:607
 msgid "Not import"
 msgstr "Không nhập dữ liệu"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:380
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:94
+msgid "OAuth (recommended) or Legacy API authentication"
+msgstr ""
+
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:376
 msgid "Only Simple"
 msgstr "Chỉ Sản phẩm đơn giản"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:387
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:383
 msgid "Only variable"
 msgstr "Chỉ sản phẩm biến thể"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:222
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:230
 msgid "Option name"
 msgstr "Tên tùy chọn"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:496
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:492
 msgid "Order by Created Date Ascending"
 msgstr "Sắp xếp theo Ngày tạo Tăng dần"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:497
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:493
 msgid "Order by Created Date Descending"
 msgstr "Sắp xếp theo Ngày tạo Giảm dần"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:494
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:490
 msgid "Order by Title Ascending"
 msgstr "Sắp xếp theo Tiêu đề Tăng dần"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:495
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:491
 msgid "Order by Title Descending"
 msgstr "Sắp xếp theo Tiêu đề Giảm dần"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:498
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:494
 msgid "Order by Updated Date Ascending"
 msgstr "Sắp xếp theo Ngày cập nhật Tăng dần"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:499
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:495
 msgid "Order by Updated Date Descending"
 msgstr "Sắp xếp theo Ngày cập nhật Giảm dần"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:603
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:599
 msgid "Pending Review"
 msgstr "Chờ duyệt"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:294
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:302
 msgid "PHP Max Input Vars"
 msgstr "PHP Max Input Vars"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:287
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:295
 msgid "PHP Time Limit"
 msgstr "PHP Time Limit"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/includes/class-vi-w2s-activator.php:39
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/includes/class-vi-w2s.php:97
-#| msgid ""
-#| "Please install and activate WooCommerce to use W2S - Migrate WooCommerce "
-#| "to Shopify Premium plugin."
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:79
 msgid ""
-"Please install and activate WooCommerce to use W2S - Migrate Woo To Shopify "
-"plugin."
+"Please enter your store address and API credentials. You can choose between "
+"OAuth (recommended) or Legacy API authentication."
 msgstr ""
-"Vui lòng cài đặt và kích hoạt WooCommerce để sử dụng W2S - Migrate Woo to "
-"Shopify plugin."
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:565
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:775
+msgid "Product don't have any variation"
+msgstr ""
+
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:561
 msgid "Product Status Mapping"
 msgstr "Chuyển đổi Trạng thái Sản phẩm"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:741
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:777
+msgid "Product's slug has been used"
+msgstr ""
+
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:738
 msgid "Products"
 msgstr "Sản phẩm"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:754
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:757
 msgid "Products Categories"
 msgstr "Danh mục Sản phẩm"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:670
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:887
 msgid "products with attribute count more than 3"
 msgstr "sản phẩm có nhiều hơn 3 thuộc tính"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:662
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:879
 msgid "Products with variants have not been entered correctly"
 msgstr "Biến thể của sản phẩm không được nhập chính xác"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:733
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:733
 msgid "Progress"
 msgstr "Tiến trình xử lý"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:577
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:573
 msgid "Publish"
 msgstr "Đăng"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:243
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:261
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:279
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:288
+msgid "Refer to "
+msgstr "Tham khảo "
+
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:251
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:269
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:287
 msgid "Required"
 msgstr "Bắt buộc"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:358
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:626
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:354
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:622
 msgid "Save"
 msgstr "Lưu"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:140
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:146
 msgid "Select products"
 msgstr "Chọn sản phẩm"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:155
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:162
 msgid "Settings"
 msgstr "Cài đặt"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:203
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:211
 msgid "Shopify Admin API security recommendation"
 msgstr "Đề xuất bảo mật API quản trị Shopify"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:373
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:369
 msgid "Simple & Variable"
 msgstr "Đơn giản và Có biến thể"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:54
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:87
 msgid "Store address"
 msgstr "Địa chỉ cửa hàng"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:135
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:141
 msgid "Store address can not be empty! "
 msgstr "Địa chỉ cửa hàng không thể để trống!"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:902
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:907
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1150
 msgid "Store setting error"
 msgstr "Cài đặt cửa hàng bị lỗi"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:180
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:218
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:188
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:226
 msgid "System Status"
 msgstr "Trạng thái Hệ thống"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:179
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:187
 msgid "System status"
 msgstr "Trạng thái hệ thống"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:687
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:904
 msgid "The product has been imported to shopify"
 msgstr "Sản phẩm này đã được nhập dữ liệu tới shopify"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:66
-msgid ""
-"This is API access token( with custom app) or API secret ( with private app)"
-msgstr ""
-"Đây là token truy cập API (với custom app) hoặc mã bí mật API (với private "
-"app)"
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:290
+msgid "this document"
+msgstr "tài liệu này"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:61
-msgid "This is api key"
-msgstr "Đây là api key"
-
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:56
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:89
 msgid "This is store address Eg: myshop.myshopify.com"
 msgstr "Đây là địa chỉ cửa hàng Ví dụ: myshop.myshopify.com"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:853
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1096
 msgid "This product category has been import error "
 msgstr "Lỗi khi nhập dữ liệu danh mục sản phẩm này"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:848
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1091
 msgid "This product category has been imported to shopify"
 msgstr "Danh mục sản phẩm này đã được nhập dữ liệu tới shopify"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:476
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:472
 msgid "To"
 msgstr "Tới"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:572
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:568
 msgid "To Shopify"
 msgstr "Tới Shopify"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:207
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:215
 msgid ""
 "Treat the API key and password like you would any other password, since "
 "whoever has access to these credentials has API access to the store."
@@ -495,11 +505,11 @@ msgstr ""
 "Coi API key và password như bất kỳ mật khẩu nào khác, vì bất kỳ ai có thể "
 "truy cập vào thông tin đăng nhập đều có quyền truy cập API đến cửa hàng."
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:324
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:332
 msgid "Upgrade this feature"
 msgstr "Nâng cấp tính năng này"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:934
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1177
 msgid "View"
 msgstr "Xem"
 
@@ -512,27 +522,35 @@ msgstr "Villatheme"
 msgid "W2S - Migrate WooCommerce to Shopify"
 msgstr "W2S - Migrate WooCommerce to Shopify"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:168
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:169
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:175
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:176
 msgid "Woo to Shopify"
 msgstr "Woo đến Shopify"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:945
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:313
+msgid ""
+"You can see the Admin API access token on this page only one time, because "
+"the token provides API access to sensitive store data. After revealing the "
+"access token, write down or record the token somewhere secure so that you "
+"can refer to it again. Treat the token like a password. Share the access "
+"token only with developers that you trust. Now the custom app is created and "
+"installed successfully, the next step is to get the API credentials and "
+"place them to the plugin General settings."
+msgstr ""
+
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:1188
 msgid "You do not have sufficient permissions to access this page."
 msgstr "Không đủ quyền để truy cập trang này."
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:232
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:262
 msgid ""
-"You need to enter correct all domain, API key and API secret to be able to "
-"import"
+"You need to enter correct domain and API credentials to be able to import"
 msgstr ""
-"Để nhập được dữ liệu, địa chỉ cửa hàng, API key và API secrect cần được điền "
-"đúng."
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:206
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:214
 msgid "You should enable only what is necessary for your app to work."
 msgstr "Chỉ nên bật các tùy chọn cần thiết để app hoạt động"
 
-#: D:/new-git-2017/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:223
+#: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:231
 msgid "Your option value"
 msgstr "Giá trị tùy chọn"

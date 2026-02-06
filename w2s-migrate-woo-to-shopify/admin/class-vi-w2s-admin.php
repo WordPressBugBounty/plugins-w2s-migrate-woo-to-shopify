@@ -133,14 +133,18 @@ class Vi_W2s_Admin {
 			wp_enqueue_script( $this->vi_w2s . '-js-transition', VIW2S_DIR_URL . 'assets/js/transition.min.js', array( 'jquery' ), $this->version, true );
 
 			wp_enqueue_script( $this->vi_w2s . '-js', VIW2S_DIR_URL . 'admin/js/vi-w2s-admin.js', array( 'jquery', 'jquery-tiptip' ), $this->version, true );
+			wp_enqueue_script( $this->vi_w2s . '-api-settings-js', VIW2S_DIR_URL . 'admin/js/viw2s-api-settings.js', array( 'jquery' ), $this->version, true );
+			
 			$viw2s_i18n_params = array(
 				'ajaxurl'                              => admin_url( "admin-ajax.php" ),
+				'_viw2s_nonce'                         => wp_create_nonce( 'viw2s_action_nonce' ),
 				'i18n_empty_store_address_error'       => esc_html__( 'Store address can not be empty! ', 'w2s-migrate-woo-to-shopify' ),
 				'i18n_empty_store_api_key_error'       => esc_html__( 'API key can not be empty! ', 'w2s-migrate-woo-to-shopify' ),
 				'i18n_empty_store_api_secret_error'    => esc_html__( 'API secret can not be empty! ', 'w2s-migrate-woo-to-shopify' ),
 				'i18n_empty_choose_store_import_error' => esc_html__( 'Need to select at least one store to import! ', 'w2s-migrate-woo-to-shopify' ),
 				'i18n_empty_choose_data_import_error'  => esc_html__( 'Need to select at least one data to import! ', 'w2s-migrate-woo-to-shopify' ),
 				'i18n_search_product_placeholder'      => esc_html__( 'Select products', 'w2s-migrate-woo-to-shopify' ),
+				'i18n_back_text'                       => esc_html__( 'Back', 'w2s-migrate-woo-to-shopify' ),
 			);
 
 			wp_localize_script( $this->vi_w2s . '-js', 'viw2s_i18n_params', $viw2s_i18n_params );
@@ -441,7 +445,7 @@ class Vi_W2s_Admin {
 			return;
 		}
 		if ( isset( $_POST['viw2s-save-setting'] ) ) {
-			$viw2s_params = get_option( 'viw2s_params ', false ) ? get_option( 'viw2s_params ' ) : $this->default_data;
+			$viw2s_params = get_option( 'viw2s_params', false ) ? get_option( 'viw2s_params' ) : $this->default_data;
 
 			$viw2s_store_setting        = isset( $_POST['viw2s_store_setting'] ) ? wc_clean( wp_unslash( $_POST['viw2s_store_setting'] ) ) : array();
 			$arr_import_products_option = isset( $_POST['viw2s_import_products_option'] ) ? wc_clean( wp_unslash( $_POST['viw2s_import_products_option'] ) ) : array();
@@ -454,26 +458,100 @@ class Vi_W2s_Admin {
 					$parse_domain             = isset( $store_item['domain'] ) ? wc_clean( wp_parse_url( $store_item['domain'] ) ) : array();
 					$domain                   = isset( $parse_domain['host'] ) ? $parse_domain['host'] : $parse_domain['path'];
 					$new_store_item['domain'] = $domain;
-					$api_key                  = isset( $store_item['api_key'] ) ? wc_clean( $store_item['api_key'] ) : '';
-					$api_secret               = isset( $store_item['api_secret'] ) ? wc_clean( $store_item['api_secret'] ) : '';
 
-					if ( $domain && $api_key && $api_secret ) {
+					// Check API type (unified table: oauth or legacy)
+					$api_type = isset( $store_item['api_type'] ) ? wc_clean( $store_item['api_type'] ) : 'legacy';
 
-						$request = $this->setting->get_access_scopes( $domain, $api_key, $api_secret );
-						if ( $request['status'] === 'success' ) {
+                    // VALIDATE & SAVE OAUTH CREDENTIALS
+                    if ( $api_type === 'oauth' && ! empty( $store_item['client_id'] ) && ! empty( $store_item['client_secret'] ) ) {
+                        $client_id     = wc_clean( $store_item['client_id'] );
+                        $client_secret = wc_clean( $store_item['client_secret'] );
 
-							$new_store_item['validate'] = 1;
+                        // Clear Legacy fields when switching to OAuth
+                        unset( $new_store_item['api_key'] );
+                        unset( $new_store_item['api_secret'] );
+                        unset( $new_store_item['password'] );
 
-						} else {
-							$new_store_item['validate'] = '';
-						}
+                        // This calls refresh_access_token (which handles Custom App logic) and saves to internal options
+                        $result = Viw2s_API_Settings::save_oauth_credentials( $domain, $client_id, $client_secret );
 
-					} else {
-						$new_store_item['validate'] = '';
+                        if ( ! is_wp_error( $result ) ) {
+                            $new_store_item['validate']      = 1;
+                            $new_store_item['oauth_enabled'] = 1;
+
+                            // Clear previous errors on success
+                            unset( $new_store_item['error_message'] );
+                            unset( $new_store_item['error_code'] );
+                            unset( $new_store_item['oauth_error'] );
+
+                            // Retrieve the token we just saved to ensure it persists in viw2s_params
+                            $saved_settings = Viw2s_API_Settings::get_settings( $domain );
+                            if ( ! empty( $saved_settings['access_token'] ) ) {
+                                $new_store_item['access_token'] = $saved_settings['access_token'];
+                            }
+                        } else {
+                            $new_store_item['validate']      = 0;
+                            $new_store_item['error_message'] = $result->get_error_message();
+                            $new_store_item['error_code']    = $result->get_error_code();
+                        }
+                    }
+                    // VALIDATE & SAVE LEGACY CREDENTIALS
+                    elseif ( $api_type === 'legacy' ) {
+                        // Get credentials from either api_secret or password field (form uses password field name)
+                        $api_key    = isset( $store_item['api_key'] ) ? wc_clean( $store_item['api_key'] ) : '';
+                        $api_secret = isset( $store_item['api_secret'] ) ? wc_clean( $store_item['api_secret'] ) : '';
+                        
+                        // If api_secret is empty, check password field (form field name)
+                        if ( empty( $api_secret ) && isset( $store_item['password'] ) ) {
+                            $api_secret = wc_clean( $store_item['password'] );
+                        }
+                        
+                        // If editing and api_secret is empty, keep the old one
+                        if ( ! empty( $store_item['existing_legacy'] ) && empty( $api_secret ) && isset( $store_item['existing_api_secret'] ) ) {
+                            $api_secret = $store_item['existing_api_secret'];
+                        }
+                        
+                        if ( ! empty( $api_key ) && ! empty( $api_secret ) ) {
+
+                        // Clear OAuth fields when switching to Legacy
+                        unset( $new_store_item['client_id'] );
+                        unset( $new_store_item['client_secret'] );
+                        unset( $new_store_item['access_token'] );
+                        unset( $new_store_item['token_expires_at'] );
+                        unset( $new_store_item['token_scope'] );
+                        unset( $new_store_item['get_access_scopes_handle'] );
+                        unset( $new_store_item['oauth_error'] );
+
+                        // Always set credentials so form displays them (pass or fail)
+                        $new_store_item['api_type']      = 'legacy';
+                        $new_store_item['api_key']       = $api_key;
+                        $new_store_item['api_secret']    = $api_secret;
+                        $new_store_item['oauth_enabled'] = 0;
+
+                        // Test legacy connection before saving
+                        $result = Viw2s_API_Settings::save_legacy_credentials( $domain, $api_key, $api_secret );
+
+                        if ( ! is_wp_error( $result ) ) {
+                            $new_store_item['validate']      = 1;
+
+                            // Clear previous errors on success
+                            unset( $new_store_item['error_message'] );
+                            unset( $new_store_item['error_code'] );
+                        } else {
+                            $new_store_item['validate']      = 0;
+                            $new_store_item['error_message'] = $result->get_error_message();
+                            $new_store_item['error_code']    = $result->get_error_code();
+                        }
+                        } else {
+                            // Missing credentials
+                            $new_store_item['validate']      = 0;
+                            $new_store_item['oauth_enabled'] = 0;
+                        }
+                    }
+
+						array_push( $arr_store_setting, $new_store_item );
 					}
-					array_push( $arr_store_setting, $new_store_item );
 				}
-			}
 
 			$new_viw2s_params = array(
 				'viw2s_store_setting'          => $arr_store_setting,
@@ -501,14 +579,26 @@ class Vi_W2s_Admin {
 			$viw2s_setting_store = $this->setting->get_params( 'viw2s_store_setting' );
 			$type_import         = isset( $_POST['type_import'] ) ? wc_clean( wp_unslash( $_POST['type_import'] ) ) : '';
 			if ( is_array( $viw2s_setting_store ) && ! empty( $viw2s_setting_store ) && isset( $viw2s_setting_store[0]['validate'] ) && $viw2s_setting_store[0]['validate'] ) {
-				$viw2s_get_api_scope = $this->setting->get_access_scopes( $viw2s_setting_store[0]['domain'], $viw2s_setting_store[0]['api_key'], $viw2s_setting_store[0]['api_secret'] );
+                // For OAuth stores, use access_token instead of api_key/api_secret
+                $api_key = $viw2s_setting_store[0]['api_key'] ?? '';
+                $api_secret = $viw2s_setting_store[0]['api_secret'] ?? '';
+
+                // Try to get OAuth token if available
+                if ( ! empty( $viw2s_setting_store[0]['access_token'] ) ) {
+                    $api_secret = $viw2s_setting_store[0]['access_token'];
+                } else if ( isset($viw2s_setting_store[0]['api_type']) && $viw2s_setting_store[0]['api_type'] === 'oauth' ) {
+                    $token = Viw2s_API_Settings::get_access_token($viw2s_setting_store[0]['domain']);
+                    if ( ! is_wp_error($token) ) {
+                        $api_secret = $token;
+                    }
+                }
+
+				$viw2s_get_api_scope = $this->setting->get_access_scopes( $viw2s_setting_store[0]['domain'], $api_key, $api_secret );
 				if ( $viw2s_get_api_scope['status'] == 'success' ) {
-					$viw2s_get_api_access_scope_handle = $this->setting->get_access_scopes_handle( $viw2s_setting_store[0]['domain'], $viw2s_setting_store[0]['api_key'], $viw2s_setting_store[0]['api_secret'] );
+					$viw2s_get_api_access_scope_handle = $this->setting->get_access_scopes_handle( $viw2s_setting_store[0]['domain'], $api_key, $api_secret );
 					$missing_scopes                    = array_diff( [
 						'read_products',
-						'write_products',
-						'read_locations',
-						'write_inventory'
+						'write_products'
 					], $viw2s_get_api_access_scope_handle );
 					if ( empty( $missing_scopes ) ) {
 						$status = 'success';
@@ -534,7 +624,7 @@ class Vi_W2s_Admin {
 								);
 							}
 						} elseif ( $type_import === 'product_categories' ) {
-							$viw2s_get_all_product_cats_data = $this->setting->viw2s_get_all_product_cats();
+							$viw2s_get_all_product_cats_data = $this->setting->viw2s_get_all_product_cats( $viw2s_setting_store[0]['domain'] );
 							if ( ! empty( $viw2s_get_all_product_cats_data ) ) {
 								update_option( 'viw2s_importing_arr_product_categories', $viw2s_get_all_product_cats_data );
 								$response = array(
@@ -592,6 +682,17 @@ class Vi_W2s_Admin {
 			$domain              = $viw2s_setting_store[0]['domain'] ?? '';
 			$api_key             = $viw2s_setting_store[0]['api_key'] ?? '';
 			$api_secret          = $viw2s_setting_store[0]['api_secret'] ?? '';
+
+            // Try to get OAuth token if available
+            if ( ! empty( $viw2s_setting_store[0]['access_token'] ) ) {
+                $api_secret = $viw2s_setting_store[0]['access_token'];
+            } else if ( isset($viw2s_setting_store[0]['api_type']) && $viw2s_setting_store[0]['api_type'] === 'oauth' ) {
+                $token = Viw2s_API_Settings::get_access_token($domain);
+                if ( ! is_wp_error($token) ) {
+                    $api_secret = $token;
+                }
+            }
+
 			$viw2s_get_api_scope = $this->setting->get_access_scopes( $domain, $api_key, $api_secret );
 			if (
 				is_array( $viw2s_get_api_scope ) &&
@@ -601,9 +702,7 @@ class Vi_W2s_Admin {
 				$viw2s_get_api_access_scope_handle = $this->setting->get_access_scopes_handle( $domain, $api_key, $api_secret );
 				$missing_scopes                    = array_diff( [
 					'read_products',
-					'write_products',
-					'read_locations',
-					'write_inventory'
+					'write_products'
 				], $viw2s_get_api_access_scope_handle );
 				if ( empty( $missing_scopes ) ) {
 
@@ -635,8 +734,9 @@ class Vi_W2s_Admin {
 								$viw2s_total_product     = count( $get_all_importing_arr_product );
 								$arr_item_product_data   = array();
 								$arr_item_product_result = array();
+								$status                  = 'successful';
 								/* Bulk import product depends on rate*/
-//                                $bulk_import->set_time_limit();
+								//                                $bulk_import->set_time_limit();
 								for ( $i = 0; $i < $bulk_import->product_rate(); $i ++ ) {
 
 									$product_index ++;
@@ -651,7 +751,6 @@ class Vi_W2s_Admin {
 										$error_image_code    = '';
 										$viw2s_import_status = '';
 										$title               = esc_html( get_the_title( $viw2s_item_product["id"] ) );
-										$status              = 'successful';
 										$log                 = array(
 											'shopify_id' => '',
 											'woo_id'     => $viw2s_item_product["id"],
@@ -698,18 +797,21 @@ class Vi_W2s_Admin {
 
 													/* Because productSet doesn't support inventory, need to do it separately */
 													foreach ( $inventory_item_update as $j => $inventory_item ) {
-														$bulk_import->update_inventory_item( array(
-															'id'    => $shopify_variants[ $j ]['inventoryItem']['id'],
-															'input' => $inventory_item
-														) );
+														if ( isset( $shopify_variants[ $j ]['inventoryItem']['id'] ) ) {
+															$bulk_import->update_inventory_item( array(
+																'id'    => $shopify_variants[ $j ]['inventoryItem']['id'],
+																'input' => $inventory_item
+															) );
+														}
 													}
 
 													/*Update data to product metadata*/
 													$_w2s_shopify_data = get_post_meta( $viw2s_item_product["id"], '_w2s_shopify_data', true );
+			$first_variant_id = ! empty( $viw2s_import_status['variants'][0]['id'] ) ? $viw2s_import_status['variants'][0]['id'] : '';
 													if ( ! empty( $_w2s_shopify_data ) && is_array( $_w2s_shopify_data ) ) {
 														$_w2s_shopify_data[ $domain ] = array(
 															'_w2s_shopify_product_id' => $shopify_product_id,
-															'_w2s_shopify_variant_id' => $viw2s_import_status['variants'][0]['id'],
+															'_w2s_shopify_variant_id' => $first_variant_id,
 															'status'                  => 'imported'
 														);
 														update_post_meta( $viw2s_item_product["id"], '_w2s_shopify_data', $_w2s_shopify_data );
@@ -717,7 +819,7 @@ class Vi_W2s_Admin {
 														update_post_meta( $viw2s_item_product["id"], '_w2s_shopify_data', array(
 															$domain => array(
 																'_w2s_shopify_product_id' => $shopify_product_id,
-																'_w2s_shopify_variant_id' => $viw2s_import_status['variants'][0]['id'],
+																'_w2s_shopify_variant_id' => $first_variant_id,
 																'status'                  => 'imported'
 															)
 														) );
@@ -731,7 +833,7 @@ class Vi_W2s_Admin {
 															if ( ! empty( $_w2s_shopify_data_children ) && is_array( $_w2s_shopify_data_children ) ) {
 																$_w2s_shopify_data_children[ $domain ] = array(
 																	'_w2s_shopify_product_id' => $shopify_product_id,
-																	'_w2s_shopify_variant_id' => basename( $shopify_variants[ $children_key ]['id'] ),
+																	'_w2s_shopify_variant_id' => isset( $shopify_variants[ $children_key ]['id'] ) ? basename( $shopify_variants[ $children_key ]['id'] ) : '',
 																	'status'                  => 'imported'
 																);
 																update_post_meta( $children_id, '_w2s_shopify_data', $_w2s_shopify_data_children );
@@ -739,7 +841,7 @@ class Vi_W2s_Admin {
 																update_post_meta( $children_id, '_w2s_shopify_data', array(
 																	$domain => array(
 																		'_w2s_shopify_product_id' => $shopify_product_id,
-																		'_w2s_shopify_variant_id' => basename( $shopify_variants[ $children_key ]['id'] ),
+																		'_w2s_shopify_variant_id' => isset( $shopify_variants[ $children_key ]['id'] ) ? basename( $shopify_variants[ $children_key ]['id'] ) : '',
 																		'status'                  => 'imported'
 																	)
 																) );
@@ -822,12 +924,12 @@ class Vi_W2s_Admin {
 										VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA::viw2s_log( $log_file, $logs_content );
 
 										if ( $status === 'error_access_scope' ) {
-											$logs = '<strong class="important_alert"> ' . $viw2s_import_status . '</strong>';
+											$logs .= '<div><strong class="important_alert"> ' . $viw2s_import_status . '</strong></div>';
 										} else {
 											$logs .= ' <div>' . $log['title'] . ': <strong > ' . $log['message'] . ' .</strong > ' . ( isset( $log['product_url'] ) ? ' <a href = "' . esc_url( $log['product_url'] ) . '" target = "_blank" rel = "nofollow" > View & edit </a> ' : '' ) . ' </div> ';
 										}
 									} else {
-										$logs     = '/*============================================================================*/';
+										$logs     .= '<div>/*============================================================================*/</div>';
 										$response = array(
 											'status'            => 'finish',
 											'logs'              => $logs,
@@ -871,6 +973,15 @@ class Vi_W2s_Admin {
 							break;
 						case 'product_categories':
 							$get_all_importing_arr_product_categories = get_option( 'viw2s_importing_arr_product_categories', array() );
+
+							// AUTO-LOAD categories if empty (workaround for JS not calling viw2s_ajax_active_import)
+							if ( empty( $get_all_importing_arr_product_categories ) ) {
+								$get_all_importing_arr_product_categories = $this->setting->viw2s_get_all_product_cats();
+								if ( ! empty( $get_all_importing_arr_product_categories ) ) {
+									update_option( 'viw2s_importing_arr_product_categories', $get_all_importing_arr_product_categories );
+								}
+							}
+
 							$categories_index                         = isset( $_POST['categories_index'] ) ? wc_clean( wp_unslash( $_POST['categories_index'] ) ) : '';
 							$categories_import_status                 = isset( $_POST['status'] ) ? wc_clean( wp_unslash( $_POST['status'] ) ) : '';
 							$viw2s_import_product_cat_progress_label  = 'Importing...';
@@ -894,16 +1005,20 @@ class Vi_W2s_Admin {
 								$viw2s_total_product_categories = count( $get_all_importing_arr_product_categories );
 								$categories_index ++;
 
-								if ( $categories_index <= $viw2s_total_product_categories ) {
+								if ( $categories_index <= $viw2s_total_product_categories && isset( $get_all_importing_arr_product_categories[ $categories_index - 1 ] ) ) {
 									$viw2s_item_product_cat          = $get_all_importing_arr_product_categories[ $categories_index - 1 ];
 									$viw2s_item_product_cat_data     = $this->setting->viw2s_format_product_cats( $viw2s_item_product_cat );
-									$title                           = esc_html( $viw2s_item_product_cat['title'] );
+									$title                           = esc_html( $viw2s_item_product_cat['title'] ?? 'Untitled' );
 									$viw2s_import_product_cat_status = '';
 									$code                            = '';
 									$status                          = '';
-									$log['woo_product_cat_id']       = $viw2s_item_product_cat['term_id'];
+									$log['woo_product_cat_id']       = $viw2s_item_product_cat['term_id'] ?? '';
 									$log['title']                    = $title;
-									if ( $viw2s_item_product_cat['status'] === 'success' ) {
+									if ( empty( $viw2s_item_product_cat_data ) ) {
+										$viw2s_import_product_cat_progress_label = sprintf( esc_html( 'Importing... %1$s /%2$s error' ), $categories_index, $viw2s_total_product_categories );
+										$log['message']                          = esc_html__( 'Category format error', 'w2s-migrate-woo-to-shopify' );
+										$status                                  = 'error';
+									} else if ( $viw2s_item_product_cat['status'] === 'success' ) {
 										try {
 											$graphQL = "
                                                 mutation collectionUpdate(\$input: CollectionInput!) {
@@ -923,21 +1038,9 @@ class Vi_W2s_Admin {
                                                   }
                                                 }
                                             ";
-											/* Only exist products on shopify can add collections*/
-											if ( ! empty( $viw2s_item_product_cat_data['products'] ) ) {
-												foreach ( $viw2s_item_product_cat_data['products'] as $product_id ) {
-													$viw2s_item_product_cat_data['products'] = [ $product_id ];
-													$bulk_import->query( $graphQL, array(
-														'input' => array(
-															'handle'   => $viw2s_item_product_cat_data['handle'],
-															'title'    => $viw2s_item_product_cat_data['title'],
-															'products' => [ $product_id ]
-														)
-													) );
-												}
-											} else {
-												$viw2s_import_product_cat_status = $bulk_import->query( $graphQL, array( 'input' => $viw2s_item_product_cat_data ) );
-											}
+			/* Create collection once with all products */
+			$viw2s_import_product_cat_status = $bulk_import->query( $graphQL, array( 'input' => $viw2s_item_product_cat_data ) );
+
 
 											if ( ! empty( $viw2s_import_product_cat_status['data']['collectionCreate']['userErrors'] ) ) {
 												$message     = $viw2s_import_product_cat_status['data']['collectionCreate']['userErrors'][0]['message'];
@@ -1006,7 +1109,7 @@ class Vi_W2s_Admin {
 										'message'                         => $viw2s_import_product_cat_progress_label,
 									);
 								} else {
-									$logs     = '/*============================================================================*/';
+									$logs     .= '<div>/*============================================================================*/</div>';
 									$response = array(
 										'status'           => 'finish',
 										'logs'             => $logs,
@@ -1068,10 +1171,10 @@ class Vi_W2s_Admin {
                 <p><?php echo esc_html( $log ) ?>
                     <a target="_blank" rel="nofollow"
                        href="<?php echo esc_url( add_query_arg( array(
-						   'action'     => 'viw2s_view_log',
-						   'viw2s_file' => urlencode( $log ),
-						   '_wpnonce'   => wp_create_nonce( 'viw2s_view_log' ),
-					   ), admin_url( 'admin-ajax.php' ) ) ) ?>"><?php esc_html_e( 'View', 'w2s-migrate-woo-to-shopify' ) ?>
+					       'action'     => 'viw2s_view_log',
+					       'viw2s_file' => urlencode( $log ),
+					       '_wpnonce'   => wp_create_nonce( 'viw2s_view_log' ),
+				       ), admin_url( 'admin-ajax.php' ) ) ) ?>"><?php esc_html_e( 'View', 'w2s-migrate-woo-to-shopify' ) ?>
                     </a>
                 </p>
 				<?php

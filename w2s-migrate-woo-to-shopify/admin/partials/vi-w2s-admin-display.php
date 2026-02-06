@@ -9,26 +9,52 @@ $viw2s_get_api_access_scope_handle = array();
 $domain                            = '';
 $api_key                           = '';
 $api_secret                        = '';
+
+/*Check active*/
 if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_setting ) > 0 ) ) {
-	$domain                            = $store_setting[0]['domain'] ?? '';
-	$api_key                           = $store_setting[0]['api_key'] ?? '';
-	$api_secret                        = $store_setting[0]['api_secret'] ?? '';
-	$config                            = array(
-		'ShopUrl'  => $domain,
-		'ApiKey'   => $api_key,
-		'Password' => $api_secret
-	);
-	$viw2s_get_api_access_scope_handle = $VIW2S_Data_default->get_access_scopes_handle( $domain, $api_key, $api_secret );
-
-	if (
-		isset( $store_setting[0]['validate'] ) &&
-		$store_setting[0]['validate']
-	) {
-		$active = true;
+	$active = true;
+	foreach ( $store_setting as $store_item ) {
+		if ( ! isset( $store_item['validate'] ) || ! $store_item['validate'] ) {
+			$active = false;
+		}
 	}
-
 }
 
+// Prepare data for the Unified API Table (copied logic from Pro)
+$all_connections = [];
+if ( ! empty( $store_setting ) && is_array( $store_setting ) ) {
+	foreach ( $store_setting as $store_item ) {
+		$domain = isset( $store_item['domain'] ) ? $store_item['domain'] : '';
+
+		// Determine API type
+		$api_type = 'legacy'; // default
+		if ( isset( $store_item['api_type'] ) ) {
+			$api_type = $store_item['api_type'];
+		} elseif ( isset( $store_item['oauth_enabled'] ) && $store_item['oauth_enabled'] ) {
+			$api_type = 'oauth';
+		}
+
+		// Get credentials
+		if ( $api_type === 'oauth' ) {
+			$credential_1 = isset( $store_item['client_id'] ) ? $store_item['client_id'] : '';
+			$credential_2 = isset( $store_item['client_secret'] ) ? $store_item['client_secret'] : '';
+		} else {
+			$credential_1 = isset( $store_item['api_key'] ) ? $store_item['api_key'] : '';
+			$credential_2 = isset( $store_item['api_secret'] ) ? $store_item['api_secret'] : '';
+		}
+
+		$all_connections[] = [
+			'domain'       => $domain,
+			'api_type'     => $api_type,
+			'credential_1' => $credential_1,
+			'credential_2' => $credential_2,
+			'validated'    => isset( $store_item['validate'] ) && $store_item['validate'],
+			'full_data'    => $store_item,
+			'error_code'    => isset( $store_item['error_code'] ) ? $store_item['error_code'] : '',
+			'error_message' => isset( $store_item['error_message'] ) ? $store_item['error_message'] : ''
+		];
+	}
+}
 ?>
 
 <div class="wrap">
@@ -42,29 +68,40 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
             <i class="dropdown icon"></i>
             <span><?php esc_html_e( 'General settings', 'w2s-migrate-woo-to-shopify' ); ?></span>
         </div>
-        <div class="content <?php if ( ! $active || empty( $viw2s_get_api_access_scope_handle ) || ! in_array( 'write_products', $viw2s_get_api_access_scope_handle ) ) {
+        <div class="content <?php if ( ! $active ) {
 			echo esc_attr( 'active' );
 		} ?> ">
             <form class="vi-ui form" method="post" action="" id="viw2s_setting_form">
 				<?php wp_nonce_field( 'viw2s_action_save_setting_nonce', '_viw2s_save_setting_nonce' ); ?>
 
-                <table class="vi-ui compact celled stackable table center aligned" id="table_store_info">
+                <div class="vi-ui tab-connect-api">
+                    <h3><?php esc_html_e( 'Connect to Shopify store', 'w2s-migrate-woo-to-shopify' ); ?></h3>
+                    <p><?php esc_html_e( 'Please enter your store address and API credentials. You can choose between OAuth (recommended) or Legacy API authentication.', 'w2s-migrate-woo-to-shopify' ); ?></p>
+                </div>
+
+                <!-- Unified API Table (From Pro) -->
+                <table class="vi-ui compact celled stackable table center aligned viw2s-unified-api-table" id="table_store_info">
                     <thead>
                     <tr>
                         <th>
-		                    <?php esc_html_e( 'Store address', 'w2s-migrate-woo-to-shopify' ); ?>
+							<?php esc_html_e( 'Store address', 'w2s-migrate-woo-to-shopify' ); ?>
                             <span class="viw2s-help-tip"
                                   data-tip="<?php esc_attr_e( 'This is store address Eg: myshop.myshopify.com', 'w2s-migrate-woo-to-shopify' ) ?>"></span>
                         </th>
                         <th>
-							<?php esc_html_e( 'API key', 'w2s-migrate-woo-to-shopify' ); ?>
+							<?php esc_html_e( 'API Type', 'w2s-migrate-woo-to-shopify' ); ?>
                             <span class="viw2s-help-tip"
-                                  data-tip="<?php esc_attr_e( 'This is api key', 'w2s-migrate-woo-to-shopify' ) ?>"></span>
+                                  data-tip="<?php esc_attr_e( 'OAuth (recommended) or Legacy API authentication', 'w2s-migrate-woo-to-shopify' ) ?>"></span>
                         </th>
                         <th>
-							<?php esc_html_e( 'API access token or API secret', 'w2s-migrate-woo-to-shopify' ); ?>
+							<?php esc_html_e( 'Credential 1', 'w2s-migrate-woo-to-shopify' ); ?>
                             <span class="viw2s-help-tip"
-                                  data-tip="<?php esc_attr_e( 'This is API access token( with custom app) or API secret ( with private app)', 'w2s-migrate-woo-to-shopify' ) ?>"></span>
+                                  data-tip="<?php esc_attr_e( 'Client ID (OAuth) or API Key (Legacy)', 'w2s-migrate-woo-to-shopify' ) ?>"></span>
+                        </th>
+                        <th>
+							<?php esc_html_e( 'Credential 2', 'w2s-migrate-woo-to-shopify' ); ?>
+                            <span class="viw2s-help-tip"
+                                  data-tip="<?php esc_attr_e( 'Client Secret (OAuth) or API Access Token (Legacy)', 'w2s-migrate-woo-to-shopify' ) ?>"></span>
                         </th>
                         <th>
 							<?php esc_html_e( 'Action', 'w2s-migrate-woo-to-shopify' ); ?>
@@ -73,192 +110,170 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
                     </thead>
                     <tbody>
 					<?php
-					if (
-						! empty( $store_setting ) &&
-						is_array( $store_setting ) &&
-						( count( $store_setting ) > 0 )
-					) {
-						$count_store = 0;
-						foreach ( wc_clean( $store_setting ) as $store_item ) {
-						    if($count_store > 0){
-						        break;
-                            }
-							$store_address          = isset( $store_item['domain'] ) ? wc_clean( $store_item['domain'] ) : '';
-							$api_key                = isset( $store_item['api_key'] ) ? wc_clean( $store_item['api_key'] ) : '';
-							$api_secret             = isset( $store_item['api_secret'] ) ? wc_clean( $store_item['api_secret'] ) : '';
-							$store_validate         = isset( $store_item['validate'] ) ? wc_clean( $store_item['validate'] ) : false;
-							$class_error_domain     = '';
-							$class_error_api_key    = '';
-							$class_error_api_secret = '';
-
-							$text_error_domain     = '';
-							$text_error_api_key    = '';
-							$text_error_api_secret = '';
-							if ( ! $store_validate ) {
-								$warning      = $VIW2S_Data_default->get_access_scopes( $store_address, $api_key, $api_secret );
-								$warning_code = isset( $warning['code'] ) ? $warning['code'] : '';
-								switch ( $warning_code ) {
-									case 'http_request_failed':
-										$class_error_domain = 'error';
-										$text_error_domain  = isset( $warning['data'] ) ? $warning['data'] : 'error';
-										break;
-									case '403':
-										$class_error_api_key = 'error';
-										$text_error_api_key  = isset( $warning['data'] ) ? $warning['data'] : 'error';
-										break;
-									case '401':
-										$class_error_api_secret = 'error';
-										$class_error_api_key    = 'error';
-										$text_error_api_key     = isset( $warning['data'] ) ? $warning['data'] : 'error';
-										$text_error_api_secret  = isset( $warning['data'] ) ? $warning['data'] : 'error';
-										break;
-								}
-
-
-							}
-
+					if ( ! empty( $all_connections ) ) {
+						$conn_index = 0;
+						foreach ( $all_connections as $conn ) {
+							$api_type_label = $conn['api_type'] === 'oauth' ? 'OAuth' : 'Legacy';
+							$cred1_label = $conn['api_type'] === 'oauth' ? 'Client ID' : 'API Key';
+							$cred2_label = $conn['api_type'] === 'oauth' ? 'Client Secret' : 'API Token';
 							?>
-                            <tr>
-                                <td data-label="Store address" class="<?php echo esc_attr( $class_error_domain ); ?>">
+                            <tr data-shop-domain="<?php echo esc_attr( $conn['domain'] ); ?>" data-api-type="<?php echo esc_attr( $conn['api_type'] ); ?>">
+                                <td data-label="Store address">
                                     <input type="text"
-                                           name="viw2s_store_setting[<?php echo esc_attr( $count_store ); ?>][domain]"
-                                           class="viw2s_store_domain"
-                                           id="viw2s_domain-<?php echo esc_attr( $count_store ); ?>"
-                                           value="<?php echo esc_attr( $store_address ); ?>"
-                                           placeholder="eg: myshop.myshopify.com">
-                                    <label for="viw2s_domain-<?php echo esc_attr( $count_store ); ?>"></label>
-									<?php
-									if ( ! empty( $text_error_domain ) ) {
-										?>
-                                        <div>
-                                            <i class="attention icon"></i><?php echo esc_html( $text_error_domain ); ?>
-                                        </div>
-										<?php
-									}
-									?>
-
-                                </td>
-                                <td data-label="API key" class="<?php echo esc_attr( $class_error_api_key ); ?>">
-                                    <input type="text"
-                                           name="viw2s_store_setting[<?php echo esc_attr( $count_store ); ?>][api_key]"
-                                           class="viw2s_store_api_key"
-                                           id="viw2s_api_key-<?php echo esc_attr( $count_store ); ?>"
-                                           value="<?php echo esc_attr( $api_key ); ?>"
+                                           class="viw2s-store-domain"
+                                           name="viw2s_store_setting[<?php echo $conn_index; ?>][domain]"
+                                           value="<?php echo esc_attr( $conn['domain'] ); ?>"
                                     >
-                                    <label for="viw2s_api_key-<?php echo esc_attr( $count_store ); ?>"></label>
 									<?php
-									if ( ! empty( $text_error_api_key ) ) {
-										?>
-                                        <div>
-                                            <i class="attention icon"></i><?php echo esc_html( $text_error_api_key ); ?>
-                                        </div>
-										<?php
+									// Display error for domain field
+									if ( ! empty( $conn['error_code'] ) && ! empty( $conn['error_message'] ) ) {
+										if ( $conn['error_code'] === 'http_request_failed' ||
+										     $conn['error_code'] === 'invalid_credentials' ||
+										     $conn['error_code'] === 'connection_failed' ||
+										     $conn['error_code'] === 'missing_fields' ||
+										     $conn['error_code'] === 'oauth_error' ) {
+											?>
+                                            <div class="viw2s-inline-error">
+                                                <i class="attention icon"></i><?php echo wp_kses_post( $conn['error_message'] ); ?>
+                                            </div>
+											<?php
+										}
+									}
+									?>
+									<?php
+									// Preserve other fields
+									if ( isset( $conn['full_data'] ) && is_array( $conn['full_data'] ) ) {
+										foreach ( $conn['full_data'] as $field_key => $field_value ) {
+											if ( in_array( $field_key, ['domain', 'api_type', 'client_id', 'api_key', 'password', 'client_secret'] ) ) {
+												continue;
+											}
+											if ( is_array( $field_value ) ) {
+												$field_value = wp_json_encode( $field_value );
+											}
+											?>
+                                            <input type="hidden"
+                                                   name="viw2s_store_setting[<?php echo $conn_index; ?>][<?php echo esc_attr( $field_key ); ?>]"
+                                                   value="<?php echo esc_attr( $field_value ); ?>">
+											<?php
+										}
+									}
+									if ( $conn['api_type'] === 'oauth' ): ?>
+									<input type="hidden" name="viw2s_store_setting[<?php echo $conn_index; ?>][existing_oauth]" value="1">
+									<?php else: ?>
+									<input type="hidden" name="viw2s_store_setting[<?php echo $conn_index; ?>][existing_legacy]" value="1">
+									<input type="hidden" name="viw2s_store_setting[<?php echo $conn_index; ?>][existing_api_secret]" value="<?php echo esc_attr( isset( $conn['full_data']['api_secret'] ) ? $conn['full_data']['api_secret'] : '' ); ?>">
+									<?php endif; ?>
+                                </td>
+                                <td data-label="API Type">
+                                    <select name="viw2s_store_setting[<?php echo $conn_index; ?>][api_type]" class="viw2s-api-type-select">
+                                        <option value="legacy" <?php selected( $conn['api_type'], 'legacy' ); ?>>Legacy</option>
+                                        <option value="oauth" <?php selected( $conn['api_type'], 'oauth' ); ?>>OAuth</option>
+                                    </select>
+                                </td>
+                                <td data-label="<?php echo esc_attr( $cred1_label ); ?>">
+                                    <small class="viw2s-credential-label"><?php echo esc_html( $cred1_label ); ?></small>
+									<?php if ( $conn['api_type'] === 'oauth' ): ?>
+                                        <input type="text"
+                                               class="viw2s-store-credential-1"
+                                               name="viw2s_store_setting[<?php echo $conn_index; ?>][client_id]"
+                                               value="<?php echo esc_attr( $conn['credential_1'] ); ?>"
+                                        >
+									<?php else: ?>
+                                        <input type="text"
+                                               class="viw2s-store-credential-1"
+                                               name="viw2s_store_setting[<?php echo $conn_index; ?>][api_key]"
+                                               value="<?php echo esc_attr( $conn['credential_1'] ); ?>"
+                                        >
+									<?php endif; ?>
+									<?php
+									if ( ! empty( $conn['error_code'] ) && ! empty( $conn['error_message'] ) ) {
+										if ( $conn['error_code'] === '403' ||
+										     $conn['error_code'] === 'unauthorized' ||
+										     $conn['error_code'] === 'invalid_credentials' ||
+										     $conn['error_code'] === 'missing_fields' ||
+										     $conn['error_code'] === 'insufficient_scopes' ) {
+											?>
+                                            <div class="viw2s-inline-error">
+                                                <i class="attention icon"></i><?php echo wp_kses_post( $conn['error_message'] ); ?>
+                                            </div>
+											<?php
+										}
 									}
 									?>
                                 </td>
-                                <td data-label="API secret(Password)"
-                                    class="<?php echo esc_attr( $class_error_api_secret ); ?>">
-                                    <input type="text"
-                                           name="viw2s_store_setting[<?php echo esc_attr( $count_store ); ?>][api_secret]"
-                                           class="viw2s_store_api_secret"
-                                           id="viw2s_api_secret-<?php echo esc_attr( $count_store ); ?>"
-                                           value="<?php echo esc_attr( $api_secret ); ?>">
-                                    <label for="viw2s_api_secret-<?php echo esc_attr( $count_store ); ?>"></label>
+                                <td data-label="<?php echo esc_attr( $cred2_label ); ?>">
+                                    <small class="viw2s-credential-label"><?php echo esc_html( $cred2_label ); ?></small>
+									<?php if ( $conn['api_type'] === 'oauth' ): ?>
+                                        <input type="text"
+                                               class="viw2s-store-credential-2"
+                                               name="viw2s_store_setting[<?php echo $conn_index; ?>][client_secret]"
+                                               value="<?php echo esc_attr( $conn['credential_2'] ); ?>"
+                                               placeholder="Leave blank to keep current secret"
+                                        >
+									<?php else: ?>
+                                        <input type="text"
+                                               class="viw2s-store-credential-2"
+                                               name="viw2s_store_setting[<?php echo $conn_index; ?>][api_secret]"
+                                               value="<?php echo esc_attr( $conn['credential_2'] ); ?>"
+                                               placeholder="Leave blank to keep current token"
+                                        >
+									<?php endif; ?>
 									<?php
-									if ( ! empty( $text_error_api_secret ) ) {
-										?>
-                                        <div>
-                                            <i class="attention icon"></i><?php echo esc_html( $text_error_api_secret); ?>
-                                        </div>
-										<?php
+									if ( ! empty( $conn['error_code'] ) && ! empty( $conn['error_message'] ) ) {
+										if ( $conn['error_code'] === '401' ||
+										     $conn['error_code'] === 'unauthorized' ||
+										     $conn['error_code'] === 'invalid_credentials' ||
+										     $conn['error_code'] === 'missing_fields' ||
+										     $conn['error_code'] === 'insufficient_scopes' ) {
+											?>
+                                            <div class="viw2s-inline-error">
+                                                <i class="attention icon"></i><?php echo wp_kses_post( $conn['error_message'] ); ?>
+                                            </div>
+											<?php
+										}
 									}
 									?>
                                 </td>
                                 <td data-label="Action">
-                                    <div class="viw2s-wrap_btn">
-                                        <a href="#" class="vi-ui red basic compact icon button remove-store">
-                                            <i class="icon trash alternate outline"></i>
-                                        </a>
-                                    </div>
+                                    <button type="button" class="viw2s-delete-connection-btn vi-ui red basic compact icon button"
+                                            data-shop-domain="<?php echo esc_attr( $conn['domain'] ); ?>"
+                                            data-api-type="<?php echo esc_attr( $conn['api_type'] ); ?>">
+                                        <i class="icon trash alternate outline"></i>
+                                    </button>
                                 </td>
                             </tr>
 							<?php
-							$count_store ++;
+							$conn_index++;
 						}
 					} else {
 						?>
-                        <tr>
-                            <td data-label="Store address">
-                                <input type="text" name="viw2s_store_setting[0][domain]"
-                                       class="viw2s_store_domain"
-                                       id="viw2s_domain-0"
-                                       value=""
-                                       placeholder="eg: myshop.myshopify.com"
-                                >
-                                <label for="viw2s_domain-0"></label>
-                            </td>
-                            <td data-label="API key">
-                                <input type="text" name="viw2s_store_setting[0][api_key]"
-                                       class="viw2s_store_api_key"
-                                       id="viw2s_api_key-0"
-                                       value=""
-                                >
-                                <label for="viw2s_api_key-0"></label>
-                            </td>
-                            <td data-label="API secret(Password)">
-                                <input type="text" name="viw2s_store_setting[0][api_secret]"
-                                       class="viw2s_store_api_secret"
-                                       id="viw2s_api_secret-0"
-                                       value="">
-                                <label for="viw2s_api_secret-0"></label>
-                            </td>
-                            <td data-label="Action">
-                                <div class="viw2s-wrap_btn">
-                                    <a href="#" class="vi-ui red basic compact icon button remove-store">
-                                        <i class="icon trash alternate outline"></i>
-                                    </a>
-                                </div>
+                        <tr class="viw2s-no-connections">
+                            <td colspan="5">
+								<?php esc_html_e( 'No API connections configured yet. Click "Add Connection" to get started.', 'w2s-migrate-woo-to-shopify' ); ?>
                             </td>
                         </tr>
 					<?php } ?>
-
                     </tbody>
                     <tfoot>
                     <tr>
-                        <th colspan="3">
-                            <div class="viw2s-error-warning"
-                                 style="<?php if ( $active )
-								     echo esc_attr( 'display:none' ) ?>">
+                        <th colspan="4">
+                            <div class="viw2s-error-warning" style="<?php if ( $active ) echo esc_attr( 'display:none' ) ?>">
                                 <div class="vi-ui negative message">
-									<?php esc_html_e( 'You need to enter correct all domain, API key and API secret to be able to import', 'w2s-migrate-woo-to-shopify' ); ?>
+									<?php esc_html_e( 'You need to enter correct domain and API credentials to be able to import', 'w2s-migrate-woo-to-shopify' ); ?>
                                 </div>
                             </div>
-							<?php
-							if (
-								$active &&
-								( empty( $viw2s_get_api_access_scope_handle ) ||
-								  ! in_array( 'write_products', $viw2s_get_api_access_scope_handle ) )
-							) {
-								?>
-                                <div class="viw2s-permission-warning">
-                                    <div class="vi-ui negative message">
-										<?php esc_html_e( 'API permission must have product write permission!', 'w2s-migrate-woo-to-shopify' ); ?>
-                                    </div>
-                                </div>
-								<?php
-							}
-							?>
                         </th>
                         <th>
                             <div class="vi-wrap-add-button">
-                                <button class="vi-ui green labeled icon button tiny viw2s-add-store-options">
-                                    <i class="icon add"></i><?php esc_html_e( 'Add store', 'w2s-migrate-woo-to-shopify' ); ?>
+                                <button type="button" class="viw2s-show-add-connection vi-ui green labeled icon button tiny">
+                                    <i class="icon add"></i><?php esc_html_e( 'Add Connection', 'w2s-migrate-woo-to-shopify' ); ?>
                                 </button>
                             </div>
                         </th>
                     </tr>
                     </tfoot>
                 </table>
+
                 <!--Guide video get api key-->
                 <div class="title active">
                     <i class="dropdown icon"></i>
@@ -267,43 +282,23 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
                 <div class="content active">
                     <div class="w2s-guide-get-api">
                         <div class="vi-ui white big message">
-                            <div class="header">
-				                <?php esc_html_e( 'Guide get API key', 'w2s-migrate-woocommerce-to-shopify' ); ?>
-                            </div>
                             <ul class="list">
                                 <li>
-                                    <strong><?php esc_html_e( 'Step 1: Creating your Shopify development store', 'w2s-migrate-woocommerce-to-shopify' ); ?></strong>
+                                    <strong>
+                                        <?php esc_html_e( 'Refer to ', 'w2s-migrate-woo-to-shopify' ); ?>
+                                        <a href="https://docs.villatheme.com/w2s-migrate-woocommerce-to-shopify/#configuration_child_menu_7909" target="_blank" rel="noopener noreferrer">
+                                            <?php esc_html_e( 'this document', 'w2s-migrate-woo-to-shopify' ); ?>
+                                        </a>
+                                        <?php esc_html_e( ' or the tutorial below to create a custom app and get API credentials', 'w2s-migrate-woo-to-shopify' ); ?>
+                                    </strong>
                                 </li>
                                 <li>
-                                    <strong><?php esc_html_e( 'Step 2: Enable cutom app', 'w2s-migrate-woocommerce-to-shopify' ); ?></strong>
-                                    <p><?php echo sprintf( esc_html( 'On the Shopify dashboard, go to the App settings as in the picture below >> Click "Develop apps". Then, follow the steps in %1$s to enable custom app development from the Shopify admin.' ), '<a target="_blank" href="https://help.shopify.com/en/manual/apps/custom-apps#:~:text=From%20your%20Shopify%20admin%2C%20go%20to%20Apps,then%20click%20Allow%20custom%20app%20development."  rel="noopener">this instruction </a>' ); ?>
-                                        <a href="https://docs.villatheme.com/wp-content/uploads/2022/06/Screenshot-11.png"
-                                           target="_blank"><?php esc_html_e( 'See image guide', 'w2s-migrate-woocommerce-to-shopify' ); ?></a>
-                                    </p>
-                                </li>
-                                <li>
-                                    <strong><?php esc_html_e( 'Step 3: Create an app', 'w2s-migrate-woocommerce-to-shopify' ); ?></strong>
-                                    <p><?php echo sprintf( esc_html( 'Click "Create an app" to create a custom app. And follow the next steps in %1$s to create a custom app.' ), '<a href="https://help.shopify.com/en/manual/apps/custom-apps#:~:text=Create%20the%20app,Create%20app." target="_blank">this instruction</a>' ); ?>
-                                        <a href="https://docs.villatheme.com/wp-content/uploads/2022/06/Screenshot-10.png"
-                                           target="_blank"><?php esc_html_e( 'See image guide', 'w2s-migrate-woocommerce-to-shopify' ); ?></a>
-                                    </p>
-                                    <p><?php echo sprintf( esc_html( 'Note: In the past, Shopify used to allow users to create private apps, but this feature was removed, as mentioned in %1$s. If any users who have been using our plugin since then, the private app credentials in your plugin settings will still be kept and work properly.', 'w2s-migrate-woocommerce-to-shopify' ), '<a href="https://help.shopify.com/en/manual/apps/private-apps#:~:text=Private%20apps%20are%20deprecated%20and%20can%27t%20be%20created%20as%20of%20January%202022.%20Ask%20your%20app%20developer%20to%20create%20a%20custom%20app.%20Like%20private%20apps%2C%20custom%20apps%20are%20built%20exclusively%20for%20your%20shop%2C%20but%20they%20don%27t%20require%20open%20API%20access%20to%20your%20store%20or%20access%20to%20your%20Shopify%20admin." target="_blank" rel="noopener">this statement</a>' ); ?>
-                                        <a href="https://docs.villatheme.com/wp-content/uploads/2022/06/Screenshot-14.png"
-                                           target="_blank"><?php esc_html_e( 'See image detail scopes', 'w2s-migrate-woocommerce-to-shopify' ); ?></a>
-                                    </p>
-                                </li>
-                                <li>
-                                    <strong><?php esc_html_e( 'Step 4: Assign API scopes', 'w2s-migrate-woocommerce-to-shopify' ); ?></strong>
-                                    <p><?php echo sprintf( esc_html( 'After successfully creating a custom app, the next step is to assign API scopes to it. Please visit %1$s for specific steps.' ), '<a href="https://help.shopify.com/en/manual/apps/custom-apps#:~:text=Select%20API%20scopes,least%20one%20scope." target="_blank" >this instruction</a>' ); ?></p>
-                                </li>
-                                <li>
-                                    <strong><?php esc_html_e( 'Step 5: Install the app', 'w2s-migrate-woocommerce-to-shopify' ); ?></strong>
-                                    <p><?php esc_html_e( 'After you\'ve set API scopes for your app, you can install the app. You\'ll get your API access tokens after you install. Depending on what API scopes you assigned to the app, you\'ll get an Admin API access token, a Storefront API access token, or both.', 'w2s-migrate-woocommerce-to-shopify' ); ?></p>
-                                </li>
-                                <li>
-                                    <strong><?php esc_html_e( 'Video guide', 'w2s-migrate-woocommerce-to-shopify' ); ?></strong>
+                                    <!--                                        <strong>--><?php //esc_html_e( 'Video guide', 'w2s-migrate-woocommerce-to-shopify' ); ?><!--</strong>-->
                                     <p>
-                                        <iframe width="640" height="360" src="https://www.youtube.com/embed/8rcq_jGkJSk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        <iframe width="640" height="360" src="https://www.youtube.com/embed/Zu4zi0cCRHU" title="YouTube video player"
+                                                frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowfullscreen></iframe>
                                     </p>
                                 </li>
                             </ul>
@@ -313,16 +308,16 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
                     <div class="w2s-security-warning">
                         <div class="vi-ui yellow large message">
                             <div class="header">
-				                <?php esc_html_e( 'IMPORTANT NOTE:', 'w2s-migrate-woocommerce-to-shopify' ); ?>
+				                <?php esc_html_e( 'IMPORTANT NOTE:', 'w2s-migrate-woo-to-shopify' ); ?>
                             </div>
-                            <p><?php esc_html_e( 'You can see the Admin API access token on this page only one time, because the token provides API access to sensitive store data. After revealing the access token, write down or record the token somewhere secure so that you can refer to it again. Treat the token like a password. Share the access token only with developers that you trust. Now the custom app is created and installed successfully, the next step is to get the API credentials and place them to the plugin General settings.', 'w2s-migrate-woocommerce-to-shopify' ); ?></p>
+                            <p><?php esc_html_e( 'You can see the Admin API access token on this page only one time, because the token provides API access to sensitive store data. After revealing the access token, write down or record the token somewhere secure so that you can refer to it again. Treat the token like a password. Share the access token only with developers that you trust. Now the custom app is created and installed successfully, the next step is to get the API credentials and place them to the plugin General settings.', 'w2s-migrate-woo-to-shopify' ); ?></p>
                         </div>
                     </div>
                     <p></p>
                 </div>
                 <!--Import Product Option-->
 				<?php
-				$products_option = $this->setting->get_params( 'viw2s_import_products_option' );
+				$products_option = $VIW2S_Data_default->get_params( 'viw2s_import_products_option' );
 
 				if (
 					! empty( $products_option ) &&
@@ -333,7 +328,7 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
 					$import_products_option = $products_option;
 
 				} else {
-					$products_option_default = $this->default_data;
+					$products_option_default = $VIW2S_Data_default->get_default();
 					$import_products_option = $products_option_default['viw2s_import_products_option' ];
 				}
 				$product_by_type           = $import_products_option['product_by_type'] ?? array();
@@ -347,7 +342,7 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
 				$import_product_categories = $import_products_option['import_product_categories'] ?? '';
 				$import_product_tags       = $import_products_option['import_product_tags'] ?? '';
 				$import_product_sku        = $import_products_option['import_product_sku'] ?? '';
-				$product_status_mapping    = $import_products_option['import_product_status_mapping'] ?? $this->setting->get_parrams( 'viw2s_import_products_option' )['import_product_status_mapping'];
+				$product_status_mapping    = $import_products_option['import_product_status_mapping'] ?? $VIW2S_Data_default->get_params( 'viw2s_import_products_option' )['import_product_status_mapping'];
 				?>
                 <div class="vi-ui segment transition visible"
                      id="viw2s-import-products-options">
@@ -510,7 +505,7 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
                                         <input type="checkbox"
                                                name="viw2s_import_products_option[import_product_keep_slug]"
                                                id="viw2s_product_keep_slug"
-											<?php checked( $product_keep_slug, 'on' ) ?>
+                                               <?php checked( $product_keep_slug, 'on' ) ?>
                                         >
                                     </div>
                                     <span class="explanatory-text top"><?php esc_html_e( 'keep the slug of the product when importing', 'w2s-migrate-woo-to-shopify' ); ?></span>
@@ -525,7 +520,7 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
                                         <input type="checkbox"
                                                name="viw2s_import_products_option[import_product_categories]"
                                                id="viw2s_import_product_categories"
-											<?php checked( $import_product_categories, 'on' ) ?>
+                                               <?php checked( $import_product_categories, 'on' ) ?>
                                         >
                                     </div>
                                     <span class="explanatory-text top"><?php esc_html_e( 'Import product categories', 'w2s-migrate-woo-to-shopify' ); ?></span>
@@ -540,7 +535,7 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
                                         <input type="checkbox"
                                                name="viw2s_import_products_option[import_product_tags]"
                                                id="viw2s_import_product_tags"
-											<?php checked( $import_product_tags, 'on' ) ?>
+                                               <?php checked( $import_product_tags, 'on' ) ?>
                                         >
                                     </div>
                                     <span class="explanatory-text top"><?php esc_html_e( 'Import product tags', 'w2s-migrate-woo-to-shopify' ); ?></span>
@@ -555,7 +550,7 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
                                         <input type="checkbox"
                                                name="viw2s_import_products_option[import_product_sku]"
                                                id="viw2s_import_product_sku"
-											<?php checked( $import_product_sku, 'on' ); ?>
+                                               <?php checked( $import_product_sku, 'on' ); ?>
                                         >
                                     </div>
                                     <span class="explanatory-text top"><?php esc_html_e( 'Import product SKU', 'w2s-migrate-woo-to-shopify' ); ?></span>
@@ -636,10 +631,28 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
     <p></p>
 	<?php
 	/*Check currency Shopify and WooCommerce*/
-	$ShopifyStore = $this->setting->get_shopify_store_info( $domain, $api_key, $api_secret );
+	$ShopifyStore = null;
 	$WooCurrency  = get_option( 'woocommerce_currency' );
+	if ( $active ) {
+		$domain       = isset( $store_setting[0]['domain'] ) ? $store_setting[0]['domain'] : '';
+		$api_key      = isset( $store_setting[0]['api_key'] ) ? $store_setting[0]['api_key'] : '';
+		$api_secret   = isset( $store_setting[0]['api_secret'] ) ? $store_setting[0]['api_secret'] : '';
+
+		if ( isset( $store_setting[0]['api_type'] ) && $store_setting[0]['api_type'] === 'oauth' ) {
+			if ( ! empty( $store_setting[0]['access_token'] ) ) {
+				$api_secret = $store_setting[0]['access_token'];
+			} elseif ( class_exists( 'Viw2s_API_Settings' ) && method_exists( 'Viw2s_API_Settings', 'get_access_token' ) ) {
+				$token = Viw2s_API_Settings::get_access_token( $domain );
+				if ( ! is_wp_error( $token ) ) {
+					$api_secret = $token;
+				}
+			}
+		}
+
+		$ShopifyStore = $VIW2S_Data_default->get_shopify_store_info( $domain, $api_key, $api_secret );
+	}
 	if (
-		$active &&
+		$ShopifyStore &&
 		isset( $ShopifyStore['data'] ) &&
 		is_array( $ShopifyStore['data'] ) &&
 		isset( $ShopifyStore['data']['currency'] ) &&
@@ -656,7 +669,7 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
 	?>
     <form class="vi-ui form viw2s-settings-import-container"
           method="post"
-          style="<?php if ( ! $active || empty( $viw2s_get_api_access_scope_handle ) || ! in_array( 'write_products', $viw2s_get_api_access_scope_handle ) )
+          style="<?php if ( ! $active )
 		      echo esc_attr( 'display:none' ) ?>">
 		<?php wp_nonce_field( 'viw2s_action_import_nonce', '_viw2s_action_import_nonce' ); ?>
         <div class="vi-ui segment">
@@ -678,7 +691,7 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
 							    if($count > 0){
 							        break;
                                 }
-								$store_address = $store_item['domain'] ?? '';
+								$store_address = $store_item['domain'];
 								$class_icon    = '';
 								$disabled      = '';
 								if ( $store_item['validate'] ) {
@@ -694,6 +707,7 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
                                        name="viw2s_store_setting[0][choosen]" <?php echo esc_attr( $disabled ); ?>
 									<?php checked( $store_item['validate'], true ); ?>
                                 >
+                                <input type="hidden" name="store_name" value="<?php echo esc_attr( $store_address ); ?>">
 								<?php
 								$count++;
 							}
@@ -712,81 +726,57 @@ if ( isset( $store_setting ) && is_array( $store_setting ) && ( count( $store_se
 <!--                        >-->
                     </div>
 
-					<?php
-					if (
-						isset( $viw2s_setting_params['viw2s_store_setting'] ) &&
-						is_array( $viw2s_setting_params['viw2s_store_setting'] ) &&
-						( count( $viw2s_setting_params['viw2s_store_setting'] ) > 0 )
-					) {
-						$count = 0;
-						foreach ( $viw2s_setting_params['viw2s_store_setting'] as $store_item ) {
-							if($count > 0){
-								break;
-							}
-							$store_address = $store_item['domain'] ?? '';
-							if ( $store_item['validate'] ) {
-								?>
-
-                                <table class="vi-ui celled table">
-                                    <thead>
-                                    <tr>
-                                        <th style="width: 200px;"><?php esc_html_e( 'Data', 'w2s-migrate-woo-to-shopify' ); ?></th>
-                                        <th><?php esc_html_e( 'Progress', 'w2s-migrate-woo-to-shopify' ); ?></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-									<?php
-
-									?>
-                                    <tr>
-                                        <td><?php esc_html_e( 'Products', 'w2s-migrate-woo-to-shopify' ); ?></td>
-                                        <td>
-                                            <div class="vi-ui toggle checkbox ">
-                                                <input type="checkbox"
-                                                       class="viw2s-import-element-enable viw2s-import-products-enable"
-                                                       data-element_name="products"
-                                                       name="" checked >
-                                                <label></label>
-                                            </div>
-                                            <div class="vi-ui indicating progress standard viw2s-import-progress"
-                                                 id="<?php echo esc_attr( 'viw2s-products-progress' ) ?>">
-                                                <div class="label"></div>
-                                                <div class="bar">
-                                                    <div class="progress"></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><?php esc_html_e( 'Products Categories', 'w2s-migrate-woo-to-shopify' ); ?></td>
-                                        <td>
-                                            <div class="vi-ui toggle checkbox ">
-                                                <input type="checkbox"
-                                                       class="viw2s-import-element-enable viw2s-import-product-categories-enable"
-                                                       data-element_name="product_categories"
-                                                       name="" checked>
-                                                <label></label>
-                                            </div>
-                                            <div class="vi-ui indicating progress standard viw2s-import-progress"
-                                                 id="<?php echo esc_attr( 'viw2s-product-categories-progress' ) ?>">
-                                                <div class="label"></div>
-                                                <div class="bar">
-                                                    <div class="progress"></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-								<?php
-							}
-							$count++;
-						}
-					}
-					?>
+                    <table class="vi-ui celled table">
+                        <thead>
+                        <tr>
+                            <th style="width: 200px;"><?php esc_html_e( 'Data', 'w2s-migrate-woo-to-shopify' ); ?></th>
+                            <th><?php esc_html_e( 'Progress', 'w2s-migrate-woo-to-shopify' ); ?></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><?php esc_html_e( 'Products', 'w2s-migrate-woo-to-shopify' ); ?></td>
+                            <td>
+                                <div class="vi-ui toggle checkbox ">
+                                    <input type="checkbox"
+                                           class="viw2s-import-element-enable viw2s-import-products-enable"
+                                           data-element_name="products"
+                                           name="" checked >
+                                    <label></label>
+                                </div>
+                                <div class="vi-ui indicating progress standard viw2s-import-progress"
+                                     id="viw2s-products-progress">
+                                    <div class="label"></div>
+                                    <div class="bar">
+                                        <div class="progress"></div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><?php esc_html_e( 'Products Categories', 'w2s-migrate-woo-to-shopify' ); ?></td>
+                            <td>
+                                <div class="vi-ui toggle checkbox ">
+                                    <input type="checkbox"
+                                           class="viw2s-import-element-enable viw2s-import-product-categories-enable"
+                                           data-element_name="product_categories"
+                                           name="" checked>
+                                    <label></label>
+                                </div>
+                                <div class="vi-ui indicating progress standard viw2s-import-progress"
+                                     id="viw2s-product-categories-progress">
+                                    <div class="label"></div>
+                                    <div class="bar">
+                                        <div class="progress"></div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                     <p>
                         <a href="#" class="vi-ui labeled icon positive button tiny viw2s-import-btn"
-                           data-target-step="progress-import""><i
+                           data-target-step="progress-import"><i
                                 class="icon cloud download"></i><?php esc_html_e( 'Import', 'w2s-migrate-woo-to-shopify' ); ?>
                         </a>
                     </p>

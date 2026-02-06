@@ -3,18 +3,18 @@
  * Plugin Name:       W2S - Migrate WooCommerce to Shopify
  * Plugin URI:        https://villatheme.com/extensions/w2s-migrate-woocommerce-to-shopify/
  * Description:       Migrate all products and categories from WooCommerce to Shopify
- * Version:           1.3.2
+ * Version:           1.4.2
  * Author:            Villatheme
  * Author URI:        https://villatheme.com/
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       w2s-migrate-woo-to-shopify
- * Copyright 2021 - 2025 VillaTheme.com. All rights reserved.
+ * Copyright 2021 - 2026 VillaTheme.com. All rights reserved.
  * Domain Path:       /languages
  * Requires at least: 5.0
- * Tested up to: 6.8
+ * Tested up to: 6.9
  * WC requires at least: 7.0.0
- * WC tested up to: 10.0
+ * WC tested up to: 10.4.3
  * Requires PHP: 7.0
  * Requires Plugins: woocommerce
  */
@@ -37,7 +37,7 @@ if ( is_plugin_active( 'w2s-migrate-woocommerce-to-shopify/w2s-migrate-woocommer
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'VIW2S_VERSION', '1.3.2' );
+define( 'VIW2S_VERSION', '1.4.2' );
 define( 'VIW2S_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'VIW2S_DIR_URL', plugin_dir_url( __FILE__ ) );
 define( 'VIW2S_CSS', VIW2S_DIR_URL . 'assets/css/' );
@@ -64,13 +64,16 @@ function activate_viw2s() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-viw2s-deactivator.php
  */
-//function deactivate_viw2s() {
-//	require_once plugin_dir_path( __FILE__ ) . 'includes/class-vi-w2s-deactivator.php';
-//	VI_IMPORT_WOOCOMMERCE_TO_SHOPIFY_Deactivator::deactivate();
-//}
+function deactivate_viw2s() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-vi-w2s-deactivator.php';
+	VI_IMPORT_WOOCOMMERCE_TO_SHOPIFY_Deactivator::deactivate();
+
+	// Unschedule OAuth token refresh cron
+	Viw2s_OAuth_Token_Refresh_Cron::deactivate();
+}
 
 register_activation_hook( __FILE__, 'activate_viw2s' );
-//register_deactivation_hook( __FILE__, 'deactivate_viw2s' );
+register_deactivation_hook( __FILE__, 'deactivate_viw2s' );
 
 
 /**
@@ -78,6 +81,17 @@ register_activation_hook( __FILE__, 'activate_viw2s' );
  * admin-specific hooks, and public-facing site hooks.
  */
 require plugin_dir_path( __FILE__ ) . 'includes/class-vi-w2s.php';
+
+/**
+ * OAuth and API Settings classes
+ */
+require plugin_dir_path( __FILE__ ) . 'includes/class-viw2s-oauth-handler.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-viw2s-api-settings.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-viw2s-api-ajax-handler.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-viw2s-oauth-token-refresh-cron.php';
+
+// Initialize OAuth Token Refresh Cron
+Viw2s_OAuth_Token_Refresh_Cron::init();
 
 /**
  * Begins execution of the plugin.

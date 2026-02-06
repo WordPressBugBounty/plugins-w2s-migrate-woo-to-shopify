@@ -35,14 +35,47 @@ class Viw2s_Bulk_Import {
 	}
 
 	public function setup( $store_name ) {
-		$this->store_settings      = $this->settings->get_setting_by_store_name( $store_name );
-		$domain                    = $this->store_settings['domain'] ?? '';
-		$api_secret                = $this->store_settings['api_secret'] ?? '';
-		$this->api_url             = sprintf( "https://%s/admin/api/%s/graphql.json", $domain, self::$graphql_version );
-		$this->access_token        = $api_secret;
-		self::$store_name          = $store_name;
+		$this->store_settings = $this->settings->get_setting_by_store_name( $store_name );
+		$domain = $this->store_settings['domain'] ?? '';
+
+		$this->api_url = sprintf( "https://%s/admin/api/%s/graphql.json", $domain, self::$graphql_version );
+
+		// Use smart fallback mechanism to get access token
+		$this->access_token = $this->get_access_token();
+
+		self::$store_name = $store_name;
 		$this->product_weight_unit = get_option( 'woocommerce_weight_unit' );
 		$this->get_rate_limit();
+	}
+
+	/**
+	 * Get access token with smart fallback mechanism
+	 * Tries multiple sources to find valid access token
+	 *
+	 * @return string Access token
+	 */
+	private function get_access_token() {
+		// From store_settings (OAuth) - direct access_token field
+		if ( ! empty( $this->store_settings['access_token'] ) ) {
+			return $this->store_settings['access_token'];
+		}
+
+		// From api_secret (Legacy API)
+		if ( ! empty( $this->store_settings['api_secret'] ) ) {
+			return $this->store_settings['api_secret'];
+		}
+
+		// Fallback to OAuth settings table
+		$domain = $this->store_settings['domain'] ?? '';
+		if ( ! empty( $domain ) ) {
+			$oauth_settings = Viw2s_API_Settings::get_settings( $domain );
+			if ( ! empty( $oauth_settings['access_token'] ) ) {
+				return $oauth_settings['access_token'];
+			}
+		}
+
+		// No token found
+		return '';
 	}
 
 	public function query( $query, $variables = null ) {

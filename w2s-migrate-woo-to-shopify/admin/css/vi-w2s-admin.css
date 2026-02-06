@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .vi-ui.segment h3 {
   text-align: center;
 }
@@ -163,6 +164,176 @@
   padding: 15px 0;
   font-size: 20px;
   color: red;
+}
+
+/* OAuth Related Styles */
+.viw2s-api-tabs {
+  margin-bottom: 15px;
+}
+.viw2s-api-tabs .viw2s-tab-separator {
+  margin: 0 10px;
+}
+
+.api-connect {
+  cursor: pointer;
+  padding: 8px 12px;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+.api-connect:hover {
+  color: #2185d0;
+}
+.api-connect.active {
+  color: #2185d0 !important;
+  border-bottom-color: #2185d0 !important;
+}
+
+.viw2s-oauth-table {
+  display: none;
+}
+.viw2s-oauth-table.viw2s-oauth-table-visible {
+  display: table;
+}
+
+.viw2s-empty-state {
+  text-align: center;
+  padding: 20px;
+  color: #999;
+}
+
+.viw2s-oauth-add-form {
+  display: none;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.viw2s-oauth-add-form h4 {
+  margin-top: 0;
+}
+.viw2s-oauth-add-form .vi-ui.warning.message {
+  margin-bottom: 20px;
+}
+.viw2s-oauth-add-form .vi-ui.form {
+  max-width: 500px;
+}
+.viw2s-oauth-add-form .vi-ui.form .field {
+  margin-bottom: 15px;
+}
+.viw2s-oauth-add-form .vi-ui.form label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+}
+.viw2s-oauth-add-form .vi-ui.form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  border-radius: 4px;
+  font-size: 14px;
+}
+.viw2s-oauth-add-form .vi-ui.form input:focus {
+  border-color: #2185d0;
+  outline: none;
+}
+.viw2s-oauth-add-form button {
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.vi-ui.bulleted.list {
+  margin-left: 20px;
+}
+.vi-ui.bulleted.list .item {
+  margin-bottom: 8px;
+}
+.vi-ui.bulleted.list .item:before {
+  content: "•";
+  margin-right: 10px;
+  color: #2185d0;
+  font-weight: bold;
+}
+
+.viw2s-scope-copy-container {
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 4px;
+  border: 2px solid #2185d0;
+  margin-bottom: 15px;
+}
+.viw2s-scope-copy-container .viw2s-scope-copy-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+.viw2s-scope-copy-container .viw2s-scope-copy-inner .viw2s-scope-string {
+  flex: 1;
+  font-size: 14px;
+  font-weight: bold;
+  color: #d63031;
+  user-select: all;
+  word-break: break-all;
+}
+.viw2s-scope-copy-container .viw2s-scope-copy-inner .viw2s-copy-scope-btn {
+  flex-shrink: 0;
+}
+
+.viw2s-scope-description-list {
+  background-color: #e8f5e9;
+  padding: 15px;
+  border-radius: 4px;
+  border-left: 4px solid #4caf50;
+}
+.viw2s-scope-description-list .item strong {
+  color: #2e7d32;
+}
+
+/* Unified API Table - Readonly Inputs */
+.viw2s-readonly-input {
+  border: none !important;
+  background: transparent !important;
+  width: 100%;
+  pointer-events: none;
+  box-shadow: none !important;
+  text-align: center;
+}
+.viw2s-readonly-input:focus {
+  outline: none !important;
+}
+
+.viw2s-unified-api-table td[data-label="API Type"] .viw2s-readonly-input {
+  text-align: center;
+}
+.viw2s-unified-api-table .viw2s-credential-label {
+  color: #666;
+  display: block;
+  margin-bottom: 3px;
+  font-size: 12px;
+}
+
+.viw2s-no-connections td {
+  text-align: center;
+  padding: 30px;
+  color: #999;
+}
+
+/* Inline error messages */
+.viw2s-inline-error {
+  color: #9f3a38;
+  font-size: 16px;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.viw2s-inline-error i.attention.icon {
+  color: #9f3a38;
+  font-size: 18px;
 }
 
 /*# sourceMappingURL=vi-w2s-admin.css.map */

@@ -4,8 +4,12 @@
     $setting = new VI_W2S_IMPORT_WOOCOMMERCE_TO_SHOPIFY_DATA();
 	$store_setting       = $setting->get_params( 'viw2s_store_setting' );
     if(is_array($store_setting) && !empty($store_setting)){
-	    $patch = $setting ->get_cache_path( $store_setting[0]['domain'], $store_setting[0]['api_key'], $store_setting[0]['api_secret']);
-	    $file =   $patch.'/logs.txt';
+	    $domain = isset($store_setting[0]['domain']) ? $store_setting[0]['domain'] : '';
+	    $api_key = isset($store_setting[0]['api_key']) ? $store_setting[0]['api_key'] : '';
+	    $api_secret = isset($store_setting[0]['api_secret']) ? $store_setting[0]['api_secret'] : '';
+
+	    $path = $setting->get_cache_path( $domain, $api_key, $api_secret );
+	    $file = $path . '/logs.txt';
 	    if ( ! is_file( $file ) ) {
 		    esc_html_e( 'Log file not found.', 'w2s-migrate-woo-to-shopify' ) ;
 	    }else{
