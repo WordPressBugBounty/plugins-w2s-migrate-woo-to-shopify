@@ -17,7 +17,7 @@ msgstr ""
 
 #: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/partials/vi-w2s-admin-display.php:292
 msgid " or the tutorial below to create a custom app and get API credentials"
-msgstr " hoặc xem hướng dẫn bên dưới để tạo ứng dụng tùy chỉnh và lấy thông tin xác thực API."
+msgstr "hoặc xem hướng dẫn bên dưới để tạo ứng dụng tùy chỉnh và lấy thông tin xác thực API."
 
 #: D:/git-12-2025/free-version/w2s-migrate-woo-to-shopify/w2s-migrate-woo-to-shopify/admin/class-vi-w2s-admin.php:306
 #, fuzzy
