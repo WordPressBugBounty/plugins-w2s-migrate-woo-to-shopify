@@ -70,7 +70,7 @@ class Vi_W2s_i18n {
 					'support'    => 'https://villatheme.com/supports/',
 					'docs'       => 'https://docs.villatheme.com/?item=w2s',
 					'review'     => 'https://wordpress.org/plugins/w2s-migrate-woo-to-shopify/#reviews',
-					'pro_url'    => 'https://1.envato.market/vnr5Nj',
+					'pro_url'    => 'https://villatheme.com/extensions/w2s-migrate-woocommerce-to-shopify/',
 					'css'        => VIW2S_CSS,
 					'image'      => '',
 					'slug'       => 'w2s-migrate-woo-to-shopify',

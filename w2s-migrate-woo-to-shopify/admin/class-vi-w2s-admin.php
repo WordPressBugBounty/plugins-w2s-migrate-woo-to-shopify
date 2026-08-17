@@ -327,7 +327,7 @@ class Vi_W2s_Admin {
 
 	public static function upgrade_button() {
 		?>
-        <a href="https://1.envato.market/vnr5Nj"
+        <a href="https://villatheme.com/extensions/w2s-migrate-woocommerce-to-shopify/"
            target="_blank"
            class="vi-ui button yellow"><?php esc_html_e( 'Upgrade this feature', 'w2s-migrate-woo-to-shopify' ) ?></a>
 		<?php

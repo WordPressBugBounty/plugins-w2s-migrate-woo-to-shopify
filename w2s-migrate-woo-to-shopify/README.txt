@@ -5,7 +5,8 @@ Tags: migrate woocommerce to shopify, transfer woocommerce to shopify, woocommer
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.0
-WC tested up to: 10.8
+WC requires at least: 7.0.0
+WC tested up to: 11.0
 Stable tag: trunk
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -22,7 +23,7 @@ WooCommerce and Shopify are very large and popular eCommerce platforms that many
 
 As a development company, we are aware of this trend, which is why we released the Shopify to WooCommerce plugin, which allows you to migrate data from Shopify to WooCommerce. Not content with this, we are considering how to migrate data from WooCommerce to Shopify in reverse – handle the majority of common needs, the release of the Migrate WooCommerce to Shopify plugin marks an important step toward mastering data management between these two platforms, allowing shop owners to save time and money to gain benefit from online business.
 
->[Try demo](https://new2new.com/?item=w2s "W2S - Migrate WooCommerce to Shopify") | [Documents](https://docs.villatheme.com/?item=w2s "Document") | [Pro Version](https://1.envato.market/vnr5Nj) |[Facebook group](https://www.facebook.com/groups/villatheme)
+>[Try demo](https://new2new.com/?item=w2s "W2S - Migrate WooCommerce to Shopify") | [Documents](https://docs.villatheme.com/?item=w2s "Document") | [Pro Version](https://villatheme.com/extensions/w2s-migrate-woocommerce-to-shopify/) |[Facebook group](https://www.facebook.com/groups/villatheme)
 
 
 ###Preview Migrate WooCommerce to Shopify plugin
@@ -235,28 +236,32 @@ We commit that you will import product data successfully. Please follow our guid
 2. Cron settings
 
 == Changelog ==
-/**1.4.3 - 2026.06.19**/
-- Updated: VillaTheme support
+2026.08.17 - version 1.4.4
+- Updated: Change premium version url
 
-/**1.4.2 - 2026.01.30**/
+2026.06.20 - version 1.4.3
+- Updated: VillaTheme support
+- Updated: Updated compatible with WC 10.8.1 and WP 7.0
+
+2026.01.30 - version 1.4.2
 - Updated: Instructions on how to get the API
 
-/**1.4.1 - 2026.01.19**/
+2026.01.19 - version 1.4.1
 - Update UI recommend scope shopify
 
-/**1.4.0 - 2026.01.17**/
+2026.01.17 - version 1.4.0
 - Update API
 - Updated: Updated compatible with WC10.4.3 and WP 6.7
 
-/**1.3.2 - 2025.08.05**/
+2025.08.05 - version 1.3.2
 - Fixed: The error is not logged when importing a product
 
-/**1.3.1 - 2025.02.28 **/
+2025.02.28 - version 1.3.1
 - Fixed: Import products sku
 - Fixed: Import low resolution image
 - Updated: Update support file
 
-/**1.3.0 - 2025.01.23**/
+2025.01.23 - version 1.3.0
 - Fixed: View file limitations
 - Added: Toggle import product or product categories
 - Updated: Enhance import logs box
@@ -265,69 +270,69 @@ We commit that you will import product data successfully. Please follow our guid
 - Updated: Change to GraphQL API
 - Removed: Shopify SDK API
 
-/**1.2.1 - 2024.12.24**/
+2024.12.24 - version 1.2.1
 - Fixed: Fixed security
 - Fixed: Translation loading triggered too early
 - Updated: Updated support file
 
-/**1.2.0 - 2024.05.24**/
+2024.05.24 - version 1.2.0
 - Updated: Updated clear data
 - Updated: Updated compatible with WC8.9.0
 - Updated: Updated support file
 - Updated: version api sdk 2024-04
 - Fixed: Fixed security
 
-/**1.1.1 - 2024.04.13**/
+2024.04.13 - version 1.1.1
 - Updated: Updated compatible with WC8.7.0 and WP 6.5.2
 - Updated: Updated support file
 
-/**1.1.0 - 2023.02.19**/
+2023.02.19 - version 1.1.0
 - Updated: Updated compatible with WC8.6.0
 - Updated: Updated support file
 - Updated: Updated version Shopify Api
 
-/**1.0.11 - 2023.07.15**/
+2023.07.15 - version 1.0.11
 - Updated: Updated compatible with WC8.5.0 and WP 6.4.0
 - Updated: Update support file
 
-/**1.0.10 - 2023.02.23**/
+2023.02.23 - version 1.0.10
 - Updated: Updated compatible with WC7.4.0
 
-/**1.0.9 - 2023.01.07**/
+2023.01.07 - version 1.0.9
 - Updated: Updated compatible with WC7.2.0 and WP 6.1.0
 - Updated: Update support file
 – Updated: Language file
 
-/**1.0.8 - 2022.10.08**/
+2022.10.08 - version 1.0.8
 - Fixed: Fixed import sku not working
 - Updated: Updated compatible with WC6.9.0
 
-/**1.0.7 - 2022.7.15**/
+2022.07.15 - version 1.0.7
 - Fixed: Fixed compatible with pro version
 - Updated: Updated support
 - Updated: Updated compatible with WC6.7.0
 
-/**1.0.6 - 2022.06.29**/
+2022.06.29 - version 1.0.6
 - Updated: Updated guide create custom app Shopify
 - Updated: Updated compatible with WC6.6.0
 
-/**1.0.5 - 2022.05.21**/
+2022.05.21 - version 1.0.5
 - Updated: Updated support
 - Updated: Updated compatible with WC6.5.0 and WP 6.0.0
 - Fixed: Fixed security
 
-/**1.0.4 - 2022.03.29**/
+2022.03.29 - version 1.0.4
 - Updated: Updated support
 
-/**1.0.3 - 2022.03.21**/
+2022.03.21 - version 1.0.3
 - Updated: Updated support
 - Updated: Updated compatible with WC6.3.0
 
-/**1.0.2 - 2022.02.28**/
+2022.02.28 - version 1.0.2
  Updated: Support Shopify custom apps as Private apps are deprecated and can't be created as of January 2022
 
-/**1.0.1 - 2021.12.22**/
+2021.12.22 - version 1.0.1
 -Fixed: Fixed different currency message
 
-/**1.0.0 - 2021.12.16**/
+2021.12.16 - version 1.0.0
 - The first released
