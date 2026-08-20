@@ -1,5 +1,9 @@
 *** W2S - Migrate WooCommerce to Shopify Changelog ***
 
+2026.08.20 - version 1.4.5
+- Updated: Compatible with WP 7.1
+- Updated: Compatibility check with WC 11.0
+
 2026.08.17 - version 1.4.4
 - Updated: Change premium version url
 

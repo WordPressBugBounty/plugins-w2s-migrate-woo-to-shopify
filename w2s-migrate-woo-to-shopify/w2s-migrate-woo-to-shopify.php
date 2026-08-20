@@ -3,7 +3,7 @@
  * Plugin Name:       W2S - Migrate WooCommerce to Shopify
  * Plugin URI:        https://villatheme.com/extensions/w2s-migrate-woocommerce-to-shopify/
  * Description:       Migrate all products and categories from WooCommerce to Shopify
- * Version:           1.4.4
+ * Version:           1.4.5
  * Author:            Villatheme
  * Author URI:        https://villatheme.com/
  * License:           GPL v2 or later
@@ -12,7 +12,7 @@
  * Copyright 2021 - 2026 VillaTheme.com. All rights reserved.
  * Domain Path:       /languages
  * Requires at least: 5.0
- * Tested up to: 7.0
+ * Tested up to: 7.1
  * WC requires at least: 7.0.0
  * WC tested up to: 11.0
  * Requires PHP: 7.0
@@ -37,7 +37,7 @@ if ( is_plugin_active( 'w2s-migrate-woocommerce-to-shopify/w2s-migrate-woocommer
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'VIW2S_VERSION', '1.4.4' );
+define( 'VIW2S_VERSION', '1.4.5' );
 define( 'VIW2S_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'VIW2S_DIR_URL', plugin_dir_url( __FILE__ ) );
 define( 'VIW2S_CSS', VIW2S_DIR_URL . 'assets/css/' );
