@@ -2,11 +2,11 @@
 Contributors: villatheme, mrt3vn
 Donate link: http://www.villatheme.com/donate
 Tags: migrate woocommerce to shopify, transfer woocommerce to shopify, woocommerce, woocommerce to shopify, woocommerce to shopify migration
-Requires at least: 5.0
+Requires at least: 6.2
 Tested up to: 7.1
-Requires PHP: 7.0
+Requires PHP: 7.4
 WC requires at least: 7.0.0
-WC tested up to: 11.0
+WC tested up to: 11.2
 Stable tag: trunk
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -236,6 +236,10 @@ We commit that you will import product data successfully. Please follow our guid
 2. Cron settings
 
 == Changelog ==
+2026.11.06 - version 1.4.6
+- Fixed: Incorrect text domain in translation function calls
+- Updated: VillaTheme support
+
 2026.08.20 - version 1.4.5
 - Updated: Compatible with WP 7.1
 - Updated: Compatibility check with WC 11.0

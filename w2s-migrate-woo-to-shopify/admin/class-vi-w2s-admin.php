@@ -773,7 +773,7 @@ class Vi_W2s_Admin {
 															$code = 429;
 														} elseif ( $message === 'Product options input is required when updating variants' ) {
 															$message = esc_html__( 'Product don\'t have any variation', 'w2s-migrate-woo-to-shopify' );
-														} elseif ( str_contains( $message, 'Please provide a new handle' ) ) {
+														} elseif ( false !== strpos( $message, 'Please provide a new handle' ) ) {
 															$message = esc_html__( 'Product\'s slug has been used', 'w2s-migrate-woo-to-shopify' );
 														}
 														throw new Exception( "{$title} - {$message}", $code );

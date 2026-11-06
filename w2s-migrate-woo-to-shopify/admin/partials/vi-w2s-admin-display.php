@@ -277,7 +277,7 @@ if ( ! empty( $store_setting ) && is_array( $store_setting ) ) {
                 <!--Guide video get api key-->
                 <div class="title active">
                     <i class="dropdown icon"></i>
-					<?php esc_html_e( 'Learn how to get API key', 'import-shopify-to-woocommerce' ) ?>
+					<?php esc_html_e('Learn how to get API key', 'w2s-migrate-woo-to-shopify') ?>
                 </div>
                 <div class="content active">
                     <div class="w2s-guide-get-api">
@@ -293,7 +293,7 @@ if ( ! empty( $store_setting ) && is_array( $store_setting ) ) {
                                     </strong>
                                 </li>
                                 <li>
-                                    <!--                                        <strong>--><?php //esc_html_e( 'Video guide', 'w2s-migrate-woocommerce-to-shopify' ); ?><!--</strong>-->
+                                    <!--                                        <strong>--><?php //esc_html_e('Video guide', 'w2s-migrate-woo-to-shopify'); ?><!--</strong>-->
                                     <p>
                                         <iframe width="640" height="360" src="https://www.youtube.com/embed/Zu4zi0cCRHU" title="YouTube video player"
                                                 frameborder="0"
@@ -346,12 +346,12 @@ if ( ! empty( $store_setting ) && is_array( $store_setting ) ) {
 				?>
                 <div class="vi-ui segment transition visible"
                      id="viw2s-import-products-options">
-                    <h3><?php esc_html_e( 'Import Products options', 'import-shopify-to-woocommerce' ) ?></h3>
+                    <h3><?php esc_html_e('Import Products options', 'w2s-migrate-woo-to-shopify') ?></h3>
                     <div class="viw2s-import-products-options-content">
                         <div class="viw2s-import-products-options-heading">
                             <div class="viw2s-save-products-options-container">
                                 <span class="vi-ui labeled icon primary button tiny viw2s-save-products-options">
-                                    <i class="icon save"></i><?php esc_html_e( 'Save', 'w2s-migrate-woo-to-shopify' ); ?>
+                                    <i class="icon save"></i><?php esc_html_e('Save', 'w2s-migrate-woo-to-shopify'); ?>
                                 </span>
                             </div>
                             <i class="close icon viw2s-import-products-options-close"></i>

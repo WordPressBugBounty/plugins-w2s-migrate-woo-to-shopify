@@ -31,9 +31,9 @@ class VI_IMPORT_WOOCOMMERCE_TO_SHOPIFY_Activator {
 	 */
 	public static function activate() {
 		global $wp_version;
-		if ( version_compare( $wp_version, "4.4", "<" ) ) {
+		if ( version_compare( $wp_version, '6.2', '<' ) ) {
 			deactivate_plugins( basename( __FILE__ ) ); // Deactivate our plugin
-			wp_die( "This plugin requires WordPress version 4.4 or higher." );
+			wp_die( 'This plugin requires WordPress version 6.2 or higher.' );
 		}
 
 

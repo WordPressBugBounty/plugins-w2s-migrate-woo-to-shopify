@@ -20,8 +20,8 @@ if ( ! class_exists( 'VIW2S_ADMIN_Clear_Data' ) ) {
 			$menu_slug = 'w2s-import-woocommerce-to-shopify-clear-data';
 			add_submenu_page(
 				'vi-w2s-woo-to-shopify',
-				esc_html__( 'Clear Data', 'w2s-migrate-woocommerce-to-shopify' ),
-				esc_html__( 'Clear Data', 'w2s-migrate-woocommerce-to-shopify' ),
+				esc_html__('Clear Data', 'w2s-migrate-woo-to-shopify'),
+				esc_html__('Clear Data', 'w2s-migrate-woo-to-shopify'),
 				apply_filters( 'villatheme_page_capabilities', 'manage_woocommerce' ),
 				$menu_slug,
 				array( $this, 'page_callback_clear_data' ),
@@ -34,13 +34,13 @@ if ( ! class_exists( 'VIW2S_ADMIN_Clear_Data' ) ) {
 
 			?>
             <div class="wrap">
-                <h2><?php esc_html_e( 'Clear Data', 'w2s-migrate-woocommerce-to-shopify' ) ?></h2>
+                <h2><?php esc_html_e('Clear Data', 'w2s-migrate-woo-to-shopify') ?></h2>
                 <div class="w2s-security-warning">
                     <div class="vi-ui red message">
                         <div class="header">
-							<?php esc_html_e( 'Important Warring!!!', 'w2s-migrate-woocommerce-to-shopify' ); ?>
+							<?php esc_html_e('Important Warring!!!', 'w2s-migrate-woo-to-shopify'); ?>
                         </div>
-                        <p><?php esc_html_e( 'All your data deletion actions cannot be undone. Be very careful and understand what you want to do.', 'w2s-migrate-woocommerce-to-shopify' ); ?></p>
+                        <p><?php esc_html_e('All your data deletion actions cannot be undone. Be very careful and understand what you want to do.', 'w2s-migrate-woo-to-shopify'); ?></p>
 
                     </div>
                 </div>
@@ -48,7 +48,7 @@ if ( ! class_exists( 'VIW2S_ADMIN_Clear_Data' ) ) {
                     <table class="vi-ui celled table" id="viw2s-table-choose-import">
                         <thead>
                         <tr>
-                            <th><?php esc_html_e( 'Choose clear data', 'w2s-migrate-woocommerce-to-shopify' ); ?></th>
+                            <th><?php esc_html_e('Choose clear data', 'w2s-migrate-woo-to-shopify'); ?></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -69,7 +69,7 @@ if ( ! class_exists( 'VIW2S_ADMIN_Clear_Data' ) ) {
                                         <table class="vi-ui celled table">
                                             <thead>
                                             <tr>
-                                                <th class="viw2s_thead_store_choosen_import"><?php esc_html_e( 'Data', 'w2s-migrate-woocommerce-to-shopify' ); ?></th>
+                                                <th class="viw2s_thead_store_choosen_import"><?php esc_html_e('Data', 'w2s-migrate-woo-to-shopify'); ?></th>
                                                 <th>
                                                     <strong><?php echo esc_html( $domain ); ?></strong>
                                                     <input type="hidden" class="store_name_clear" value="<?php echo esc_attr( $domain ); ?>">
@@ -88,7 +88,7 @@ if ( ! class_exists( 'VIW2S_ADMIN_Clear_Data' ) ) {
                                                            data-clear_title="<?php echo esc_attr( $key ); ?>"
                                                         >
                                                             <i class="icon trash alternate outline"></i>
-															<?php esc_html_e( 'Clear', 'w2s-migrate-woocommerce-to-shopify' ); ?>
+															<?php esc_html_e('Clear', 'w2s-migrate-woo-to-shopify'); ?>
                                                         </a>
                                                         <span class="mess-clear-data"></span>
                                                     </td>

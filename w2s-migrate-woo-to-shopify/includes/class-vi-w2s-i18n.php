@@ -46,8 +46,8 @@ class Vi_W2s_i18n {
 
 		$environment = new \VillaTheme_Require_Environment( [
 				'plugin_name'     => 'W2S - Migrate WooCommerce to Shopify',
-				'php_version'     => '7.0',
-				'wp_version'      => '5.0',
+				'php_version'     => '7.4',
+				'wp_version'      => '6.2',
 				'require_plugins' => [
 					[
 						'slug'            => 'woocommerce',
